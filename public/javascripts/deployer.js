@@ -1,13 +1,8 @@
 var socket = io();
 
-socket.on('setStatus', function(data) {
-	console.log('status received in client: ' + JSON.stringify(data));
-	
+socket.on('status_set', function(data) {	
 	var list = $('ul li');
-	//ul.remove('li');
-	
 	var d = JSON.parse(data);
-	
 	
 	for (var i = 0; i < list.length; i++) {
 		var listItem = $(list[i]);
@@ -17,17 +12,26 @@ socket.on('setStatus', function(data) {
 				listItem.attr('class', project.status == 1 ? "success" : "error");
 			}
 		}
-//		ul.append('<li data-id="' + project.id + '" class="' + project.status == 1 ? "success" : "error" + '">' + project.name + '</li>');
 	}
 });
 
-socket.on('test', function(input) {
-	console.log('test received in client: ' + input);
+socket.on('input_up', function() {
+	
 });
 
-
-var button = document.getElementById('test');
-
-button.addEventListener('click', function() {
-	socket.emit('send', 'testing');
+socket.on('input_down', function() {
+	
 });
+
+socket.on('input_left', function() {
+	
+});
+
+socket.on('input_right', function() {
+	
+});
+
+socket.on('input_button', function() {
+	
+});
+

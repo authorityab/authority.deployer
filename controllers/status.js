@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/set', function(req, res, next) {
-    sockets.setStatus(req.body.projects);
+    sockets.status.set(req.body.projects);
     
     res.end();
 });

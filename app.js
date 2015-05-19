@@ -8,9 +8,6 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compass = require('node-compass');
 
-
-
-
 var controllers = require('./controllers');
 
 var app = express();

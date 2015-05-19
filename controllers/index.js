@@ -17,7 +17,7 @@ router.get('/', function(req, res, next) {
     { id: 3, name: 'Project 4', status: Math.round(Math.random()) }
   ];
     
-  res.render('index', { title: 'Home', projects: projects });
+  res.render('index', { title: 'SoftResource Project Status', projects: projects });
 });
 
 
