@@ -3,3 +3,4 @@ npm-debug.log
 
 .settings/
 public/.sass-cache/
+node_modules/
