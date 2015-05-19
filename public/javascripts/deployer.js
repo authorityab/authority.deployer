@@ -16,22 +16,22 @@ socket.on('status_set', function(data) {
 });
 
 socket.on('input_up', function() {
-	
+	console.log('joystick_up');
 });
 
 socket.on('input_down', function() {
-	
+	console.log('joystick_down');
 });
 
 socket.on('input_left', function() {
-	
+	console.log('joystick_left');
 });
 
 socket.on('input_right', function() {
-	
+	console.log('joystick_right');
 });
 
 socket.on('input_button', function() {
-	
+	console.log('button');
 });
 
