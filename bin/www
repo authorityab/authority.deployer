@@ -2,8 +2,8 @@ var app = require('../app');
 var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
 
-var sockets = require('../lib/websockets')
-var inputs = require('../lib/inputs');
+var sockets = require('../lib/websockets');
+var inputs = require('../lib/inputs').init();
 
 /**
  * Get port from environment and store in Express.
@@ -20,7 +20,6 @@ var server = http.createServer(app);
 var io = require('socket.io')(server);
 
 sockets.startServer(io);
-//inputs();
 
 server.listen(port, function() {
   console.log('listening on *:' + port + ' in ' + app.get('env') + ' mode');
