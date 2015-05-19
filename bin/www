@@ -3,7 +3,7 @@ var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
 
 var sockets = require('../lib/websockets');
-var inputs = require('../lib/inputs').init();
+var inputs = require('../lib/inputs'); //.init();
 
 /**
  * Get port from environment and store in Express.
