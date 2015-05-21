@@ -93,6 +93,7 @@ socket.on('inputs_left', function() {
 socket.on('inputs_right', function() {
 	console.log('joystick_right');
 
+	$('ul li').removeClass('selected');
 	$('li.active').addClass('selected');
 });
 
