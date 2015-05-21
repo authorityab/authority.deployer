@@ -5,6 +5,6 @@ block content
   p #{title}
   
   ul
-    each project in projects
+    each project, i in projects
       li(data-id="#{project.id}" class=project.status === 1 ? "success" : "error")= project.name
 
