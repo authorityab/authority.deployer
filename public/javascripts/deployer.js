@@ -64,7 +64,7 @@ socket.on('inputs_up', function() {
 	if (activeIndex === 0) {
 		$('ul li:last-child').addClass('active');
 	} else {
-		activeItem.closest('li').addClass('active');
+		activeItem.prev('li').addClass('active');
 	}
 });
 
