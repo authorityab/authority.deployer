@@ -16,8 +16,8 @@ GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 while True:
 	input_up = GPIO.input(6)
 	input_down = GPIO.input(5)
-	input_left = GPIO.input(26)
-	input_right = GPIO.input(4)
+	input_left = GPIO.input(19)
+	input_right = GPIO.input(13)
 	
 	if input_up == False:
 		print('up');
