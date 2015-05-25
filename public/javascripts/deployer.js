@@ -2,7 +2,10 @@ var socket = io();
 
 
 $(function() {
-	$('ul li:first-child').addClass('active');
+	
+	
+	
+//	$('ul li:first-child').addClass('active');
 	
 //	$(document).keydown(function(e) {
 //	    switch(e.which) {
@@ -36,20 +39,60 @@ $(function() {
 	
 });
 
-
-
-socket.on('status_set', function(data) {	
-	var list = $('ul li');
-	var d = JSON.parse(data);
+socket.on('projects_set', function(data) {
+	var list = $('ul#projects');
+	list.empty();
 	
-	for (var i = 0; i < list.length; i++) {
-		var listItem = $(list[i]);
-		for (var y = 0; y < d.projects.length; y++) {
-			var project = d.projects[y];
-			if (listItem.data('id') == project.id) {
-				listItem.attr('class', project.status == 1 ? "success" : "error");
+	var dashboard = JSON.parse(JSON.parse(data));
+	
+	for (var i = 0; i < dashboard.Projects.length; i++) {
+//		var listItem = $(list[i]);
+		var project = dashboard.Projects[i];
+		var environment = dashboard.Environments[0];
+		
+		var success;
+		for (var y = 0; y < dashboard.Items.length; y++) {
+			if (dashboard.Items[y].ProjectId === project.Id) {
+				success = !dashboard.Items[y].HasPendingInterruptions && !dashboard.Items[y].HasWarningsOrErrors;
 			}
 		}
+		
+//		for (var y = 0; y < list.length; y++) {
+			
+			
+			var listItem = $('<li>' + project.Name + ' - ' + environment.Name + '</li>');
+			
+//			if (list.find('li[id="' + project.ProjectId + '"]').data('id') == project.ProjectId) {
+				listItem.attr('class', success ? "success" : "error");
+//			}
+			list.append(listItem);
+//		}
+	}
+	
+	list.find('li:first-child').addClass('active');
+	
+});
+
+socket.on('status_set', function(data) {	
+	var list = $('ul#build-statuses');
+	list.empty();
+	
+	var statuses = JSON.parse(JSON.parse(data));
+	
+	for (var i = 0; i < statuses.length; i++) {
+//		var listItem = $(list[i]);
+		var status = statuses[i];
+		
+//		for (var y = 0; y < list.length; y++) {
+			
+			
+			var listItem = $('<li>' + status.ProjectName + '</li>');
+			
+//			if (list.find('li[id="' + project.ProjectId + '"]').data('id') == project.ProjectId) {
+				listItem.attr('class', status.BuildStatus == 1 ? "success" : "error");
+//			}
+			list.append(listItem);
+//		}
 	}
 });
 

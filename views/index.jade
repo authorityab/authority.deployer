@@ -2,9 +2,18 @@ extends layout
 
 block content
   h1= title
-  p #{title}
   
-  ul
-    each project, i in projects
-      li(data-id="#{project.id}" class=project.status === 1 ? "success" : "error")= project.name
+  p Build statuses Team City
+  
+  ul#build-statuses
+    li SR.DeployerServices is not running.
+  
+  p Octopus Projects
+
+  ul#projects
+    li SR.DeployerServices is not running.
+  
+  
+
+
 

@@ -1,4 +1,4 @@
-var sockets = require('../lib/websockets');
+var communication = require('../lib/communication');
 var express = require('express');
 var router = express.Router();
 
@@ -7,7 +7,7 @@ router.get('/', function(req, res, next) {
 });
 
 router.post('/set', function(req, res, next) {
-    sockets.status.set(req.body.projects);
+    communication.websockets.status.set(req.body.projects);
     
     res.end();
 });

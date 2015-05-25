@@ -2,8 +2,11 @@ var app = require('../app');
 var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
 
-var sockets = require('../lib/websockets');
-var inputs = require('../lib/inputs'); //.init();
+var communication = require('../lib/communication');
+
+if (app.get('env') === 'production')  {
+  var inputs = require('../lib/inputs'); 
+}
 
 /**
  * Get port from environment and store in Express.
@@ -19,7 +22,7 @@ app.set('port', port);
 var server = http.createServer(app);
 var io = require('socket.io')(server);
 
-sockets.startServer(io);
+communication.init(io);
 
 server.listen(port, function() {
   console.log('listening on *:' + port + ' in ' + app.get('env') + ' mode');
