@@ -3,10 +3,6 @@ var socket = io();
 
 $(function() {
 	
-	
-	
-//	$('ul li:first-child').addClass('active');
-	
 //	$(document).keydown(function(e) {
 //	    switch(e.which) {
 //	        case 37: 
@@ -44,9 +40,7 @@ socket.on('projects_set', function(data) {
 	list.empty();
 	
 	var dashboard = JSON.parse(JSON.parse(data));
-	
 	for (var i = 0; i < dashboard.Projects.length; i++) {
-//		var listItem = $(list[i]);
 		var project = dashboard.Projects[i];
 		var environment = dashboard.Environments[0];
 		
@@ -57,16 +51,10 @@ socket.on('projects_set', function(data) {
 			}
 		}
 		
-//		for (var y = 0; y < list.length; y++) {
-			
-			
-			var listItem = $('<li>' + project.Name + ' - ' + environment.Name + '</li>');
-			
-//			if (list.find('li[id="' + project.ProjectId + '"]').data('id') == project.ProjectId) {
-				listItem.attr('class', success ? "success" : "error");
-//			}
-			list.append(listItem);
-//		}
+		var listItem = $('<li>' + project.Name + ' - ' + environment.Name + '</li>');
+		listItem.attr('class', success ? "success" : "error");
+		
+		list.append(listItem);
 	}
 	
 	list.find('li:first-child').addClass('active');
@@ -78,21 +66,11 @@ socket.on('status_set', function(data) {
 	list.empty();
 	
 	var statuses = JSON.parse(JSON.parse(data));
-	
 	for (var i = 0; i < statuses.length; i++) {
-//		var listItem = $(list[i]);
 		var status = statuses[i];
-		
-//		for (var y = 0; y < list.length; y++) {
-			
-			
-			var listItem = $('<li>' + status.ProjectName + '</li>');
-			
-//			if (list.find('li[id="' + project.ProjectId + '"]').data('id') == project.ProjectId) {
-				listItem.attr('class', status.BuildStatus == 1 ? "success" : "error");
-//			}
-			list.append(listItem);
-//		}
+		var listItem = $('<li>' + status.ProjectName + '</li>');
+		listItem.attr('class', status.BuildStatus == 1 ? "success" : "error");
+		list.append(listItem);
 	}
 });
 
