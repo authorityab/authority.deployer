@@ -78,13 +78,13 @@ socket.on('status_set', function(data) {
 socket.on('inputs_up', function() {	
 	console.log('joystick_up');
 	
-	var activeItem = $('li.active');
-	var activeIndex = $('ul li').index(activeItem);
+	var activeItem = $('ul#projects li.active');
+	var activeIndex = $('ul#projects li').index(activeItem);
 	
 	activeItem.removeClass('active');
 	
 	if (activeIndex === 0) {
-		$('ul li:last-child').addClass('active');
+		$('ul#projects li:last-child').addClass('active');
 	} else {
 		activeItem.prev('li').addClass('active');
 	}
@@ -93,14 +93,14 @@ socket.on('inputs_up', function() {
 socket.on('inputs_down', function() {	
 	console.log('joystick_down');
 	
-	var totalCount = $('ul li').length;
-	var activeItem = $('li.active');
-	var activeIndex = $('ul li').index(activeItem);
+	var totalCount = $('ul#projects li').length;
+	var activeItem = $('ul#projects li.active');
+	var activeIndex = $('ul#projects li').index(activeItem);
 	
 	activeItem.removeClass('active');
 	
 	if (activeIndex === totalCount - 1) {
-		$('ul li:first-child').addClass('active');
+		$('ul#projects li:first-child').addClass('active');
 	} else {
 		activeItem.next('li').addClass('active');
 	}
@@ -109,14 +109,14 @@ socket.on('inputs_down', function() {
 socket.on('inputs_left', function() {
 	console.log('joystick_left');
 
-	$('li.active').removeClass('selected');
+	$('ul#projects li.active').removeClass('selected');
 });
 
 socket.on('inputs_right', function() {
 	console.log('joystick_right');
 
-	$('ul li').removeClass('selected');
-	$('li.active').addClass('selected');
+	$('ul#projects li').removeClass('selected');
+	$('ul#projects li.active').addClass('selected');
 });
 
 socket.on('inputs_button', function() {
