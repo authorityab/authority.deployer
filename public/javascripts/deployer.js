@@ -39,7 +39,8 @@ socket.on('projects_set', function(data) {
 	var list = $('ul#projects');
 	list.empty();
 	
-	var dashboard = JSON.parse(JSON.parse(data));
+	// TODO: If from c# must double parse;
+	var dashboard =  JSON.parse(data); //JSON.parse(JSON.parse(data));
 	for (var i = 0; i < dashboard.Projects.length; i++) {
 		var project = dashboard.Projects[i];
 		var environment = dashboard.Environments[0];
