@@ -3,35 +3,37 @@ var socket = io();
 
 $(function() {
 	
-//	$(document).keydown(function(e) {
-//	    switch(e.which) {
-//	        case 37: 
-////				socket.emit('inputs_left');
-////				unselect();
+	$(document).keydown(function(e) {
+	    switch(e.which) {
+	        case 37: 
+//				socket.emit('inputs_left');
+//				unselect();
 //				$('li.active').toggleClass('selected');
-//	        break;
-//	
-//	        case 38: 
-////				socket.emit('inputs_up_test');
-//	        	up();
-//			break;
-//	
-//	        case 39: 
-////				socket.emit('inputs_right');
-////				select();
+				left();
+	        break;
+	
+	        case 38: 
+//				socket.emit('inputs_up_test');
+	        	up();
+			break;
+	
+	        case 39: 
+//				socket.emit('inputs_right');
+//				select();
 //				$('li.active').toggleClass('selected');
-//	        break;
-//	
-//	        case 40:
-////				socket.emit('inputs_down_test');
-//				down();
-//	        break;
-//	
-//	        default: 
-//			return;
-//	    }
-//	    e.preventDefault(); 
-//	});
+				right();
+	        break;
+	
+	        case 40:
+//				socket.emit('inputs_down_test');
+				down();
+	        break;
+	
+	        default: 
+			return;
+	    }
+	    e.preventDefault(); 
+	});
 	
 });
 
@@ -40,7 +42,7 @@ socket.on('projects_set', function(data) {
 	list.empty();
 	
 	// TODO: If from c# must double parse;
-	var dashboard =  JSON.parse(data); //JSON.parse(JSON.parse(data));
+	var dashboard =  JSON.parse(JSON.parse(data));
 	for (var i = 0; i < dashboard.Projects.length; i++) {
 		var project = dashboard.Projects[i];
 		var environment = dashboard.Environments[0];
@@ -54,6 +56,7 @@ socket.on('projects_set', function(data) {
 		
 		var listItem = $('<li>' + project.Name + ' - ' + environment.Name + '</li>');
 		listItem.attr('class', success ? "success" : "error");
+		listItem.attr('data-project-id', project.Id);
 		
 		list.append(listItem);
 	}
@@ -75,7 +78,10 @@ socket.on('status_set', function(data) {
 	}
 });
 
-socket.on('inputs_up', function() {	
+function up() {
+	
+
+//socket.on('inputs_up', function() {	
 	console.log('joystick_up');
 	
 	var activeItem = $('ul#projects li.active');
@@ -88,9 +94,12 @@ socket.on('inputs_up', function() {
 	} else {
 		activeItem.prev('li').addClass('active');
 	}
-});
+//});
+}
 
-socket.on('inputs_down', function() {	
+function down() {
+	
+//socket.on('inputs_down', function() {	
 	console.log('joystick_down');
 	
 	var totalCount = $('ul#projects li').length;
@@ -104,20 +113,36 @@ socket.on('inputs_down', function() {
 	} else {
 		activeItem.next('li').addClass('active');
 	}
-});
+//});
+}
 
-socket.on('inputs_left', function() {
+function left() {
+	
+//socket.on('inputs_left', function() {
 	console.log('joystick_left');
 
 	$('ul#projects li.active').removeClass('selected');
-});
+//});
+}
 
-socket.on('inputs_right', function() {
+function right() {
+//socket.on('inputs_right', function() {
+
+// TODO: Send project id to Service
+	var projectId = $('ul#projects li.active').data('project-id');
+	
 	console.log('joystick_right');
+	console.log('joystick_right project id: ' + projectId);
 
 	$('ul#projects li').removeClass('selected');
 	$('ul#projects li.active').addClass('selected');
-});
+	
+	
+	
+	socket.emit('trigger_deploy', projectId);
+//});
+}
+
 
 socket.on('inputs_button', function() {
 	console.log('button');
