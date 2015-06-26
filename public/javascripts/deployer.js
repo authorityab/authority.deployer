@@ -2,7 +2,7 @@ var socket = io();
 
 $(function() {
 	
-	socket.triggerLights();
+	socket.emit('triggerLights');
 
 	$(document).keydown(function(e) {
 	    switch(e.which) {
