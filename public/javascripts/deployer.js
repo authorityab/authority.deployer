@@ -1,8 +1,9 @@
 var socket = io();
 
-
 $(function() {
 	
+	socket.triggerLights();
+
 	$(document).keydown(function(e) {
 	    switch(e.which) {
 	        case 37: 
