@@ -79,6 +79,14 @@ socket.on('status_set', function(data) {
 	}
 });
 
+socket.on('set_task_id', function(taskId) {
+	
+	setInterval(function () {
+		var status = socket.emit('get_deploy_status', taskId);
+	}, 500);
+	
+});
+
 function up() {
 	
 
@@ -130,22 +138,26 @@ function right() {
 //socket.on('inputs_right', function() {
 
 // TODO: Send project id to Service
-	var projectId = $('ul#projects li.active').data('project-id');
 	
 	console.log('joystick_right');
-	console.log('joystick_right project id: ' + projectId);
-
-	$('ul#projects li').removeClass('selected');
-	$('ul#projects li.active').addClass('selected');
 	
 	
 	
-	socket.emit('trigger_deploy', projectId);
+	
+	
 //});
 }
 
 
 socket.on('inputs_button', function() {
-	console.log('button');
+	
+	var projectId = $('ul#projects li.active').data('project-id');
+	
+	console.log('joystick_right project id: ' + projectId);
+
+	$('ul#projects li').removeClass('selected');
+	$('ul#projects li.active').addClass('selected');
+	
+	socket.emit('trigger_deploy', projectId);
 });
 
