@@ -1,0 +1,39 @@
+ul.project-list{
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 4vh;
+  >li{
+    width: 100%;
+    height: 24vw;
+    margin-bottom: 0.5vh;
+    background-color: $list-bg-color;
+    position: relative;
+    >div{
+      @extend %vertical-align;
+      padding: 1% 4%;
+      h2{
+        color: $list-text-color;
+        @extend %display-4;
+      }
+      h3, h4{
+        color: $list-small-text-color;
+        @extend %display-1;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+      }
+
+    }
+    &.current{
+      z-index: 100;
+      transform: scale(1.05);
+      @extend %dropshadow_4;
+      background: $selected-list-bg-color;
+      h3, h4{
+        color: $selected-list-text-color;
+
+      }
+
+    }
+  }
+
+}
