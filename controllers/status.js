@@ -8,7 +8,7 @@ router.get('/', function(req, res, next) {
 
 router.post('/set', function(req, res, next) {
     com.sockets.status.set(req.body.projects);
-    
+
     res.end();
 });
 

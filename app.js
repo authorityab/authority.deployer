@@ -7,12 +7,10 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compass = require('node-compass');
-
-var controllers = require('./controllers');
-
 var app = express();
 
-
+app.use(express.static(path.join(__dirname, 'public')));
+var controllers = require('./controllers');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -26,7 +24,9 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compass({ mode: 'expanded' }));
 app.use(controllers);
-app.use(express.static(path.join(__dirname, 'public')));
+
+
+
 
 
 // catch 404 and forward to error handler
