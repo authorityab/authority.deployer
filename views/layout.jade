@@ -1,22 +1,10 @@
 doctype html
-html(ng-app='srDeployer')
+html
   head
-    base(href='/')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    block body
-
+    block content
     script(src='http://code.jquery.com/jquery-2.1.4.min.js')
-
-    script(src='libs/angular/angular.js')
-    script(src='libs/angular-route/angular-route.js')
-    script(src='libs/angular-animate/angular-animate.js')
-
-    script(src='javascripts/angular/routes.js')
-    script(src='javascripts/angular/controllers.js')
-    script(src='javascripts/angular/app.js')
-
-    script(src='socket.io/socket.io.js')
-
-    script(src='javascripts/main.js')
+    script(src='/socket.io/socket.io.js')
+    script(src='/javascripts/deployer.js')
