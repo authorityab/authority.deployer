@@ -1,19 +1,10 @@
 extends layout
 
-block content
-  h1= title
-  
-  p Build statuses Team City
-  
-  ul#build-statuses
-    li SR.DeployerServices is not running.
-  
-  p Octopus Projects
+block body
+  ul
+    li
+      a(href='/') index
+    li
+      a(href='/status') status
 
-  ul#projects
-    li SR.DeployerServices is not running.
-  
-  
-
-
-
+  div(ng-view id='wrapper' class='{{ pageClass }}')
