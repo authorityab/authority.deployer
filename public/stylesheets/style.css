@@ -1,40 +1,194 @@
+ul.project-list > li.current {
+  box-shadow: 0px 24px 48px 0px rgba(0, 0, 0, 0.2); }
+
+ul.project-list > li.current {
+  box-shadow: 0px 24px 48px 0px rgba(0, 0, 0, 0.2); }
+
+ul.project-list > li > div {
+  position: relative;
+  top: 50%;
+  transform: translateY(-50%); }
+
+.view:after, .view nav:after {
+  content: " ";
+  display: block;
+  clear: both;
+  height: 0px;
+  overflow: hidden; }
+
+/* http://meyerweb.com/eric/tools/css/reset/
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, body, div, span, applet, object, iframe,
+p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed,
+figure, figcaption, footer, header, hgroup,
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video, ul, li {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align: baseline; }
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,
+footer, header, hgroup, menu, nav, section {
+  display: block; }
+
+h1, h2, h3, h4, h5, h6 {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  vertical-align: baseline; }
+
+body {
+  line-height: 1; }
+
+ol, ul {
+  list-style: none; }
+
+blockquote, q {
+  quotes: none; }
+
+blockquote:before, blockquote:after,
+q:before, q:after {
+  content: '';
+  content: none; }
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+.view {
+  width: 25%;
+  min-height: 100%;
+  background-color: #6c8c99; }
+  .view.fails {
+    background-color: #f72350; }
+
+html, body {
+  height: 100%;
+  min-height: 100%; }
+
+body {
+  margin: 0;
+  padding: 0; }
+  body * {
+    box-sizing: border-box;
+    transition: all 200ms; }
+
+.wrapper {
+  width: 400%;
+  height: 100%;
+  overflow: scroll; }
+  .wrapper > * {
+    float: left;
+    display: inline-block; }
+
+.loader {
+  display: block;
+  width: 32px;
+  height: 32px;
+  border: solid #ffffff 2px;
+  border-bottom-color: transparent;
+  border-radius: 50%;
+  -webkit-animation: spin 3s linear infinite;
+  -moz-animation: spin 3s linear infinite;
+  animation: spin 3s linear infinite; }
+@-moz-keyframes spin {
+  100% {
+    -moz-transform: rotate(360deg); } }
+@-webkit-keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg); } }
+@keyframes spin {
+  100% {
+    -webkit-transform: rotate(360deg);
+    transform: rotate(360deg); } }
+ul.project-list > li > div h2, ul.project-list > li > div h3, ul.project-list > li > div h4 {
+  font-family: Helvetica, Arial, Sans-Serif; }
+
+ul.project-list > li > div h2 {
+  font-size: 6vw;
+  line-height: 1.1;
+  margin-bottom: 0.3em; }
+
+ul.project-list > li > div h3, ul.project-list > li > div h4 {
+  line-height: 1.1;
+  font-size: 2vw;
+  margin-bottom: 0.4em; }
+
+body {
+  font-family: Helvetica; }
+
+.dash {
+  background-color: #6c8c99; }
+
+ul.project-list {
+  width: 90%;
+  margin: 0 auto;
+  padding-bottom: 4vh; }
+  ul.project-list > li {
+    width: 100%;
+    height: 24vw;
+    margin-bottom: 0.5vh;
+    background-color: #475a60;
+    position: relative; }
+    ul.project-list > li > div {
+      padding: 1% 4%; }
+      ul.project-list > li > div h2 {
+        color: #ffffff; }
+      ul.project-list > li > div h3, ul.project-list > li > div h4 {
+        color: #6c8c99;
+        text-transform: uppercase;
+        letter-spacing: 0.08em; }
+    ul.project-list > li.current {
+      z-index: 100;
+      transform: scale(1.05);
+      background: #6c8c99; }
+      ul.project-list > li.current h3, ul.project-list > li.current h4 {
+        color: #ffffff; }
+
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
-}
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; }
 
 a {
-  color: #00B7FF;
-}
+  color: #00B7FF; }
 
 ul {
   list-style: none;
   list-style-type: none;
-}
+  margin: 4px; }
 
 li {
   margin-bottom: 1px;
-  padding: 8px;
-}
+  padding: 8px; }
 
 .error {
-  background-color: #FF667F;
-}
+  background-color: #FF667F; }
 
 .success {
-  background-color: #3DFF7E;
-}
+  background-color: #3DFF7E; }
 
 .active {
   box-shadow: 2px 2px 2px #888888;
   margin-bottom: 10px;
   margin-top: 2px;
-  margin-left: -8px;
-}
+  margin-left: -8px; }
 
 .selected {
-  background-color: cyan;
-}
+  background-color: cyan; }
 
 /* ANIMATIONS
 ============================================================================= */
@@ -42,65 +196,45 @@ li {
 /* rotate and fall */
 @keyframes rotateFall {
   0% {
-    transform: rotateZ(0deg);
-  }
+    transform: rotateZ(0deg); }
   20% {
     transform: rotateZ(10deg);
-    animation-timing-function: ease-out;
-  }
+    animation-timing-function: ease-out; }
   40% {
-    transform: rotateZ(17deg);
-  }
+    transform: rotateZ(17deg); }
   60% {
-    transform: rotateZ(16deg);
-  }
+    transform: rotateZ(16deg); }
   100% {
-    transform: translateY(100%) rotateZ(17deg);
-  }
-}
+    transform: translateY(100%) rotateZ(17deg); } }
 /* slide in from the bottom */
 @keyframes slideOutLeft {
   to {
-    transform: translateX(-100%);
-  }
-}
+    transform: translateX(-100%); } }
 /* rotate out newspaper */
 @keyframes rotateOutNewspaper {
   to {
     transform: translateZ(-3000px) rotateZ(360deg);
-    opacity: 0;
-  }
-}
+    opacity: 0; } }
 /* entering animations --------------------------------------- */
 /* scale up */
 @keyframes scaleUp {
   from {
     opacity: 0.3;
-    -webkit-transform: scale(0.8);
-  }
-}
+    -webkit-transform: scale(0.8); } }
 /* slide in from the right */
 @keyframes slideInRight {
   from {
-    transform: translateX(100%);
-  }
+    transform: translateX(100%); }
   to {
-    transform: translateX(0);
-  }
-}
+    transform: translateX(0); } }
 /* slide in from the bottom */
 @keyframes slideInUp {
   from {
-    transform: translateY(100%);
-  }
+    transform: translateY(100%); }
   to {
-    transform: translateY(0);
-  }
-}
+    transform: translateY(0); } }
 .ng-enter {
-  z-index: 8888;
-}
+  z-index: 8888; }
 
 .ng-leave {
-  z-index: 9999;
-}
+  z-index: 9999; }

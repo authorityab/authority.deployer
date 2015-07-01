@@ -1,0 +1,184 @@
+$font-display-4-size:6vw;
+$font-display-3-size:5vw;
+$font-display-2-size:4vw;
+$font-display-1-size:2vw;
+$font-headline-size:22px;
+$font-title-size:20px;
+$font-bread-head-size:18px;
+$font-bread-l-size:16px;
+$font-bread-m-size:14px;
+$font-bread-s-size:14px;
+$caption-l-size:12px;
+$caption-2-size:10px;
+$menu-font-size:18px;
+$submenu-font-size:18px;
+$preamble-font-size:18px;
+$small-font-m-size:11px;
+$small-font-s-size:9px;
+
+$font-display-lineheight :1.1;
+
+// families
+
+%theme-font-main{
+  font-family: $theme-font-main, $theme-font-main-fallback;
+}
+
+%theme-font-sub{
+  font-family: $theme-font-sub, $theme-font-sub-fallback;
+}
+
+%theme-font-main-alt{
+  font-family: $theme-font-main-alt, $theme-font-main-alt-fallback;
+}
+
+%bread-font{
+  font-family: $bread-font, $bread-font-fallback;
+}
+
+%italic-font{
+  font-family: $italic-font, $italic-font-fallback;
+  font-style: italic;
+}
+
+%mono-font{
+  font-family: $mono-font, $mono-font-fallback;
+}
+
+
+// definitions
+
+
+%display-4{
+  @extend %theme-font-main;
+  font-size: $font-display-4-size;
+  line-height: $font-display-lineheight;
+  margin-bottom: 0.3em;
+
+}
+%display-3{
+  @extend %theme-font-main;
+  font-size: $font-display-3-size;
+  line-height: $font-display-lineheight;
+  margin-bottom: 0.2em;
+
+}
+%display-2{
+  @extend %theme-font-main;
+  font-size: $font-display-2-size;
+  line-height: $font-display-lineheight;
+  margin-bottom: 0.2em;
+
+}
+%display-1{
+  @extend %theme-font-main;
+  line-height: $font-display-lineheight;
+  font-size: $font-display-1-size;
+  margin-bottom: 0.4em;
+}
+%headline-text{
+  @extend %theme-font-main;
+  font-size: $font-headline-size;
+}
+%title-text{
+  @extend %theme-font-main-alt;
+  font-size: $font-title-size;
+}
+%subhead-text{
+  @extend %theme-font-sub;
+  font-size: $submenu-font-size;
+}
+%preamble-text{
+  @extend %theme-font-sub;
+  font-size: $preamble-font-size;
+}
+%bread-head{
+  @extend %theme-font-main;
+  letter-spacing: 0.05em;
+  font-size: $font-bread-head-size;
+  line-height: 1.2;
+
+}
+
+%bread-text{
+  @extend %bread-font;
+  font-size: $font-bread-l-size;
+
+}
+%bold-text{
+ font-weight: bold;
+}
+%italic-text{
+  @extend %italic-font;
+}
+
+%caption-text{
+  @extend %bread-font;
+}
+
+%menu-text{
+  @extend %theme-font-main-alt;
+}
+%submenu-text{
+  @extend %theme-font-main-alt;
+}
+%button-text{
+  @extend %theme-font-main;
+  text-transform: uppercase;
+}
+%big-button-text{
+  @extend %theme-font-main;
+}
+%mono-text{
+  @extend %mono-font;
+}
+
+%quote-text{
+  @extend %italic-font;
+}
+
+%link-text{
+
+}
+
+%small-text{
+  @extend %bread-font;
+  font-size: $small-font-m-size;
+  @include mq-small(){
+    font-size:   $small-font-m-size;
+  }
+}
+
+//------
+
+%responsive-bread{
+  line-height: 1.3;
+    @include mq-small(){
+      font-size: $font-bread-s-size;
+    }
+    @include mq-biggerthansmall(){
+      font-size: $font-bread-m-size;
+    }
+}
+
+
+%responsive-title{
+  @include mq-small(){
+    font-size: 16px;
+    line-height: 18px;
+  }
+  @include mq-biggerthansmall(){
+    font-size: 18px;
+    line-height: 20px;
+  }
+}
+
+%responsive-subhead{
+  @extend %subhead-text;
+  @include mq-small(){
+    font-size: 16px;
+  }
+  @include mq-biggerthansmall(){
+    font-size: 18px;
+  }
+}
