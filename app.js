@@ -10,21 +10,20 @@ var compass = require('node-compass');
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
-var controllers = require('./controllers');
-
-// view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
-//app.use(favicon(__dirname + '/public/favicon.ico'));
+app.use(favicon(__dirname + '/public/images/favicon.ico'));
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compass({ mode: 'expanded' }));
-app.use(controllers);
 
+
+var controllers = require('./controllers');
+app.use(controllers);
 
 
 
@@ -36,7 +35,6 @@ app.use(function(req, res, next) {
   next(err);
 });
 
-// error handlers
 
 // development error handler
 // will print stacktrace

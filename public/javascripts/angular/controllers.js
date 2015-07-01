@@ -1,4 +1,28 @@
+var controllers = angular.module('srDeployer.controllers', []);
 
-angular.module('srDeployer.controllers', []).controller('NavigationController', function($scope) {
-  $scope.tagline = 'test navigation'
+
+controllers.controller('ProjectsController', function($scope, $location) {
+  $scope.pageClass = 'projects-page';
+
+  $scope.routeLeft = function() {
+    $location.url('/status');
+  }
+
+  $scope.routeRight = function() {
+
+  }
+
+});
+
+controllers.controller('StatusController', function($scope, $location) {
+  $scope.pageClass = 'status-page';
+
+  $scope.routeLeft = function() {
+
+  }
+
+  $scope.routeRight = function() {
+      $location.url('/');
+  }
+
 });

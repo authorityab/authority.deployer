@@ -1,14 +1,64 @@
 var Projects = (function() {
 
 	var deployInProgress;
+	var buildStatusInterval;
 
 	$(function() {
+
+		//TODO: Remove after test
+		$(document).unbind();
+		$(document).keydown(function(e) {
+	    switch(e.which) {
+	        case 37: // left
+					left();
+					console.log('l');
+	        break;
+
+	        case 39: // right
+					right();
+					console.log('r');
+	        break;
+
+	        default: return;
+	    }
+    	e.preventDefault();
+		});
+
+
 		Main.socket.emit('get_projects');
 
-		setInterval(function() {
+		buildStatusInterval = setInterval(function() {
 			Main.socket.emit('get_build_status');
 		}, 5000);
+
 	});
+
+
+	function left() {
+		clearInterval(buildStatusInterval);
+
+		Main.ngScope().$apply(function() {
+			Main.ngScope().routeLeft();
+		});
+	}
+
+	function right() {
+		Main.ngScope().$apply(function() {
+			Main.ngScope().routeRight();
+		});
+	}
+
+
+
+
+
+
+
+
+
+
+
+
 
 	Main.socket.on('set_projects', function(data) {
 		var list = $('ul#projects');

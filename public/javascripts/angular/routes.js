@@ -4,11 +4,11 @@ angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProv
   $routeProvider
     .when('/', {
       templateUrl: 'partials/projects.jade',
-      controller: 'NavigationController'
+      controller: 'ProjectsController'
     })
     .when('/status', {
       templateUrl: 'partials/status.jade',
-      controller: 'NavigationController'
+      controller: 'StatusController'
     })
     .otherwise({
       redirectTo: '/'
