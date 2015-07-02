@@ -3,6 +3,8 @@ var Projects = (function() {
 	var deployInProgress;
 	var buildStatusInterval;
 
+	var latestFailedBuild;
+
 	$(function() {
 
 		//TODO: Remove after test
@@ -26,6 +28,8 @@ var Projects = (function() {
 
 
 		Main.socket.emit('get_projects');
+
+		Main.socket.emit('get_latest_failed_build');
 
 		buildStatusInterval = setInterval(function() {
 			Main.socket.emit('get_build_status');
@@ -55,6 +59,14 @@ var Projects = (function() {
 
 
 
+Main.socket.on('set_latest_failed_build', function(build) {
+	latestFailedBuild = JSON.parse(JSON.parse(build));
+	setBuildDestroyer('BUILD DESTROYER: ' + latestFailedBuild.BuildDestroyer);
+});
+
+function setBuildDestroyer(value) {
+	$('#build-destroyer').html(value);
+}
 
 
 
@@ -89,16 +101,31 @@ var Projects = (function() {
 	});
 
 	Main.socket.on('set_build_status', function(data) {
+		var allSuccess = true;
+
 		var list = $('ul#build-statuses');
 		list.empty();
 
-		var statuses = JSON.parse(JSON.parse(data));
-		for (var i = 0; i < statuses.length; i++) {
-			var status = statuses[i];
-			var listItem = $('<li>' + status.ProjectName + '</li>');
-			listItem.attr('class', status.BuildStatus == 1 ? "success" : "error");
+		var builds = JSON.parse(JSON.parse(data));
+		for (var i = 0; i < builds.length; i++) {
+			var build = builds[i];
+
+			if (build.Status === 'FAILURE') {
+				allSuccess = false;
+			}
+
+			var listItem = $('<li>' + build.BuildConfig.ProjectName + ' ¶ ' + build.BuildConfig.Name + '</li>');
+			listItem.attr('class', build.Status === 'SUCCESS' ? "success" : "error");
 			list.append(listItem);
 		}
+
+		if (allSuccess) {
+			setBuildDestroyer('');
+		} else {
+			Main.socket.emit('get_latest_failed_build');
+		}
+
+
 	});
 
 	Main.socket.on('deploy_started', function(taskId) {
@@ -111,6 +138,8 @@ var Projects = (function() {
 
 	Main.socket.on('set_deploy_status', function(data) {
 		var status =  JSON.parse(JSON.parse(data));
+
+
 
 		if (status.IsCompleted) {
 
