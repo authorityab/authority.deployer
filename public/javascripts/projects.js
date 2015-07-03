@@ -211,12 +211,12 @@ function setBuildDestroyer(value) {
 
 	Main.socket.on('inputs_button', function() {
 
-		var projectId = $('ul#projects li.active').data('project-id');
+		//var projectId = $('ul#projects li.active').data('project-id');
 
-		console.log('joystick_right project id: ' + projectId);
+		console.log('button pushed');
 
-		$('ul#projects li').removeClass('selected');
-		$('ul#projects li.active').addClass('selected');
+//		$('ul#projects li').removeClass('selected');
+//		$('ul#projects li.active').addClass('selected');
 
 		Main.socket.emit('trigger_deploy', projectId);
 	});
