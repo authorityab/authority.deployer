@@ -26,6 +26,19 @@ var Projects = (function() {
     	e.preventDefault();
 		});
 
+		$('#success').on('click', function(){
+			Main.socket.emit('deploy_succeeded');
+		});
+		$('#error').on('click', function(){
+			Main.socket.emit('deploy_failed');
+		});
+		$('#loading').on('click', function(){
+			Main.socket.emit('trigger_deploy');
+		});
+		$('#stop').on('click', function(){
+			Main.socket.emit('ledstrip_stop');
+		});
+
 
 		Main.socket.emit('get_projects');
 
