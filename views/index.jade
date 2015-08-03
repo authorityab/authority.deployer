@@ -1,10 +1,5 @@
 extends layout
 
 block body
-  ul
-    li
-      a(href='/') index
-    li
-      a(href='/status') status
-
+  
   div(ng-view id='wrapper' class='{{ pageClass }}')

@@ -181,6 +181,9 @@ li {
 .success {
   background-color: #3DFF7E; }
 
+.in-progress {
+  background-color: cyan; }
+
 .active {
   box-shadow: 2px 2px 2px #888888;
   margin-bottom: 10px;
