@@ -1,4 +1,4 @@
-@import "compass/css3";
+//@import "compass/css3";
 
 
 @import "vars/colors";
@@ -9,12 +9,26 @@
 @import "typography/constructor";
 @import "components/dashboard/constructor";
 @import "components/project-list/constructor";
+@import "components/view/constructor";
+@import "components/date-time/constructor";
 
+
+.btn-container{
+
+  width: 40%;
+  min-width: 200px;
+  margin: 4rem auto 2rem;
+  h2{
+    color: $font-color-inverted;
+    padding-bottom: 1rem;
+    text-align: center;
+    font-size: 3em;
+  }
+}
 
 
 body {
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0px;
 }
 
 a {
@@ -32,12 +46,33 @@ li {
   padding: 8px;
 }
 
-.error {
-  background-color: #FF667F;
+
+%message-badge{
+  display: block;
+  position: absolute;
+  top: 0.7em;
+  right: 0.7em;
+  content: "";
+  font-size: $font-bread-head-size;
+  color: $fail-badge-text-color;
+  min-width: 12%;
+  text-align: center;
+  padding: 0.2em;
+  text-transform: uppercase;
 }
 
-.success {
-  background-color: #3DFF7E;
+
+
+.fail:after {
+  @extend %message-badge;
+  content: "fail";
+  background-color: $fail-color;
+}
+
+.success:after {
+  @extend %message-badge;
+  content : "success";
+  background-color: $success-color;
 }
 
 .active {

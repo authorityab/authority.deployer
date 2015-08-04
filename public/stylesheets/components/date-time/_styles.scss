@@ -1,0 +1,44 @@
+#joint { stroke-width: 2px; stroke: $dark; fill:$theme;}
+#face { fill:$dark;}
+#hour, #min, #sec { stroke-width: 0px; fill: $dark; }
+#sec { stroke: $dark; stroke-width: 1px;}
+
+.date-time{
+  width: 80%;
+  margin: auto;
+  padding-top: 5vw;
+  padding-bottom: 0vw;
+  @extend %clearafter !optional;
+  margin-bottom: 4vw;
+}
+
+.clock{
+  width: 30%;
+  margin-left: 5%;
+  float: left;
+}
+
+
+.date{
+  float: right;
+  color: $dark;
+  transform: translate(0, 50%);
+  .day{
+    font-weight: bold;
+    font-size: 10vw;
+    padding-right: 2vw;
+  }
+
+  .month{
+    font-weight: lighter;
+    font-size: 10vw;
+  }
+  .year{
+    width: 100%;
+    display: block;
+    text-align: right;
+    font-size: 5vw;
+    font-weight: lighter;
+  }
+
+}

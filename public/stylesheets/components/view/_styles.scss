@@ -1,0 +1,35 @@
+.head-line{
+  display: flex;
+  flex: auto;
+  margin: 1em 2em 0 2rem;
+  flex-direction: row;
+  font-size: 1em;
+  >.line{
+    flex: 2;
+    border-top: $light 1px solid;
+    height: 0.1vw;
+    margin-top: 0.8vw;
+  }
+  >h1{
+    color: $light;
+    text-align: center;
+    font-weight: lighter;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-size: 2vw;
+    flex: auto;
+  }
+}
+
+
+.head-description{
+  border-bottom: $light solid 1px;
+  color: $light;
+  font-size: $font-display-2-size;
+  padding: 1em;
+  text-align: center;
+  margin: 0 2rem 0 2rem;
+
+
+
+}

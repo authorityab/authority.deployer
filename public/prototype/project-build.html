@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title></title>
+    <link rel="stylesheet" href="../stylesheets/style.css">
+</head>
+<body>
+<div class="wrapper">
+    <section id="project_view" class="view project">
+
+           <header>
+               <div class="head-line">
+                   <div class="line"></div>
+                   <h1>Project name</h1>
+                   <div class="line"></div>
+               </div>
+                <div class="head-description">
+                <h3>Version 10.X</h3>
+                </div>
+           </header>
+            <div class="btn-container">
+                <img src="../images/press-the-button.svg">
+                <h2>DEPLOY</h2>
+            </div>
+
+            <nav>
+                            <ul class="project-list">
+                                <li class="current success">
+                                    <div>
+                                        <h2>Miljö X</h2>
+                                        <h3>Version 10.8</h3>
+                                        <h4>Last build: 23 juli 09:30, Johan thuresson</h4>
+                                    </div>
+                                </li>
+                                <li class="fail">
+                                    <div>
+                                        <h2>Miljö Y</h2>
+                                        <h3>Version 10.8</h3>
+                                        <h4>Last build: 23 juli 09:30, Johan thuresson</h4>
+                                    </div>
+                                </li>
+                                <li class="success">
+                                    <div>
+                                        <h2>Miljö Z</h2>
+                                        <h3>Version 10.8</h3>
+                                        <h4>Last build: 23 juli 09:30, Johan thuresson</h4>
+                                    </div>
+                                </li>
+                            </ul>
+                        </nav>
+
+    </section>
+</div>
+
+
+
+<script src="jQuery/jquery-2.1.3.min.js"></script>
+<script src="nav.js"></script>
+<script language="JavaScript" type="text/javascript">
+    $(".wrapper").navigation({  zStart: 2000,
+                                currentView : "#project_view",
+                                nextPage : "",
+                                prevPage : "project.html"
+                                }) ;
+</script>
+</body>
+</html>

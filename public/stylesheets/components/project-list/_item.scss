@@ -2,6 +2,7 @@ ul.project-list{
   width: 90%;
   margin: 0 auto;
   padding-bottom: 4vh;
+  padding-top: 4vh;
   >li{
     width: 100%;
     height: 24vw;
@@ -30,10 +31,57 @@ ul.project-list{
       background: $selected-list-bg-color;
       h3, h4{
         color: $selected-list-text-color;
+      }
+    }
+
+
+
+  }
+}
+
+
+.fails{
+  ul.project-list{
+    >li{
+      background-color: $fail-list-bg-color;
+      >div{
+        h2{
+          color: $fail-list-text-color;
+        }
+        h3, h4{
+          color: $fail-list-small-text-color;
+        }
 
       }
-
+      &.current{
+        background: $fail-selected-list-bg-color;
+        h3, h4{
+          color: $fail-selected-list-text-color;
+        }
+      }
     }
   }
+}
 
+.project{
+  ul.project-list{
+    >li{
+      background-color: $project-list-bg-color;
+      >div{
+        h2{
+          color: $project-list-text-color;
+        }
+        h3, h4{
+          color: $project-list-small-text-color;
+        }
+
+      }
+      &.current{
+        background: $project-selected-list-bg-color;
+        h3, h4{
+          color: $project-selected-list-text-color;
+        }
+      }
+    }
+  }
 }

@@ -4,19 +4,22 @@ $.fn.navigation = function (options) {
     var settings = $.extend({
         // These are the defaults.
         zStart : 1000,
-        var2 : 2
+        var2 : 2,
+        currentView : "",
+        nextPage : "",
+        prevPage : ""
     }, options);
 
 
     //TODO:populate this in some way
 
-    var $currentView = "#projects_view";
+    var $currentView = settings.currentView;
     var $currentListIndex = 0 ;
 
 
 
 
-    //  alert(options.zStart);
+ //   alert(settings.var2);
 
 
     $('body').bind('keypress', function(e) {
@@ -35,10 +38,12 @@ $.fn.navigation = function (options) {
         if(e.keyCode==100){
             // d, right
             console.log("right");
+            pageNav(settings.nextPage);
         }
         if(e.keyCode==97){
             // a, left
             console.log("left");
+            pageNav(settings.prevPage);
         }
         if(e.keyCode==32){
             // space, action
@@ -52,7 +57,6 @@ $.fn.navigation = function (options) {
 
         $(this).parent().find("li").each(function(){
             $(this).removeClass("current");
-
         });
 
         console.log($(this));
@@ -61,8 +65,11 @@ $.fn.navigation = function (options) {
     });
 
 
-
-
+    function pageNav(page){
+        if(page != ""){
+            window.location = page;
+        }
+    }
 
 
     function listNav(dir){
@@ -71,7 +78,7 @@ $.fn.navigation = function (options) {
             if($currentListIndex<0){$currentListIndex=0;}
 
 
-            var _item =     $currentView + " nav > ul >li";
+            var _item = $currentView + " nav > ul >li";
             $(_item).each(function(){
                 $(this).removeClass("current");
 

@@ -1,5 +1,5 @@
 .view{
-  width: 0.25*$screen-width;
+  width: $wrapper-width;
   min-height: $screen-height;
   background-color: $background-color;
   @extend %clearafter;
@@ -7,6 +7,11 @@
   &.fails{
     background-color: $fail-page-bg-color;
   }
+
+  &.project{
+    background-color: $project-background-color;
+  }
+
   nav{
     @extend %clearafter;
   }

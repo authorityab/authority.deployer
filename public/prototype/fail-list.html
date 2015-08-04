@@ -9,43 +9,11 @@
 </head>
 <body>
 <div class="wrapper">
+
     <section id="fails_view" class="view fails">
-        <header>
-            <h1>Projects</h1>
-        </header>
-        <div class="loader"></div>
-
-
-        <ul class="fail-list">
-            <li>
-                bla bla bla
-            </li>
-        </ul>
-    </section>
-
-    <main id="main_view" class="view dash">
-
-        <section class="dash-projects">
-           <header><h1>projects</h1></header>
-            <div class="success">
-                <div class="number">34</div>
-                <div class="desctiption">Success</div>
-            </div>
-            <div class="fail">
-                <div class="number">1</div>
-                <div class="desctiption">Fail</div>
-            </div>
-        </section>
-
-    </main>
-
-    <section id="projects_view" class="view projcects">
-        <header>
-            <h1>Projects</h1>
-        </header>
         <nav>
                 <ul class="project-list">
-                    <li>
+                    <li class="current">
                         <div>
                             <h2>Projektet Lorem ipsum</h2>
                             <h3>Project-234</h3>
@@ -112,15 +80,6 @@
             </nav>
     </section>
 
-    <section id="project_view" class="view project">
-
-        <ul class="environments">
-            <li><div>Build alt 1</div></li>
-            <li><div>Build alt 2</div></li>
-        </ul>
-
-    </section>
-
 
 </div>
 
@@ -129,7 +88,11 @@
 <script src="jQuery/jquery-2.1.3.min.js"></script>
 <script src="nav.js"></script>
 <script language="JavaScript" type="text/javascript">
-    $("#main").navigation({zStart: 2000}) ;
+    $(".wrapper").navigation({  zStart: 2000,
+                                currentView : "#fails_view",
+                                nextPage : "main.html",
+                                prevPage : ""
+                                }) ;
 </script>
 </body>
 </html>
