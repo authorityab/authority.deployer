@@ -1,3 +1,141 @@
 .dash{
   background-color: $background-color;
+  color: $dark;
+
+  &.failed:after{
+    width: 0;
+    	height: 0;
+    	border-top: 14vw solid $fail-color;
+    	border-right: 14vw solid transparent;
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 10;
+  }
+
+  .dash-segment{
+    position: relative;
+    width: 90%;
+    margin: auto;
+    padding: 6vw 0;
+  }
+  .dash-stat{
+    display: inline-block;
+    flex:1;
+    text-align: center;
+    h1{
+      font-size: 8vw;
+    }
+    h3{
+      font-size: 2vw;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+  }
+
+
+  .dash-proj{
+    display: flex;
+  }
+
+  .dash-latest {
+    display: flex;
+
+    .dash-stat{
+      border-right: 0.2vw solid $dark;
+    }
+
+    .l-description{
+      display: inline-block;
+      flex: 4;
+      font-size: 3vw;
+      padding: 2vw 3vw;
+      text-transform: uppercase;
+      font-weight: bold;
+    }
+
+  }
+
+
+.count{
+  display: flex;
+  width: 90%;
+  margin: auto;
+  >.dash-stat{
+    border-left: 0.1vw solid $dark;
+    border-right: 0.1vw solid $dark;
+    &:last-child{
+      border-right: none;
+    }
+    &:first-child{
+      border-left: none;
+    }
+  }
+}
+
+
+
+
+
+
+
+
+.dash-latest{
+
+}
+
+.failer{
+
+  position: absolute;
+  width: 100%;
+  margin-top: 0.5vw;
+  text-align: center;
+  >*{
+    display: inline-block;
+  }
+
+  %flag{
+    height: 4vw;
+    width: 5vw;
+
+    > svg {
+      fill: $dark;
+    }
+  }
+
+  .flag-l {
+    @extend %flag;
+    transform: translate(40%, 60%);
+
+  }
+
+  .name{
+    background-color: $dark;
+    padding: 1vw;
+    color:$theme;
+    font-size: 1.5vw;
+    text-transform: uppercase;
+    border: 0.3vw solid $theme;
+    z-index: 4;
+    position: relative;
+
+
+  }
+  .flag-r{
+    @extend %flag;
+    transform: translate(-40%, 60%);
+  }
+
+}
+
+  footer{
+    height: 40vw;
+    >.logo{
+      margin: auto;
+      background: center center no-repeat url("../images/logo.svg");
+      width: 60%;
+      height: 40vw;
+    }
+  }
+
 }

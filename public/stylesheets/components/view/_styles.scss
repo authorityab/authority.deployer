@@ -6,25 +6,25 @@
   font-size: 1em;
   >.line{
     flex: 2;
-    border-top: #ffffff 1px solid;
-    height: 1px;
-    margin-top: 0.5em;
+    border-top: $light 1px solid;
+    height: 0.1vw;
+    margin-top: 0.8vw;
   }
   >h1{
-    color: #ffffff;
+    color: $light;
     text-align: center;
     font-weight: lighter;
     text-transform: uppercase;
-    letter-spacing: 0.2em;
-    font-size: 0.7em;
+    letter-spacing: 0.1em;
+    font-size: 2vw;
     flex: auto;
   }
 }
 
 
 .head-description{
-  border-bottom: #ffffff solid 1px;
-  color: #ffffff;
+  border-bottom: $light solid 1px;
+  color: $light;
   font-size: $font-display-2-size;
   padding: 1em;
   text-align: center;
