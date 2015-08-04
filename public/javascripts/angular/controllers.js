@@ -36,17 +36,33 @@ controllers.controller('ProjectsController', function($scope, $location) {
     $location.url('/');
   }
 
-  $scope.routeRight = function() {
-    $location.url('/environments');
+  $scope.routeRight = function(projectId) {
+    $location.url('/releases#' + projectId);
+  }
+
+});
+
+controllers.controller('ReleasesController', function($scope, $location) {
+  $scope.pageClass = 'releases-page';
+  $scope.projectId = $location.hash();
+
+  $scope.routeLeft = function() {
+    $location.url('/projects');
+  }
+
+  $scope.routeRight = function(projectId, releaseId) {
+    $location.url('/environments?projectId=' + projectId + '&releaseId=' + releaseId);
   }
 
 });
 
 controllers.controller('EnvironmentsController', function($scope, $location) {
   $scope.pageClass = 'environments-page';
+  $scope.projectId = $location.search('projectId');
+  $scope.releaseId = $location.search('releaseId');
 
   $scope.routeLeft = function() {
-    $location.url('/projects');
+    $location.url('/releases#' + $scope.projectId);
   }
 
   $scope.routeRight = function() {

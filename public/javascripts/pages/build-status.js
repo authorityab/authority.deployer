@@ -53,7 +53,7 @@ var BuildStatus = (function() {
     for (var i = 0; i < Main.buildParams.failedBuilds.length; i++) {
       var build = Main.buildParams.failedBuilds[i];
 
-      var changedBy = 'Anoymous';
+      var changedBy = 'Anonymous';
       if (build.Changes != null && build.Changes.Change.length !== 0) {
         changedBy = build.Changes.Change[0].Username;
       }

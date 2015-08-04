@@ -14,6 +14,10 @@ angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProv
       templateUrl: 'partials/projects.jade',
       controller: 'ProjectsController'
     })
+    .when('/releases', {
+      templateUrl: 'partials/releases.jade',
+      controller: 'ReleasesController'
+    })
     .when('/environments', {
       templateUrl: 'partials/environments.jade',
       controller: 'EnvironmentsController'

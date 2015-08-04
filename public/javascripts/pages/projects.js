@@ -9,10 +9,6 @@ var Projects = (function() {
 		$(document).unbind();
 		$(document).keydown(function(e) {
 	    switch(e.which) {
-					case 13: // enter
-					triggerDeploy();
-					console.log('e');
-					break;
 
 	        case 37: // left
 					left();
@@ -39,13 +35,7 @@ var Projects = (function() {
     	e.preventDefault();
 		});
 
-
-
-
-		Main.socket.emit('get_projects');
-
-
-
+		setProjects();
 
 	});
 
@@ -56,54 +46,13 @@ var Projects = (function() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-	Main.socket.on('set_projects', function(data) {
-		var list = $('ul#projects');
-		list.empty();
-
-		// TODO: If from c# must double parse;
-		var dashboard =  JSON.parse(JSON.parse(data));
-		for (var i = 0; i < dashboard.Projects.length; i++) {
-			var project = dashboard.Projects[i];
-			//var environment = dashboard.Environments[0];
-
-			var success;
-			for (var y = 0; y < dashboard.Items.length; y++) {
-				if (dashboard.Items[y].ProjectId === project.Id) {
-					success = !dashboard.Items[y].HasPendingInterruptions && !dashboard.Items[y].HasWarningsOrErrors;
-				}
-			}
-
-			var listItem = $('<li>' + project.Name + '</li>');
-			//listItem.attr('class', success ? "success" : "error");
-			listItem.attr('data-project-id', project.Id);
-
-			list.append(listItem);
-		}
-
-		list.find('li:first-child').addClass('active');
-
-	});
 
 
 
 	Main.socket.on('deploy_started', function(taskId) {
-
 		deployInProgress = setInterval(function () {
 			Main.socket.emit('get_deploy_status', taskId);
 		}, 8000);
-
-
 	});
 
 	Main.socket.on('set_deploy_status', function(data) {
@@ -123,6 +72,7 @@ var Projects = (function() {
 			}
 		}
 
+		socket.removeListener('get_deploy_status')
 	});
 
 	Main.socket.on('inputs_up', function() {
@@ -177,32 +127,50 @@ var Projects = (function() {
 	}
 
 	function left() {
-		// clearInterval(buildStatusInterval);
-
 		Main.ngScope().$apply(function() {
 			Main.ngScope().routeLeft();
 		});
 	}
 
 	function right() {
+		var projects = $('ul#projects');
+		var projectId = projects.find('li.active').data('project-id');
+
 		Main.ngScope().$apply(function() {
-			Main.ngScope().routeRight();
+			Main.ngScope().routeRight(projectId);
 		});
 	}
 
-	function triggerDeploy() {
-		var projects = $('ul#projects');
 
-		console.log('button pushed');
-		var projectId = $('ul#projects li.active').data('project-id');
 
-		console.log('project id: ' + projectId);
 
-		Main.socket.emit('trigger_deploy', projectId);
+	function setProjects() {
+		var list = $('ul#projects');
+		list.empty();
 
-		projects.find('[data-project-id="' + projectId + '"]').addClass('in-progress');
+		for (var i = 0; i < Main.projectParams.projects.length; i++) {
+			var project = Main.projectParams.projects[i];
+			//var environment = dashboard.Environments[0];
+
+			// var success;
+			// for (var y = 0; y < dashboard.Items.length; y++) {
+			// 	if (dashboard.Items[y].ProjectId === project.Id) {
+			// 		success = !dashboard.Items[y].HasPendingInterruptions && !dashboard.Items[y].HasWarningsOrErrors;
+			// 	}
+			// }
+
+			var listItem = $('<li>' + project.Name + '</li>');
+			//listItem.attr('class', success ? "success" : "error");
+			listItem.attr('data-project-id', project.Id);
+
+			list.append(listItem);
+		}
+
+		list.find('li:first-child').addClass('active');
 	}
 
-
+	return {
+		setProjects: setProjects
+	}
 
 })();
