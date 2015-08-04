@@ -44,17 +44,6 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/javascripts\/deployer.js": {
-		"fileType": 64,
-		"ignore": 0,
-		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/javascripts\/deployer.js",
-		"outputAbbreviatedPath": "\/javascripts\/min\/deployer-min.js",
-		"outputPathIsOutsideProject": 0,
-		"outputPathIsSetByUser": 0,
-		"outputStyle": 1,
-		"syntaxCheckerStyle": 1
-		},
 	"\/javascripts\/main.js": {
 		"fileType": 64,
 		"ignore": 0,
@@ -66,23 +55,45 @@
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/javascripts\/projects.js": {
+	"\/javascripts\/pages\/build-status.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/javascripts\/projects.js",
-		"outputAbbreviatedPath": "\/javascripts\/min\/projects-min.js",
+		"inputAbbreviatedPath": "\/javascripts\/pages\/build-status.js",
+		"outputAbbreviatedPath": "\/javascripts\/pages\/min\/build-status-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
 		},
-	"\/javascripts\/status.js": {
+	"\/javascripts\/pages\/dashboard.js": {
 		"fileType": 64,
 		"ignore": 0,
 		"ignoreWasSetByUser": 0,
-		"inputAbbreviatedPath": "\/javascripts\/status.js",
-		"outputAbbreviatedPath": "\/javascripts\/min\/status-min.js",
+		"inputAbbreviatedPath": "\/javascripts\/pages\/dashboard.js",
+		"outputAbbreviatedPath": "\/javascripts\/pages\/min\/dashboard-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/javascripts\/pages\/environments.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/pages\/environments.js",
+		"outputAbbreviatedPath": "\/javascripts\/pages\/min\/environments-min.js",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0,
+		"outputStyle": 1,
+		"syntaxCheckerStyle": 1
+		},
+	"\/javascripts\/pages\/projects.js": {
+		"fileType": 64,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/javascripts\/pages\/projects.js",
+		"outputAbbreviatedPath": "\/javascripts\/pages\/min\/projects-min.js",
 		"outputPathIsOutsideProject": 0,
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
@@ -384,6 +395,15 @@
 		"outputPathIsSetByUser": 0,
 		"outputStyle": 1,
 		"syntaxCheckerStyle": 1
+		},
+	"\/prototype\/project-build.html": {
+		"fileType": 8192,
+		"ignore": 0,
+		"ignoreWasSetByUser": 0,
+		"inputAbbreviatedPath": "\/prototype\/project-build.html",
+		"outputAbbreviatedPath": "No Output Path",
+		"outputPathIsOutsideProject": 0,
+		"outputPathIsSetByUser": 0
 		},
 	"\/prototype\/project.html": {
 		"fileType": 8192,

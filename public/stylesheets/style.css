@@ -143,7 +143,8 @@ body {
 ul.project-list {
   width: 90%;
   margin: 0 auto;
-  padding-bottom: 4vh; }
+  padding-bottom: 4vh;
+  padding-top: 4vh; }
   ul.project-list > li {
     width: 100%;
     height: 24vw;
@@ -279,9 +280,6 @@ li {
 .success:after {
   content: "success";
   background-color: #67cb67; }
-
-.in-progress {
-  background-color: cyan; }
 
 .active {
   box-shadow: 2px 2px 2px #888888;
