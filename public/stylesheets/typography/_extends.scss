@@ -4,7 +4,7 @@ $font-display-2-size:4vw;
 $font-display-1-size:2vw;
 $font-headline-size:22px;
 $font-title-size:20px;
-$font-bread-head-size:18px;
+$font-bread-head-size:2vw;
 $font-bread-l-size:16px;
 $font-bread-m-size:14px;
 $font-bread-s-size:14px;
@@ -136,10 +136,11 @@ $font-display-lineheight :1.1;
 %quote-text{
   @extend %italic-font;
 }
-
+/*
 %link-text{
-
+  
 }
+*/
 
 %small-text{
   @extend %bread-font;

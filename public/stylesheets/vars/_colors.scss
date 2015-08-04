@@ -1,5 +1,10 @@
 $background-color:#6c8c99;
 
+$fail-color:#f72350;
+$success-color: #67cb67;
+$fail-badge-text-color:#ffffff;
+$success-badge-text-color:#ffffff;
+
 
 
 $font-color:#475a60;
@@ -9,10 +14,31 @@ $list-bg-color:#475a60;
 $list-text-color:#ffffff;
 $list-small-text-color:#6c8c99;
 
-
-
 $selected-list-bg-color:#6c8c99;
 $selected-list-text-color:#ffffff;
 
+
+
 $fail-page-bg-color:#f72350;
 $fail-list-bg-color:#cd264b;
+
+
+
+$fail-list-bg-color:#cd264b;
+$fail-list-text-color:#ffffff;
+$fail-list-small-text-color:#f72350;
+
+$fail-selected-list-bg-color:#f72350;
+$fail-selected-list-text-color:#ffffff;
+
+
+
+
+
+$project-background-color:#475a60;
+$project-list-bg-color:#6c8c99;
+$project-list-text-color:#ffffff;
+$project-list-small-text-color:#475a60;
+
+$project-selected-list-bg-color:#475a60;
+$project-selected-list-text-color:#ffffff;
