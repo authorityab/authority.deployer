@@ -3,12 +3,20 @@
 angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
+      templateUrl: 'partials/dashboard.jade',
+      controller: 'DashboardController'
+    })
+    .when('/build-status', {
+      templateUrl: 'partials/build-status.jade',
+      controller: 'BuildStatusController'
+    })
+    .when('/projects', {
       templateUrl: 'partials/projects.jade',
       controller: 'ProjectsController'
     })
-    .when('/status', {
-      templateUrl: 'partials/status.jade',
-      controller: 'StatusController'
+    .when('/environments', {
+      templateUrl: 'partials/environments.jade',
+      controller: 'EnvironmentsController'
     })
     .otherwise({
       redirectTo: '/'

@@ -12,25 +12,31 @@ GPIO.setup(6, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(5, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(19, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
+GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 while True:
 	input_up = GPIO.input(6)
 	input_down = GPIO.input(5)
 	input_left = GPIO.input(19)
 	input_right = GPIO.input(13)
+	button_pushed = GPIO.input(21)
 	
 	if input_up == False:
-		print('up');
+		print('up')
 		time.sleep(0.2)
 		
 	if input_down == False:
-		print('down');
+		print('down')
 		time.sleep(0.2)
 	
 	if input_left == False:
-		print('left');
+		print('left')
 		time.sleep(0.2)
 		
 	if input_right == False:
-		print('right');
+		print('right')
+		time.sleep(0.2)
+
+	if button_pushed == False:
+		print('button_pushed')
 		time.sleep(0.2)

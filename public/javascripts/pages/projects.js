@@ -1,7 +1,7 @@
 var Projects = (function() {
 
 	var deployInProgress;
-	var buildStatusInterval;
+
 
 	$(function() {
 
@@ -9,14 +9,29 @@ var Projects = (function() {
 		$(document).unbind();
 		$(document).keydown(function(e) {
 	    switch(e.which) {
+					case 13: // enter
+					triggerDeploy();
+					console.log('e');
+					break;
+
 	        case 37: // left
 					left();
 					console.log('l');
 	        break;
 
+					case 38: // up
+					up();
+					console.log('u');
+	        break;
+
 	        case 39: // right
 					right();
 					console.log('r');
+	        break;
+
+					case 40: // down
+					down();
+					console.log('d');
 	        break;
 
 	        default: return;
@@ -25,28 +40,20 @@ var Projects = (function() {
 		});
 
 
+
+
 		Main.socket.emit('get_projects');
 
-		buildStatusInterval = setInterval(function() {
-			Main.socket.emit('get_build_status');
-		}, 5000);
+
+
 
 	});
 
 
-	function left() {
-		clearInterval(buildStatusInterval);
 
-		Main.ngScope().$apply(function() {
-			Main.ngScope().routeLeft();
-		});
-	}
 
-	function right() {
-		Main.ngScope().$apply(function() {
-			Main.ngScope().routeRight();
-		});
-	}
+
+
 
 
 
@@ -68,7 +75,7 @@ var Projects = (function() {
 		var dashboard =  JSON.parse(JSON.parse(data));
 		for (var i = 0; i < dashboard.Projects.length; i++) {
 			var project = dashboard.Projects[i];
-			var environment = dashboard.Environments[0];
+			//var environment = dashboard.Environments[0];
 
 			var success;
 			for (var y = 0; y < dashboard.Items.length; y++) {
@@ -77,8 +84,8 @@ var Projects = (function() {
 				}
 			}
 
-			var listItem = $('<li>' + project.Name + ' - ' + environment.Name + '</li>');
-			listItem.attr('class', success ? "success" : "error");
+			var listItem = $('<li>' + project.Name + '</li>');
+			//listItem.attr('class', success ? "success" : "error");
 			listItem.attr('data-project-id', project.Id);
 
 			list.append(listItem);
@@ -88,43 +95,57 @@ var Projects = (function() {
 
 	});
 
-	Main.socket.on('set_build_status', function(data) {
-		var list = $('ul#build-statuses');
-		list.empty();
 
-		var statuses = JSON.parse(JSON.parse(data));
-		for (var i = 0; i < statuses.length; i++) {
-			var status = statuses[i];
-			var listItem = $('<li>' + status.ProjectName + '</li>');
-			listItem.attr('class', status.BuildStatus == 1 ? "success" : "error");
-			list.append(listItem);
-		}
-	});
 
 	Main.socket.on('deploy_started', function(taskId) {
 
 		deployInProgress = setInterval(function () {
 			Main.socket.emit('get_deploy_status', taskId);
-		}, 500);
+		}, 8000);
+
 
 	});
 
 	Main.socket.on('set_deploy_status', function(data) {
 		var status =  JSON.parse(JSON.parse(data));
+		var projects = $('ul#projects');
 
 		if (status.IsCompleted) {
-
 			clearInterval(deployInProgress);
+			project = projects.find('li.active');
+			project.removeClass('in-progress');
 
 			if (status.FinishedSuccessfully) {
+				project.addClass('success');
 			}
 			else if (status.HasWarningsOrErrors) {
+				project.addClass('error');
 			}
 		}
 
 	});
 
 	Main.socket.on('inputs_up', function() {
+		up();
+	});
+
+	Main.socket.on('inputs_down', function() {
+		down();
+	});
+
+	Main.socket.on('inputs_left', function() {
+		left();
+	});
+
+	Main.socket.on('inputs_right', function() {
+		right();
+	});
+
+	Main.socket.on('inputs_button', function() {
+		triggerDeploy();
+	});
+
+	function up() {
 		console.log('joystick_up');
 
 		var activeItem = $('ul#projects li.active');
@@ -137,9 +158,9 @@ var Projects = (function() {
 		} else {
 			activeItem.prev('li').addClass('active');
 		}
-	});
+	}
 
-	Main.socket.on('inputs_down', function() {
+	function down() {
 		console.log('joystick_down');
 
 		var totalCount = $('ul#projects li').length;
@@ -153,30 +174,35 @@ var Projects = (function() {
 		} else {
 			activeItem.next('li').addClass('active');
 		}
-	});
+	}
 
-	Main.socket.on('inputs_left', function() {
-		console.log('joystick_left');
+	function left() {
+		// clearInterval(buildStatusInterval);
 
-		$('ul#projects li.active').removeClass('selected');
-	});
+		Main.ngScope().$apply(function() {
+			Main.ngScope().routeLeft();
+		});
+	}
 
-	Main.socket.on('inputs_right', function() {
-		console.log('joystick_right');
+	function right() {
+		Main.ngScope().$apply(function() {
+			Main.ngScope().routeRight();
+		});
+	}
 
-	});
+	function triggerDeploy() {
+		var projects = $('ul#projects');
 
-
-	Main.socket.on('inputs_button', function() {
-
+		console.log('button pushed');
 		var projectId = $('ul#projects li.active').data('project-id');
 
-		console.log('joystick_right project id: ' + projectId);
-
-		$('ul#projects li').removeClass('selected');
-		$('ul#projects li.active').addClass('selected');
+		console.log('project id: ' + projectId);
 
 		Main.socket.emit('trigger_deploy', projectId);
-	});
+
+		projects.find('[data-project-id="' + projectId + '"]').addClass('in-progress');
+	}
+
+
 
 })();

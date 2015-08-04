@@ -1,9 +1,6 @@
-var Status = (function() {
-
-
+var Environments = (function() {
 
   $(function() {
-
     //TODO: Remove after test
     $(document).unbind();
     $(document).keydown(function(e) {
@@ -23,16 +20,10 @@ var Status = (function() {
       }
       e.preventDefault();
     });
-
-
+    
   });
 
-
-
-
-
-
-	function left() {
+  function left() {
 		Main.ngScope().$apply(function() {
 			Main.ngScope().routeLeft();
 		});
@@ -43,6 +34,5 @@ var Status = (function() {
 			Main.ngScope().routeRight();
 		});
 	}
-
 
 })();
