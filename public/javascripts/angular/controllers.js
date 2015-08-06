@@ -4,7 +4,11 @@ var controllers = angular.module('srDeployer.controllers', []);
 
 
 controllers.controller('BuildStatusController', function($scope, $location) {
-  $scope.pageClass = 'build-status-page';
+  $scope.pageId = 'fails_view';
+  $scope.pageClass = 'view fails';
+
+  BuildStatus = new buildStatus();
+  $scope.currentPage = BuildStatus;
 
   $scope.routeLeft = function() {
 
@@ -17,7 +21,12 @@ controllers.controller('BuildStatusController', function($scope, $location) {
 });
 
 controllers.controller('DashboardController', function($scope, $location) {
-  $scope.pageClass = 'dashboard-page';
+  $scope.pageId = 'main_view';
+  $scope.pageClass = 'view dash';
+
+  Dashboard = new dashboard();
+  $scope.currentPage = Dashboard;
+
 
   $scope.routeLeft = function() {
     $location.url('/build-status');
@@ -30,42 +39,56 @@ controllers.controller('DashboardController', function($scope, $location) {
 });
 
 controllers.controller('ProjectsController', function($scope, $location) {
-  $scope.pageClass = 'projects-page';
+  $scope.pageId = 'projects_view';
+  $scope.pageClass = 'view projects';
+
+  Projects = new projects();
+  $scope.currentPage = Projects;
+
 
   $scope.routeLeft = function() {
     $location.url('/');
   }
 
   $scope.routeRight = function(projectId) {
-    $location.url('/releases#' + projectId);
+    $location.url('/releases/' + projectId);
   }
 
 });
 
-controllers.controller('ReleasesController', function($scope, $location) {
-  $scope.pageClass = 'releases-page';
-  $scope.projectId = $location.hash();
+controllers.controller('ReleasesController', function($scope, $location, $routeParams) {
+  $scope.pageId = 'project_view';
+  $scope.pageClass = 'view project';
+  $scope.projectId = $routeParams.projectId;
+
+  Releases = new releases();
+  $scope.currentPage = Releases;
 
   $scope.routeLeft = function() {
     $location.url('/projects');
   }
 
   $scope.routeRight = function(projectId, releaseId) {
-    $location.url('/environments?projectId=' + projectId + '&releaseId=' + releaseId);
+    $location.url('/environments/' + projectId + '/' + releaseId);
   }
 
 });
 
-controllers.controller('EnvironmentsController', function($scope, $location) {
-  $scope.pageClass = 'environments-page';
-  $scope.projectId = $location.search('projectId');
-  $scope.releaseId = $location.search('releaseId');
+controllers.controller('EnvironmentsController', function($scope, $location, $routeParams) {
+  $scope.pageId = 'project_view';
+  $scope.pageClass = 'view project';
+  $scope.projectId = $routeParams.projectId;
+  $scope.releaseId = $routeParams.releaseId;
+
+  Environments = new environments();
+  $scope.currentPage = Environments;
 
   $scope.routeLeft = function() {
-    $location.url('/releases#' + $scope.projectId);
+    $location.url('/releases/' + $routeParams.projectId);
   }
 
   $scope.routeRight = function() {
+    $location.url('/');
   }
 
 });

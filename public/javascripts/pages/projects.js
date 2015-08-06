@@ -1,42 +1,49 @@
-var Projects = (function() {
+function projects() {
 
 	var deployInProgress;
-
+	var projectList;
 
 	$(function() {
 
+		projectList = $('.project-list');
+
 		//TODO: Remove after test
-		$(document).unbind();
-		$(document).keydown(function(e) {
-	    switch(e.which) {
+		// $(document).unbind();
+		// $(document).keydown(function(e) {
+	  //   switch(e.which) {
+		//
+	  //       case 37: // left
+		// 			left();
+		// 			console.log('l');
+	  //       break;
+		//
+		// 			case 38: // up
+		// 			up();
+		// 			console.log('u');
+	  //       break;
+		//
+	  //       case 39: // right
+		// 			right();
+		// 			console.log('r');
+	  //       break;
+		//
+		// 			case 40: // down
+		// 			down();
+		// 			console.log('d');
+	  //       break;
+		//
+	  //       default: return;
+	  //   }
+    // 	e.preventDefault();
+		// });
 
-	        case 37: // left
-					left();
-					console.log('l');
-	        break;
 
-					case 38: // up
-					up();
-					console.log('u');
-	        break;
 
-	        case 39: // right
-					right();
-					console.log('r');
-	        break;
+	});
 
-					case 40: // down
-					down();
-					console.log('d');
-	        break;
-
-	        default: return;
-	    }
-    	e.preventDefault();
-		});
-
-		setProjects();
-
+	Main.socket.emit('get_projects');
+  Main.socket.on('set_projects', function(data) {
+    setProjects(data);
 	});
 
 
@@ -45,84 +52,31 @@ var Projects = (function() {
 
 
 
-
-
-
-
-	Main.socket.on('deploy_started', function(taskId) {
-		deployInProgress = setInterval(function () {
-			Main.socket.emit('get_deploy_status', taskId);
-		}, 8000);
-	});
-
-	Main.socket.on('set_deploy_status', function(data) {
-		var status =  JSON.parse(JSON.parse(data));
-		var projects = $('ul#projects');
-
-		if (status.IsCompleted) {
-			clearInterval(deployInProgress);
-			project = projects.find('li.active');
-			project.removeClass('in-progress');
-
-			if (status.FinishedSuccessfully) {
-				project.addClass('success');
-			}
-			else if (status.HasWarningsOrErrors) {
-				project.addClass('error');
-			}
-		}
-
-		socket.removeListener('get_deploy_status')
-	});
-
-	Main.socket.on('inputs_up', function() {
-		up();
-	});
-
-	Main.socket.on('inputs_down', function() {
-		down();
-	});
-
-	Main.socket.on('inputs_left', function() {
-		left();
-	});
-
-	Main.socket.on('inputs_right', function() {
-		right();
-	});
-
-	Main.socket.on('inputs_button', function() {
-		triggerDeploy();
-	});
 
 	function up() {
-		console.log('joystick_up');
+		var activeItem = projectList.find('li.current');
+		var activeIndex = projectList.find('li').index(activeItem);
 
-		var activeItem = $('ul#projects li.active');
-		var activeIndex = $('ul#projects li').index(activeItem);
-
-		activeItem.removeClass('active');
+		activeItem.removeClass('current');
 
 		if (activeIndex === 0) {
-			$('ul#projects li:last-child').addClass('active');
+			projectList.find('li:last-child').addClass('current');
 		} else {
-			activeItem.prev('li').addClass('active');
+			activeItem.prev('li').addClass('current');
 		}
 	}
 
 	function down() {
-		console.log('joystick_down');
+		var totalCount = projectList.find('li').length;
+		var activeItem = projectList.find('li.current');
+		var activeIndex = projectList.find('li').index(activeItem);
 
-		var totalCount = $('ul#projects li').length;
-		var activeItem = $('ul#projects li.active');
-		var activeIndex = $('ul#projects li').index(activeItem);
-
-		activeItem.removeClass('active');
+		activeItem.removeClass('current');
 
 		if (activeIndex === totalCount - 1) {
-			$('ul#projects li:first-child').addClass('active');
+			projectList.find('li:first-child').addClass('current');
 		} else {
-			activeItem.next('li').addClass('active');
+			activeItem.next('li').addClass('current');
 		}
 	}
 
@@ -133,8 +87,7 @@ var Projects = (function() {
 	}
 
 	function right() {
-		var projects = $('ul#projects');
-		var projectId = projects.find('li.active').data('project-id');
+		var projectId = projectList.find('li.current').data('project-id');
 
 		Main.ngScope().$apply(function() {
 			Main.ngScope().routeRight(projectId);
@@ -142,35 +95,35 @@ var Projects = (function() {
 	}
 
 
-
-
-	function setProjects() {
-		var list = $('ul#projects');
-		list.empty();
+	function setProjects(data) {
+		var projects =  JSON.parse(JSON.parse(data));
+    Main.projectParams.projects = projects;
 
 		for (var i = 0; i < Main.projectParams.projects.length; i++) {
 			var project = Main.projectParams.projects[i];
-			//var environment = dashboard.Environments[0];
 
-			// var success;
-			// for (var y = 0; y < dashboard.Items.length; y++) {
-			// 	if (dashboard.Items[y].ProjectId === project.Id) {
-			// 		success = !dashboard.Items[y].HasPendingInterruptions && !dashboard.Items[y].HasWarningsOrErrors;
-			// 	}
-			// }
+			var listItem = $('<li><div>' +
+											 	'<h2>' + project.Name + '</h2>' +
+										 		'<h3>' + project.Id + '</h3>' +
+												'<h4>' + project.Description + '</h4>' +
+										  '</div></li>');
 
-			var listItem = $('<li>' + project.Name + '</li>');
-			//listItem.attr('class', success ? "success" : "error");
 			listItem.attr('data-project-id', project.Id);
-
-			list.append(listItem);
+			projectList.append(listItem);
 		}
 
-		list.find('li:first-child').addClass('active');
+		projectList.find('li:first-child').addClass('current');
 	}
 
 	return {
+		up: up,
+		down: down,
+		left: left,
+		right: right,
 		setProjects: setProjects
 	}
 
-})();
+} //)();
+
+// Main.currentPage = Projects;
+// var Projects = new projects();

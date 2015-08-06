@@ -14,11 +14,11 @@ angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProv
       templateUrl: 'partials/projects.jade',
       controller: 'ProjectsController'
     })
-    .when('/releases', {
+    .when('/releases/:projectId', {
       templateUrl: 'partials/releases.jade',
       controller: 'ReleasesController'
     })
-    .when('/environments', {
+    .when('/environments/:projectId/:releaseId', {
       templateUrl: 'partials/environments.jade',
       controller: 'EnvironmentsController'
     })
