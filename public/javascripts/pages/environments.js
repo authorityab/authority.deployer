@@ -113,11 +113,12 @@ function environments() {
       environmentList.appendTo('.wrapper nav');
     }
 
-    Main.pageLock = false;
-    Main.stopSpinner();
     $('.btn-container').removeClass('hidden');
     $('header').removeClass('hidden');
     environmentList.removeClass('hidden');
+
+    Main.pageLock = false;
+    Main.stopSpinner();
   }
 
   function triggerDeploy() {

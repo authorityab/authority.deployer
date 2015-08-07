@@ -78,10 +78,11 @@ function releases() {
       releaseList.appendTo('.wrapper nav');
     }
 
-    Main.pageLock = false;
-    Main.stopSpinner();
     releaseList.removeClass('hidden');
     $('header').removeClass('hidden');
+
+    Main.pageLock = false;
+    Main.stopSpinner();
   }
 
   return {
