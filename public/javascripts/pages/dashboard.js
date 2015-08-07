@@ -80,6 +80,9 @@ function dashboard() {
       var hours = finishDate.getHours();
       var minutes = finishDate.getMinutes();
 
+      if (minutes < 10)
+        minutes = "0" + minutes;
+
       var month = monthNamesShort[monthNr];
 
       var buildHolder = $('.dash-latest');
