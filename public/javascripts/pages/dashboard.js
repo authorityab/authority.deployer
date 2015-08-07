@@ -1,14 +1,12 @@
 function dashboard() {
+  Main.stopSpinner();
 
   var clockInterval;
-  var lastFailedInterval;
   var hasBuildErrors = false;
   var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   var monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
   $(function() {
-
-    console.log('DASHBOARD LOAD');
     //TODO: Remove after test
     $(document).on('click', '#success', function(){
 			Main.socket.emit('deploy_succeeded');
@@ -28,58 +26,13 @@ function dashboard() {
       setBuildCount();
       setCurrentDate();
       setLastFailedCounter();
+      checkForBuildErrors();
     }, 300);
-
-
-    // lastFailedInterval = setInterval(function() {
-    //   setLastFailedCounter();
-    // }, 60000);
-
   });
-    // //TODO: Remove after test
-    // $(document).unbind();
-    // $(document).keydown(function(e) {
-    //   switch (e.which) {
-    //     case 37: // left
-    //       left();
-    //       console.log('l');
-    //       break;
-    //
-    //     case 39: // right
-    //       right();
-    //       console.log('r');
-    //       break;
-    //
-    //     default:
-    //       return;
-    //   }
-    //   e.preventDefault();
-    // });
-
-
-
-
-
-
-function clearIntervals() {
-  console.log('clear interval ' + clockInterval + " " + lastFailedInterval);
-  clearInterval(clockInterval);
-  clearInterval(lastFailedInterval);
-  console.log('clear interval 2 ' + clockInterval + " " + lastFailedInterval);
-}
-
-  function up() {
-    // TODO: something to do here?
-  }
-
-  function down() {
-    // TODO: something to do here?
-  }
 
   function left() {
-    clearIntervals();
-
     if (hasBuildErrors) {
+      clearInterval(clockInterval);
       Main.ngScope().$apply(function() {
   			Main.ngScope().routeLeft();
   		});
@@ -87,8 +40,7 @@ function clearIntervals() {
 	}
 
 	function right() {
-    clearIntervals();
-
+    clearInterval(clockInterval);
 		Main.ngScope().$apply(function() {
 			Main.ngScope().routeRight();
 		});
@@ -119,19 +71,21 @@ function clearIntervals() {
     }, 1000)
   }
 
-
   function setLatestBuild() {
     if (Main.buildParams.latestBuild != null) {
       var finishDate = new Date(Main.buildParams.latestBuild.FinishDate);
       var monthNr = finishDate.getMonth();
       var year = finishDate.getFullYear();
       var day = finishDate.getDate();
+      var hours = finishDate.getHours();
+      var minutes = finishDate.getMinutes();
 
       var month = monthNamesShort[monthNr];
 
       var buildHolder = $('.dash-latest');
       buildHolder.find('h1').text(day);
       buildHolder.find('h3').text(month);
+      buildHolder.find('h4').text(hours + ':' + minutes);
 
       buildHolder.find('.l-description').text(Main.buildParams.latestBuild.ProjectName + ' - ' + Main.buildParams.latestBuild.StepName);
 
@@ -152,16 +106,12 @@ function clearIntervals() {
 
     $('.p-success.dash-stat h1').text(successCount);
     $('.p-fail.dash-stat h1').text(failedCount);
-      // $('#build-destroyer').html(Main.buildParams.latestFailed);
-
   }
 
   function setLastFailedCounter() {
     if (Main.buildParams.latestFailed != null) {
       var currentDate = new Date();
-
       var failedDate = Main.buildParams.latestFailed.Build.FinishDate;
-
       var diffMilli = Math.floor(currentDate - new Date(failedDate));
 
       var seconds = (diffMilli / 1000) | 0;
@@ -199,13 +149,7 @@ function clearIntervals() {
     }
   }
 
-
-
-
-
   return {
-    up: up,
-		down: down,
 		left: left,
 		right: right,
     setLastFailedCounter: setLastFailedCounter,
@@ -213,9 +157,4 @@ function clearIntervals() {
     setBuildCount: setBuildCount,
     checkForBuildErrors: checkForBuildErrors
   }
-
-
-
-} //)();
-
-// var Dashboard = new dashboard();
+}

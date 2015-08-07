@@ -21,12 +21,8 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(compass({ mode: 'expanded' }));
 
-
 var controllers = require('./controllers');
 app.use(controllers);
-
-
-
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -34,7 +30,6 @@ app.use(function(req, res, next) {
   err.status = 404;
   next(err);
 });
-
 
 // development error handler
 // will print stacktrace
@@ -58,6 +53,5 @@ app.use(function(err, req, res, next) {
   });
   console.log(err);
 });
-
 
 module.exports = app;

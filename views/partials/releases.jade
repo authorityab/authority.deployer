@@ -1,6 +1,6 @@
 section(id='{{ pageId }}' class='{{ pageClass }}')
 
-  header
+  header(class='hidden')
     div(class='head-line')
       div(class='line')
       h1
@@ -10,5 +10,6 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
       h3
         
   nav
+    ul(id='releases' class='hidden project-list')
     
 script(src='javascripts/pages/releases.js')

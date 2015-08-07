@@ -1,8 +1,5 @@
 var controllers = angular.module('srDeployer.controllers', []);
 
-
-
-
 controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
@@ -17,7 +14,6 @@ controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.routeRight = function() {
       $location.url('/');
   }
-
 });
 
 controllers.controller('DashboardController', function($scope, $location) {
@@ -27,7 +23,6 @@ controllers.controller('DashboardController', function($scope, $location) {
   Dashboard = new dashboard();
   $scope.currentPage = Dashboard;
 
-
   $scope.routeLeft = function() {
     $location.url('/build-status');
   }
@@ -35,7 +30,6 @@ controllers.controller('DashboardController', function($scope, $location) {
   $scope.routeRight = function() {
     $location.url('/projects');
   }
-
 });
 
 controllers.controller('ProjectsController', function($scope, $location) {
@@ -45,7 +39,6 @@ controllers.controller('ProjectsController', function($scope, $location) {
   Projects = new projects();
   $scope.currentPage = Projects;
 
-
   $scope.routeLeft = function() {
     $location.url('/');
   }
@@ -53,7 +46,6 @@ controllers.controller('ProjectsController', function($scope, $location) {
   $scope.routeRight = function(projectId) {
     $location.url('/releases/' + projectId);
   }
-
 });
 
 controllers.controller('ReleasesController', function($scope, $location, $routeParams) {
@@ -71,7 +63,6 @@ controllers.controller('ReleasesController', function($scope, $location, $routeP
   $scope.routeRight = function(projectId, releaseId) {
     $location.url('/environments/' + projectId + '/' + releaseId);
   }
-
 });
 
 controllers.controller('EnvironmentsController', function($scope, $location, $routeParams) {
@@ -90,5 +81,4 @@ controllers.controller('EnvironmentsController', function($scope, $location, $ro
   $scope.routeRight = function() {
     $location.url('/');
   }
-
 });

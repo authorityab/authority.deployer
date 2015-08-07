@@ -1,5 +1,3 @@
-// var routes = angular.module('srDeployer.routes', []);
-
 angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
