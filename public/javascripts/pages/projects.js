@@ -1,10 +1,11 @@
 function projects() {
-	Main.stopSpinner();
   Main.startSpinner();
 
 	var projectList
 
 	$(function() {
+		Main.pageLock = true;
+
 		projectList = $('ul#projects');
 
 		Main.socket.emit('get_projects');
@@ -12,8 +13,6 @@ function projects() {
 			setProjects(data);
 			Main.socket.removeListener('set_projects');
 		});
-
-		Main.pageLock = true;
 	});
 
 	function right() {

@@ -1,5 +1,4 @@
 function environments() {
-  Main.stopSpinner();
   Main.startSpinner();
 
   var environmentList;
@@ -9,6 +8,8 @@ function environments() {
   var deployInProgress;
 
   $(function() {
+    Main.pageLock = true;
+
     environmentList = $('ul#environments');
 
     // TODO: Remove after test
@@ -20,7 +21,7 @@ function environments() {
 
         case 13: // enter
           triggerDeploy();
-          Main.pageLock = true;
+
           console.log('e');
           break;
 
@@ -34,13 +35,11 @@ function environments() {
       projectId = Main.ngScope().projectId;
       releaseId = Main.ngScope().releaseId;
       Main.socket.emit('get_environments', projectId, releaseId);
-      Main.pageLock = true;
     }, 500);
 
     Main.socket.removeListener('inputs_button');
   	Main.socket.on('inputs_button', function() {
   		triggerDeploy();
-      Main.pageLock = true;
   	});
 
     Main.socket.removeListener('deploy_started');
@@ -122,6 +121,8 @@ function environments() {
   }
 
   function triggerDeploy() {
+    Main.pageLock = true;
+
     var activeItem = environmentList.find('li.current');
 		var environmentId = activeItem.data('environment-id');
 

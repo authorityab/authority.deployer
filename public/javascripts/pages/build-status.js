@@ -1,5 +1,4 @@
 function buildStatus() {
-  Main.stopSpinner();
   Main.startSpinner();
 
   var buildList;

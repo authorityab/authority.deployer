@@ -1,19 +1,17 @@
 function releases() {
-  Main.stopSpinner();
   Main.startSpinner();
 
   var projectId;
   var releaseList;
 
   $(function() {
+    Main.pageLock = true;
+
     releaseList = $('ul#releases');
 
-    //FIXME: Wait for the scope to be loaded. This is probably not the best solution...
-    //       But the scope needs to load;
     setTimeout(function() {
       projectId = Main.ngScope().projectId;
       Main.socket.emit('get_releases', projectId);
-      Main.pageLock = true;
     }, 500);
 
     Main.socket.on('set_releases', function(data) {
