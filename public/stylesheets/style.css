@@ -303,6 +303,13 @@ ul.project-list > li > div h3, ul.project-list > li > div h4 {
   text-transform: uppercase;
   letter-spacing: 0.08em;
 }
+ul.project-list > li > div img {
+  height: 9vw;
+  max-width: 250px;
+  position: absolute;
+  top: 2vw;
+  right: 2vw;
+}
 ul.project-list > li.current {
   z-index: 100;
   transform: scale(1.05);

@@ -4,9 +4,9 @@ var http = require('http');
 
 var communication = require('../lib/communication');
 
-//if (app.get('env') === 'production')  {
-  //var inputs = require('../lib/inputs');
-//}
+if (app.get('env') === 'production')  {
+  var inputs = require('../lib/inputs');
+}
 
 /**
  * Get port from environment and store in Express.

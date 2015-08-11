@@ -39,8 +39,10 @@ function projects() {
 
 				var listItem = $('<li><div>' +
 												 	'<h2>' + project.Name + '</h2>' +
-											 		'<h3>' + project.Id + '</h3>' +
+											 		'<h3>' + project.GroupName + '</h3>' +
 													'<h4>' + project.Description + '</h4>' +
+                          '<img src="' + project.Logo + '" alt="Project Logo"/>' +
+
 											  '</div></li>');
 
 				listItem.attr('data-project-id', project.Id);
@@ -48,6 +50,7 @@ function projects() {
 			}
 
 			projectList.find('li:first-child').addClass('current');
+			Main.lockRight = false;
 		}
 
 		Main.pageLock = false;

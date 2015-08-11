@@ -21,7 +21,6 @@ function environments() {
 
         case 13: // enter
           triggerDeploy();
-
           console.log('e');
           break;
 
@@ -61,8 +60,27 @@ function environments() {
 
   });
 
+  function left() {
+    if (!Main.pageLock && !Main.lockRight) {
+
+      Main.ngScope().$apply(function() {
+  			Main.ngScope().routeLeft();
+  		});
+    }
+	}
+
+  function right() {
+    Main.socket.emit('disarm_deploy_button');
+    if (!Main.pageLock && !Main.lockRight) {
+      Main.ngScope().$apply(function() {
+  			Main.ngScope().routeRight();
+  		});
+    }
+	}
+
 	function right() {
     // TODO: what to do here?
+    Main.socket.emit('disarm_deploy_button');
     if (!Main.pageLock && !Main.lockRight) {
       Main.ngScope().$apply(function() {
   			Main.ngScope().routeRight();
@@ -110,6 +128,9 @@ function environments() {
 
       environmentList.find('li:first-child').addClass('current');
       environmentList.appendTo('.wrapper nav');
+
+      Main.lockRight = false;
+      Main.socket.emit('arm_deploy_button');
     }
 
     $('.btn-container').removeClass('hidden');
@@ -124,10 +145,12 @@ function environments() {
     Main.pageLock = true;
 
     var activeItem = environmentList.find('li.current');
-		var environmentId = activeItem.data('environment-id');
+    if (activeItem.length < 0) {
+      var environmentId = activeItem.data('environment-id');
 
-		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
-		activeItem.addClass('in-progress');
+  		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
+  		activeItem.addClass('in-progress');
+    }
 	}
 
   function setDeployStatus(data) {
@@ -142,9 +165,11 @@ function environments() {
 
 			if (status.FinishedSuccessfully) {
 				env.addClass('success');
+        Main.socket.emit('deploy_succeeded');
 			}
 			else if (status.HasWarningsOrErrors) {
 				env.addClass('error');
+        Main.socket.emit('deploy_failed');
 			}
 
       Main.pageLock = false;
@@ -153,6 +178,7 @@ function environments() {
 
   return {
     list: environmentList,
+    left: left,
 		right: right,
     setEnvironments: setEnvironments
   }

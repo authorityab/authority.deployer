@@ -74,6 +74,8 @@ function releases() {
 
       releaseList.find('li:first-child').addClass('current');
       releaseList.appendTo('.wrapper nav');
+
+      Main.lockRight = false;
     }
 
     releaseList.removeClass('hidden');

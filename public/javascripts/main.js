@@ -1,6 +1,4 @@
 var Main = (function() {
-
-
   var socket = io();
 
   var currentPage;
@@ -160,29 +158,33 @@ var Main = (function() {
 
   function up() {
     var list = ngScope().currentPage.list;
-		var activeItem = list.find('li.current');
-		var activeIndex = list.find('li').index(activeItem);
+    if (list !== undefined) {
+      var activeItem = list.find('li.current');
+  		var activeIndex = list.find('li').index(activeItem);
 
-		activeItem.removeClass('current');
-		if (activeIndex === 0) {
-			list.find('li:last-child').addClass('current');
-		} else {
-			activeItem.prev('li').addClass('current');
-		}
+  		activeItem.removeClass('current');
+  		if (activeIndex === 0) {
+  			list.find('li:last-child').addClass('current');
+  		} else {
+  			activeItem.prev('li').addClass('current');
+  		}
+    }
 	}
 
 	function down() {
     var list = ngScope().currentPage.list;
-		var totalCount = list.find('li').length;
-		var activeItem = list.find('li.current');
-		var activeIndex = list.find('li').index(activeItem);
+    if (list !== undefined) {
+  		var totalCount = list.find('li').length;
+  		var activeItem = list.find('li.current');
+  		var activeIndex = list.find('li').index(activeItem);
 
-		activeItem.removeClass('current');
-		if (activeIndex === totalCount - 1) {
-			list.find('li:first-child').addClass('current');
-		} else {
-			activeItem.next('li').addClass('current');
-		}
+  		activeItem.removeClass('current');
+  		if (activeIndex === totalCount - 1) {
+  			list.find('li:first-child').addClass('current');
+  		} else {
+  			activeItem.next('li').addClass('current');
+  		}
+    }
 	}
 
   function left() {

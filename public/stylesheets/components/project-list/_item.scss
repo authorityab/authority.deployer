@@ -22,7 +22,13 @@ ul.project-list{
         text-transform: uppercase;
         letter-spacing: 0.08em;
       }
-
+      img {
+        height: 9vw;
+        max-width: 250px;
+        position: absolute;
+        top: 2vw;
+        right: 2vw;
+      }
     }
     &.current{
       z-index: 100;
