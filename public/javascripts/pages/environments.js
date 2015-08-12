@@ -63,18 +63,9 @@ function environments() {
 
   function left() {
     if (!Main.pageLock && !Main.lockRight) {
-
+      Main.socket.emit('disarm_deploy_button');
       Main.ngScope().$apply(function() {
   			Main.ngScope().routeLeft();
-  		});
-    }
-	}
-
-  function right() {
-    Main.socket.emit('disarm_deploy_button');
-    if (!Main.pageLock && !Main.lockRight) {
-      Main.ngScope().$apply(function() {
-  			Main.ngScope().routeRight();
   		});
     }
 	}
