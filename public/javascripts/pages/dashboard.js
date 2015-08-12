@@ -9,10 +9,10 @@ function dashboard() {
   $(function() {
     //TODO: Remove after test
     $(document).on('click', '#success', function(){
-			Main.socket.emit('deploy_succeeded');
+			Main.socket.emit('arm_deploy_button');
 		});
 		$(document).on('click', '#error', function(){
-			Main.socket.emit('deploy_failed');
+			Main.socket.emit('disarm_deploy_button');
 		});
 		$(document).on('click', '#loading', function(){
 			Main.socket.emit('trigger_deploy');
