@@ -159,7 +159,7 @@ function environments() {
 				env.addClass('success');
         Main.socket.emit('deploy_succeeded');
 			}
-			else if (status.HasWarningsOrErrors) {
+			else if (status.HasWarningOrErrors) {
 				env.addClass('error');
         Main.socket.emit('deploy_failed');
 			}
