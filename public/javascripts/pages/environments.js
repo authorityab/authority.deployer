@@ -38,6 +38,7 @@ function environments() {
 
     Main.socket.removeListener('inputs_button');
   	Main.socket.on('inputs_button', function() {
+      console.log('button eee');
   		triggerDeploy();
   	});
 
@@ -145,7 +146,7 @@ function environments() {
     Main.pageLock = true;
 
     var activeItem = environmentList.find('li.current');
-    if (activeItem.length < 0) {
+    if (activeItem.length > 0) {
       var environmentId = activeItem.data('environment-id');
 
   		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
