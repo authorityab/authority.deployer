@@ -5,6 +5,7 @@ var http = require('http');
 var communication = require('../lib/communication');
 
 if (app.get('env') === 'production')  {
+  console.log('load inputs');
   var inputs = require('../lib/inputs');
 }
 
