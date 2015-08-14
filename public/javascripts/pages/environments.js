@@ -5,10 +5,12 @@ function environments() {
   var projectId;
   var releaseId;
   var releaseVersion;
-  var deployInProgress;
+  var deployInProgress = false;
+  var buttonIsArmed = false;
 
   $(function() {
     Main.pageLock = true;
+    buttonIsArmed = true;
 
     environmentList = $('ul#environments');
 
@@ -38,7 +40,7 @@ function environments() {
 
     Main.socket.removeListener('inputs_button');
   	Main.socket.on('inputs_button', function() {
-      console.log('button eee');
+      // TODO: only trigger deploy if on this page and button is armed
   		triggerDeploy();
   	});
 
@@ -62,6 +64,7 @@ function environments() {
   });
 
   function left() {
+    buttonIsArmed = false;
     if (!Main.pageLock && !Main.lockRight) {
       Main.socket.emit('disarm_deploy_button');
       Main.ngScope().$apply(function() {
@@ -72,6 +75,7 @@ function environments() {
 
 	function right() {
     // TODO: what to do here?
+    buttonIsArmed = false;
     Main.socket.emit('disarm_deploy_button');
     if (!Main.pageLock && !Main.lockRight) {
       Main.ngScope().$apply(function() {
@@ -134,14 +138,16 @@ function environments() {
   }
 
   function triggerDeploy() {
-    Main.pageLock = true;
+    if (buttonIsArmed) {
+      Main.pageLock = true;
 
-    var activeItem = environmentList.find('li.current');
-    if (activeItem.length > 0) {
-      var environmentId = activeItem.data('environment-id');
+      var activeItem = environmentList.find('li.current');
+      if (activeItem.length > 0) {
+        var environmentId = activeItem.data('environment-id');
 
-  		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
-  		activeItem.addClass('in-progress');
+    		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
+    		activeItem.addClass('in-progress');
+      }
     }
 	}
 
