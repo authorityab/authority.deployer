@@ -66,8 +66,6 @@ var Main = (function() {
     ngScope().currentPage.right === undefined ? right() : ngScope().currentPage.right();
   });
 
-
-
   buildParams.statusInterval = setInterval(function() {
     socket.emit('get_build_status', function (status) {
       setBuildStatus(status);
