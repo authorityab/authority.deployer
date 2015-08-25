@@ -66,6 +66,20 @@ var Main = (function() {
     ngScope().currentPage.right === undefined ? right() : ngScope().currentPage.right();
   });
 
+
+
+  buildParams.statusInterval = setInterval(function() {
+    socket.emit('get_build_status', function (status) {
+      // setBuildStatus(status);
+      console.log('as');
+    });
+  }, 10000);
+
+  function ngScope() {
+    var scope = angular.element($(".wrapper")).scope();
+    return scope;
+  };
+
   function setBuildStatus(data) {
     var builds = JSON.parse(JSON.parse(data));
 
@@ -107,19 +121,6 @@ var Main = (function() {
       Dashboard.setLastFailedCounter();
     }
   }
-
-  buildParams.statusInterval = setInterval(function() {
-    socket.emit('get_build_status', function (status) {
-      setBuildStatus(status);
-    });
-  }, 10000);
-
-  function ngScope() {
-    var scope = angular.element($(".wrapper")).scope();
-    return scope;
-  };
-
-
 
   function removeListeners() {
     for (var i = 0; i < arguments.length; i++) {
