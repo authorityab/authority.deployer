@@ -24,12 +24,20 @@ server.listen(port, function() {
 
 server.on('error', onError);
 server.on('listening', onListening);
+
+/**
+ * Create communication service.
+ */
+
 com.init(server);
+
+/**
+ * Initialize IO modules.
+ */
 
 if (app.get('env') === 'production') {
   var inputs = new (require('../lib/inputs'));
   var outputs = new (require('../lib/outputs'));
-
 
   inputs.init(com);
   outputs.init();
