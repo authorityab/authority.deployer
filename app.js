@@ -7,8 +7,7 @@ var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var compass = require('node-compass');
-var inputs = new (require('./lib/inputs'));
-var outputs = new (require('./lib/outputs'));
+
 var app = express();
 
 app.use(express.static(path.join(__dirname, 'public')));
@@ -50,8 +49,8 @@ if (app.get('env') === 'development') {
 // production
 // load inputs
 if (app.get('env') === 'production') {
-  inputs.init();
-  outputs.init();
+  // inputs.init();
+  // outputs.init();
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
