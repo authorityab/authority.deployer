@@ -1,3 +1,5 @@
+#!/usr/bin/env node
+
 var app = require('../app');
 var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
@@ -16,21 +18,23 @@ app.set('port', port);
 
 var server = http.createServer(app);
 
-
 server.listen(port, function() {
   console.log('listening on *:' + port + ' in ' + app.get('env') + ' mode');
 });
 
 server.on('error', onError);
 server.on('listening', onListening);
+com.init(server);
 
 if (app.get('env') === 'production') {
   var inputs = new (require('../lib/inputs'));
   var outputs = new (require('../lib/outputs'));
-  com.init(server);
+
 
   inputs.init(com);
   outputs.init();
+
+  com.attachOutputs(outputs);
 }
 
 /**
