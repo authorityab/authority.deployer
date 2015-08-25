@@ -70,8 +70,8 @@ var Main = (function() {
 
   buildParams.statusInterval = setInterval(function() {
     socket.emit('get_build_status', function (status) {
-      // setBuildStatus(status);
-      console.log('as');
+      setBuildStatus(status);
+      //console.log('as');
     });
   }, 10000);
 
