@@ -1,4 +1,4 @@
-function projects() {
+function Projects() {
   Main.startSpinner();
 
 	var projectList
@@ -8,11 +8,9 @@ function projects() {
 
 		projectList = $('ul#projects');
 
-		Main.socket.emit('get_projects');
-		Main.socket.on('set_projects', function(data) {
-			setProjects(data);
-			Main.socket.removeListener('set_projects');
-		});
+		Main.socket.emit('get_projects', function(projects) {
+      setProjects(projects);
+    });
 	});
 
 	function right() {
@@ -62,5 +60,4 @@ function projects() {
 		right: right,
 		setProjects: setProjects
 	}
-
 }

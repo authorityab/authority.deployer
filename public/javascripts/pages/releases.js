@@ -1,4 +1,4 @@
-function releases() {
+function Releases() {
   Main.startSpinner();
 
   var projectId;
@@ -11,13 +11,10 @@ function releases() {
 
     setTimeout(function() {
       projectId = Main.ngScope().projectId;
-      Main.socket.emit('get_releases', projectId);
+      Main.socket.emit('get_releases', projectId, function(releases) {
+        setReleases(releases);
+      });
     }, 500);
-
-    Main.socket.on('set_releases', function(data) {
-      setReleases(data);
-      Main.socket.removeListener('set_releases');
-    });
   });
 
   function right() {

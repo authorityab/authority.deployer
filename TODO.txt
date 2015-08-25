@@ -1,3 +1,5 @@
-* Maybe use socket.io Acknowledgements instead of specific return emits.
+* Maybe use socket.io Acknowledgements instead of specific return emits. // Semi-done...
 
-*
+* Figure out what to do after a deploy has succeeded/failed.
+
+* New design

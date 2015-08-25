@@ -1,4 +1,4 @@
-function dashboard() {
+function Dashboard() {
   Main.stopSpinner();
 
   var clockInterval;

@@ -1,12 +1,10 @@
-function buildStatus() {
+function BuildStatus() {
   Main.startSpinner();
 
   var buildList;
 
   $(function() {
     buildList = $('nav .project-list');
-    // setFailedBuilds();
-    // Main.pageLock = true;
   });
 
   function setFailedBuilds() {
@@ -32,7 +30,6 @@ function buildStatus() {
       buildList.find('li:first-child').addClass('current');
     }
 
-    // Main.pageLock = false;
     Main.stopSpinner();
   }
 

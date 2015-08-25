@@ -1,4 +1,4 @@
-function environments() {
+function Environments() {
   Main.startSpinner();
 
   var environmentList;
@@ -35,12 +35,13 @@ function environments() {
     setTimeout(function() {
       projectId = Main.ngScope().projectId;
       releaseId = Main.ngScope().releaseId;
-      Main.socket.emit('get_environments', projectId, releaseId);
+      Main.socket.emit('get_environments', { projectId: projectId, releaseId: releaseId }, function(environments) {
+        setEnvironments(environments);
+      });
     }, 500);
 
     Main.socket.removeListener('inputs_button');
   	Main.socket.on('inputs_button', function() {
-      // TODO: only trigger deploy if on this page and button is armed
   		triggerDeploy();
   	});
 
@@ -55,12 +56,6 @@ function environments() {
   	Main.socket.on('set_deploy_status', function(data) {
       setDeployStatus(data);
   	});
-
-    Main.socket.removeListener('set_environments');
-    Main.socket.on('set_environments', function(data) {
-      setEnvironments(data);
-    });
-
   });
 
   function left() {
@@ -145,7 +140,7 @@ function environments() {
       if (activeItem.length > 0) {
         var environmentId = activeItem.data('environment-id');
 
-    		Main.socket.emit('trigger_deploy', projectId, releaseId, environmentId);
+    		Main.socket.emit('trigger_deploy', { projectId: projectId, releaseId: releaseId, environmentId: environmentId });
     		activeItem.addClass('in-progress');
       }
     }

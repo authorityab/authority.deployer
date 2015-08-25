@@ -46,11 +46,6 @@ var Main = (function() {
     e.preventDefault();
   });
 
-
-
-
-  socket.emit('get_latest_failed_build');
-
   socket.removeListener('inputs_up');
   socket.on('inputs_up', function() {
     ngScope().currentPage.up === undefined ? up() : ngScope().currentPage.up();
@@ -72,16 +67,10 @@ var Main = (function() {
   });
 
   buildParams.statusInterval = setInterval(function() {
-    socket.emit('get_build_status');
+    socket.emit('get_build_status', function (status) {
+      setBuildStatus(status);
+    });
   }, 10000);
-
-  socket.on('set_build_status', function(data) {
-    setBuildStatus(data);
-  });
-
-  socket.on('set_latest_failed_build', function(build) {
-    buildParams.latestFailed = JSON.parse(JSON.parse(build));
-  });
 
   function ngScope() {
     var scope = angular.element($(".wrapper")).scope();
@@ -110,7 +99,9 @@ var Main = (function() {
     }
 
     if (buildParams.failedBuilds.length > 0) {
-      socket.emit('get_latest_failed_build');
+      socket.emit('get_latest_failed_build', function(build) {
+        buildParams.latestFailed = JSON.parse(JSON.parse(build));
+      });
 
       if (typeof BuildStatus !== 'undefined') {
         BuildStatus.setFailedBuilds();

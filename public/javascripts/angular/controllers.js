@@ -4,8 +4,8 @@ controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
 
-  BuildStatus = new buildStatus();
-  $scope.currentPage = BuildStatus;
+  var buildStatus = new BuildStatus();
+  $scope.currentPage = buildStatus;
 
   $scope.routeLeft = function() {
 
@@ -20,7 +20,7 @@ controllers.controller('DashboardController', function($scope, $location) {
   $scope.pageId = 'main_view';
   $scope.pageClass = 'view dash';
 
-  Dashboard = new dashboard();
+  Dashboard = new Dashboard();
   $scope.currentPage = Dashboard;
 
   $scope.routeLeft = function() {
@@ -36,7 +36,7 @@ controllers.controller('ProjectsController', function($scope, $location) {
   $scope.pageId = 'projects_view';
   $scope.pageClass = 'view projects';
 
-  Projects = new projects();
+  Projects = new Projects();
   $scope.currentPage = Projects;
 
   $scope.routeLeft = function() {
@@ -53,7 +53,7 @@ controllers.controller('ReleasesController', function($scope, $location, $routeP
   $scope.pageClass = 'view project';
   $scope.projectId = $routeParams.projectId;
 
-  Releases = new releases();
+  Releases = new Releases();
   $scope.currentPage = Releases;
 
   $scope.routeLeft = function() {
@@ -71,7 +71,7 @@ controllers.controller('EnvironmentsController', function($scope, $location, $ro
   $scope.projectId = $routeParams.projectId;
   $scope.releaseId = $routeParams.releaseId;
 
-  Environments = new environments();
+  Environments = new Environments();
   $scope.currentPage = Environments;
 
   $scope.routeLeft = function() {
