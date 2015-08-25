@@ -35,8 +35,8 @@ app.use(function(req, res, next) {
 // development
 // will print stacktrace
 if (app.get('env') === 'development') {
-  inputs.init();
-  outputs.init();
+  // inputs.init();
+  // outputs.init();
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
@@ -50,8 +50,8 @@ if (app.get('env') === 'development') {
 // production
 // load inputs
 if (app.get('env') === 'production') {
-  // inputs.init();
-
+  inputs.init();
+  outputs.init();
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
     res.render('error', {
