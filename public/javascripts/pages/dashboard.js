@@ -1,79 +1,58 @@
 function Dashboard() {
-  Main.stopSpinner();
 
-  var clockInterval;
-  var hasBuildErrors = false;
-  var monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  var monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+  var self = this;
 
-  $(function() {
-    //TODO: Remove after test
-    $(document).on('click', '#success', function(){
-			Main.socket.emit('deploy_succeeded');
-		});
-		$(document).on('click', '#error', function(){
-			Main.socket.emit('deploy_failed');
-		});
-		// $(document).on('click', '#loading', function(){
-		// 	Main.socket.emit('trigger_deploy');
-		// });
-		$(document).on('click', '#stop', function(){
-			Main.socket.emit('ledstrip_stop');
-		});
+  this.clockInterval;
+  this.hasBuildErrors = false;
+  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
 
-    setTimeout(function() {
-      setLatestBuild();
-      setBuildCount();
-      setCurrentDate();
-      setLastFailedCounter();
-      checkForBuildErrors();
-    }, 300);
-  });
+  this.init = function() {
 
-  function left() {
-    if (hasBuildErrors) {
-      clearInterval(clockInterval);
-      Main.ngScope().$apply(function() {
-  			Main.ngScope().routeLeft();
+      this.stopSpinner();
+
+      //TODO: Remove after test
+      $(document).on('click', '#success', function(){
+  			self.socket.emit('deploy_succeeded');
+  		});
+  		$(document).on('click', '#error', function(){
+  			self.socket.emit('deploy_failed');
+  		});
+  		// $(document).on('click', '#loading', function(){
+  		// 	Main.socket.emit('trigger_deploy');
+  		// });
+  		$(document).on('click', '#stop', function(){
+  			self.socket.emit('ledstrip_stop');
+  		});
+
+      setTimeout(function() {
+        setCurrentDate();
+        self.setLatestBuild();
+        self.setBuildCount();
+        self.setLastFailedCounter();
+        self.checkForBuildErrors();
+      }, 300);
+  };
+
+  this.left = function() {
+    if (this.hasBuildErrors) {
+      clearInterval(this.clockInterval);
+      this.ngScope().$apply(function() {
+  			self.ngScope().routeLeft();
   		});
     }
-	}
+	};
 
-	function right() {
-    clearInterval(clockInterval);
-		Main.ngScope().$apply(function() {
-			Main.ngScope().routeRight();
+	this.right = function() {
+    clearInterval(this.clockInterval);
+		this.ngScope().$apply(function() {
+			self.ngScope().routeRight();
 		});
-	}
+	};
 
-  function setCurrentDate() {
-    var currentDate = new Date();
-    var monthNr = currentDate.getMonth();
-    var year = currentDate.getFullYear();
-    var day = currentDate.getDate();
-
-    var month = monthNamesShort[monthNr];
-
-    var dateHolder = $('.date-time .date');
-    dateHolder.find('.day').text(day);
-    dateHolder.find('.month').text(month);
-    dateHolder.find('.year').text(year);
-
-    clockInterval = setInterval(function() {
-      function r(el, deg) {
-        el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
-      }
-      var d = new Date()
-
-      r($('#sec').get(0), 6*d.getSeconds())
-      r($('#min').get(0), 6*d.getMinutes())
-      r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
-    }, 1000)
-  }
-
-  function setLatestBuild() {
-    if (Main.buildParams.latestBuild != null) {
-      var finishDate = new Date(Main.buildParams.latestBuild.FinishDate);
+  this.setLatestBuild = function() {
+    if (this.buildParams.latestBuild != null) {
+      var finishDate = new Date(this.buildParams.latestBuild.FinishDate);
       var monthNr = finishDate.getMonth();
       var year = finishDate.getFullYear();
       var day = finishDate.getDate();
@@ -86,16 +65,16 @@ function Dashboard() {
       if (minutes < 10)
         minutes = "0" + minutes;
 
-      var month = monthNamesShort[monthNr];
+      var month = this.monthNamesShort[monthNr];
 
       var buildHolder = $('.dash-latest');
       buildHolder.find('h1').text(day);
       buildHolder.find('h3').text(month);
       buildHolder.find('h4').text(hours + ':' + minutes);
 
-      buildHolder.find('.l-description').text(Main.buildParams.latestBuild.ProjectName + ' - ' + Main.buildParams.latestBuild.StepName);
+      buildHolder.find('.l-description').text(this.buildParams.latestBuild.ProjectName + ' - ' + this.buildParams.latestBuild.StepName);
 
-      if (Main.buildParams.latestBuild.Status === 'SUCCESS') {
+      if (this.buildParams.latestBuild.Status === 'SUCCESS') {
         buildHolder.removeClass('fail');
         buildHolder.addClass('success');
       } else {
@@ -103,21 +82,21 @@ function Dashboard() {
         buildHolder.addClass('fail');
       }
     }
-  }
+  };
 
-  function setBuildCount() {
-    var totalCount = Main.buildParams.totalCount;
-    var successCount = Main.buildParams.succeededBuilds.length;
-    var failedCount = Main.buildParams.failedBuilds.length;
+  this.setBuildCount = function() {
+    var totalCount = this.buildParams.totalCount;
+    var successCount = this.buildParams.succeededBuilds.length;
+    var failedCount = this.buildParams.failedBuilds.length;
 
     $('.p-success.dash-stat h1').text(successCount);
     $('.p-fail.dash-stat h1').text(failedCount);
-  }
+  };
 
-  function setLastFailedCounter() {
-    if (Main.buildParams.latestFailed != null) {
+  this.setLastFailedCounter = function() {
+    if (this.buildParams.latestFailed != null) {
       var currentDate = new Date();
-      var failedDate = Main.buildParams.latestFailed.Build.FinishDate;
+      var failedDate = this.buildParams.latestFailed.Build.FinishDate;
       var diffMilli = Math.floor(currentDate - new Date(failedDate));
 
       var seconds = (diffMilli / 1000) | 0;
@@ -141,26 +120,47 @@ function Dashboard() {
       countHolder.find('#f_hours').text(hours);
       countHolder.find('#f_minutes').text(minutes);
 
-      countHolder.find('.failer .name').text(Main.buildParams.latestFailed.BuildDestroyer);
+      countHolder.find('.failer .name').text(this.buildParams.latestFailed.BuildDestroyer);
     }
-  }
+  };
 
-  function checkForBuildErrors() {
-    if (Main.buildParams.failedBuilds.length > 0) {
+  this.checkForBuildErrors = function() {
+    if (this.buildParams.failedBuilds.length > 0) {
       $('main').addClass('failed');
-      hasBuildErrors = true;
+      this.hasBuildErrors = true;
     } else {
       $('main').removeClass('failed');
-      hasBuildErrors = false;
+      this.hasBuildErrors = false;
     }
+  };
+
+  function setCurrentDate() {
+    var currentDate = new Date();
+    var monthNr = currentDate.getMonth();
+    var year = currentDate.getFullYear();
+    var day = currentDate.getDate();
+
+    var month = self.monthNamesShort[monthNr];
+
+    var dateHolder = $('.date-time .date');
+    dateHolder.find('.day').text(day);
+    dateHolder.find('.month').text(month);
+    dateHolder.find('.year').text(year);
+
+    self.clockInterval = setInterval(function() {
+      function r(el, deg) {
+        el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
+      }
+      var d = new Date()
+
+      r($('#sec').get(0), 6*d.getSeconds())
+      r($('#min').get(0), 6*d.getMinutes())
+      r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
+    }, 1000)
   }
 
-  return {
-		left: left,
-		right: right,
-    setLastFailedCounter: setLastFailedCounter,
-    setLatestBuild: setLatestBuild,
-    setBuildCount: setBuildCount,
-    checkForBuildErrors: checkForBuildErrors
-  }
+  this.init();
 }
+
+Dashboard.prototype = Main;
+var Dashboard = new Dashboard();

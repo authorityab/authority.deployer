@@ -3,3 +3,7 @@
 * Figure out what to do after a deploy has succeeded/failed.
 
 * New design
+
+* Figure out how to put left/right methods in main again
+
+* If triggerDeploy return taskId === null, figure out what to do

@@ -3,12 +3,9 @@ var controllers = angular.module('srDeployer.controllers', []);
 controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
-
-  var buildStatus = new BuildStatus();
-  $scope.currentPage = buildStatus;
+  $scope.currentPage = BuildStatus;
 
   $scope.routeLeft = function() {
-
   }
 
   $scope.routeRight = function() {
@@ -19,8 +16,6 @@ controllers.controller('BuildStatusController', function($scope, $location) {
 controllers.controller('DashboardController', function($scope, $location) {
   $scope.pageId = 'main_view';
   $scope.pageClass = 'view dash';
-
-  Dashboard = new Dashboard();
   $scope.currentPage = Dashboard;
 
   $scope.routeLeft = function() {
@@ -35,8 +30,6 @@ controllers.controller('DashboardController', function($scope, $location) {
 controllers.controller('ProjectsController', function($scope, $location) {
   $scope.pageId = 'projects_view';
   $scope.pageClass = 'view projects';
-
-  Projects = new Projects();
   $scope.currentPage = Projects;
 
   $scope.routeLeft = function() {
@@ -52,8 +45,6 @@ controllers.controller('ReleasesController', function($scope, $location, $routeP
   $scope.pageId = 'project_view';
   $scope.pageClass = 'view project';
   $scope.projectId = $routeParams.projectId;
-
-  Releases = new Releases();
   $scope.currentPage = Releases;
 
   $scope.routeLeft = function() {
@@ -70,8 +61,6 @@ controllers.controller('EnvironmentsController', function($scope, $location, $ro
   $scope.pageClass = 'view project';
   $scope.projectId = $routeParams.projectId;
   $scope.releaseId = $routeParams.releaseId;
-
-  Environments = new Environments();
   $scope.currentPage = Environments;
 
   $scope.routeLeft = function() {

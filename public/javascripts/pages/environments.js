@@ -1,18 +1,19 @@
 function Environments() {
-  Main.startSpinner();
 
-  var environmentList;
-  var projectId;
-  var releaseId;
-  var releaseVersion;
-  var deployInProgress = false;
-  var buttonIsArmed = false;
+  var self = this;
 
-  $(function() {
-    Main.pageLock = true;
-    buttonIsArmed = true;
+  this.projectId;
+  this.releaseId;
+  this.releaseVersion;
+  this.deployInProgress = false;
+  this.buttonIsArmed = false;
 
-    environmentList = $('ul#environments');
+  this.init = function() {
+    this.startSpinner();
+    this.pageLock = true;
+    this.buttonIsArmed = true;
+
+    this.navigationList = $('ul#environments');
 
     // TODO: Remove after test
     $(document).unbind("hitenter", hitEnter);
@@ -33,51 +34,51 @@ function Environments() {
     }
 
     setTimeout(function() {
-      projectId = Main.ngScope().projectId;
-      releaseId = Main.ngScope().releaseId;
-      Main.socket.emit('get_environments', { projectId: projectId, releaseId: releaseId }, function(environments) {
+      self.projectId = self.ngScope().projectId;
+      self.releaseId = self.ngScope().releaseId;
+      self.socket.emit('get_environments', { projectId: self.projectId, releaseId: self.releaseId }, function(environments) {
         setEnvironments(environments);
       });
     }, 500);
 
-    Main.socket.removeListener('inputs_button');
-  	Main.socket.on('inputs_button', function() {
-  		triggerDeploy();
-  	});
+    this.socket.removeListener('inputs_button');
+    this.socket.on('inputs_button', function() {
+      triggerDeploy();
+    });
 
-    Main.socket.removeListener('deploy_started');
-  	Main.socket.on('deploy_started', function(taskId) {
-  		deployInProgress = setInterval(function () {
-  			Main.socket.emit('get_deploy_status', taskId);
-  		}, 8000);
-  	});
+    this.socket.removeListener('deploy_started');
+    this.socket.on('deploy_started', function(taskId) {
+      self.deployInProgress = setInterval(function () {
+        self.socket.emit('get_deploy_status', taskId);
+      }, 8000);
+    });
 
-    Main.socket.removeListener('set_deploy_status');
-  	Main.socket.on('set_deploy_status', function(data) {
+    this.socket.removeListener('set_deploy_status');
+    this.socket.on('set_deploy_status', function(data) {
       setDeployStatus(data);
-  	});
-  });
+    });
+  };
 
-  function left() {
-    buttonIsArmed = false;
-    if (!Main.pageLock && !Main.lockRight) {
-      Main.socket.emit('disarm_deploy_button');
-      Main.ngScope().$apply(function() {
-  			Main.ngScope().routeLeft();
+  this.left = function() {
+    this.buttonIsArmed = false;
+    if (!this.pageLock && !this.lockRight) {
+      this.socket.emit('disarm_deploy_button');
+      this.ngScope().$apply(function() {
+  			self.ngScope().routeLeft();
   		});
     }
-	}
+	};
 
-	function right() {
+	this.right = function() {
     // TODO: what to do here?
-    buttonIsArmed = false;
-    Main.socket.emit('disarm_deploy_button');
-    if (!Main.pageLock && !Main.lockRight) {
-      Main.ngScope().$apply(function() {
-  			Main.ngScope().routeRight();
+    this.buttonIsArmed = false;
+    this.socket.emit('disarm_deploy_button');
+    if (!this.pageLock && !this.lockRight) {
+      this.ngScope().$apply(function() {
+  			self.ngScope().routeRight();
   		});
     }
-	}
+	};
 
   function setEnvironments(data) {
     var environmentPage =  JSON.parse(JSON.parse(data));
@@ -86,9 +87,9 @@ function Environments() {
 			var listItem = $('<li><div>' +
 												'<h2>No environments for the selected project were found.</h3>' +
 											'</div></li>');
-			environmentList.append(listItem);
-      environmentList.appendTo('.wrapper nav');
-      Main.lockRight = true;
+			self.navigationList.append(listItem);
+      self.navigationList.appendTo('.wrapper nav');
+      self.lockRight = true;
 		} else {
       releaseVersion = environmentPage.ReleaseVersion;
 
@@ -114,33 +115,33 @@ function Environments() {
           listItem.addClass('in-progress');
         }
 
-        environmentList.append(listItem);
+        self.navigationList.append(listItem);
       }
 
-      environmentList.find('li:first-child').addClass('current');
-      environmentList.appendTo('.wrapper nav');
+      self.navigationList.find('li:first-child').addClass('current');
+      self.navigationList.appendTo('.wrapper nav');
 
-      Main.lockRight = false;
-      Main.socket.emit('arm_deploy_button');
+      self.lockRight = false;
+      self.socket.emit('arm_deploy_button');
     }
 
     $('.btn-container').removeClass('hidden');
     $('header').removeClass('hidden');
-    environmentList.removeClass('hidden');
+    self.navigationList.removeClass('hidden');
 
-    Main.pageLock = false;
-    Main.stopSpinner();
+    self.pageLock = false;
+    self.stopSpinner();
   }
 
   function triggerDeploy() {
-    if (buttonIsArmed) {
-      Main.pageLock = true;
+    if (self.buttonIsArmed) {
+      self.pageLock = true;
 
-      var activeItem = environmentList.find('li.current');
+      var activeItem = self.navigationList.find('li.current');
       if (activeItem.length > 0) {
         var environmentId = activeItem.data('environment-id');
 
-    		Main.socket.emit('trigger_deploy', { projectId: projectId, releaseId: releaseId, environmentId: environmentId });
+    		self.socket.emit('trigger_deploy', { projectId: self.projectId, releaseId: self.releaseId, environmentId: environmentId });
     		activeItem.addClass('in-progress');
       }
     }
@@ -150,29 +151,27 @@ function Environments() {
     var status =  JSON.parse(JSON.parse(data));
 
 		if (status.IsCompleted) {
-			clearInterval(deployInProgress);
-			env = environmentList.find('li.current');
+			clearInterval(self.deployInProgress);
+			env = self.navigationList.find('li.current');
 			env.removeClass('in-progress');
-      env.find('h3').text(releaseVersion);
+      env.find('h3').text(self.releaseVersion);
       env.find('h4').text(status.CompletedTime);
 
 			if (status.FinishedSuccessfully) {
 				env.addClass('success');
-        Main.socket.emit('deploy_succeeded');
+        self.socket.emit('deploy_succeeded');
 			}
 			else if (status.HasWarningOrErrors) {
 				env.addClass('error');
-        Main.socket.emit('deploy_failed');
+        self.socket.emit('deploy_failed');
 			}
 
-      Main.pageLock = false;
+      self.pageLock = false;
 		}
   }
 
-  return {
-    list: environmentList,
-    left: left,
-		right: right,
-    setEnvironments: setEnvironments
-  }
+  this.init();
 }
+
+Environments.prototype = Main;
+var Environments = new Environments();

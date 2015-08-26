@@ -1,31 +1,38 @@
 function Releases() {
-  Main.startSpinner();
 
-  var projectId;
-  var releaseList;
+  var self = this;
+  this.projectId;
 
-  $(function() {
-    Main.pageLock = true;
-
-    releaseList = $('ul#releases');
+  this.init = function() {
+    this.startSpinner();
+    this.pageLock = true;
+    this.navigationList = $('ul#releases');
 
     setTimeout(function() {
-      projectId = Main.ngScope().projectId;
-      Main.socket.emit('get_releases', projectId, function(releases) {
+      projectId = self.ngScope().projectId;
+      self.socket.emit('get_releases', projectId, function(releases) {
         setReleases(releases);
       });
     }, 500);
-  });
+  };
 
-  function right() {
-    if (!Main.pageLock && !Main.lockRight) {
-      var releaseId = releaseList.find('li.current').data('release-id');
+  this.left = function() {
+   if (!this.pageLock) {
+     this.ngScope().$apply(function() {
+       self.ngScope().routeLeft();
+     });
+   }
+ };
 
-      Main.ngScope().$apply(function() {
-        Main.ngScope().routeRight(projectId, releaseId);
+  this.right = function() {
+    if (!this.pageLock && !this.lockRight) {
+      var releaseId = this.navigationList.find('li.current').data('release-id');
+
+      this.ngScope().$apply(function() {
+        self.ngScope().routeRight(projectId, releaseId);
       });
     }
-  }
+  };
 
   function setReleases(data) {
     var releasePage = JSON.parse(JSON.parse(data));
@@ -37,9 +44,9 @@ function Releases() {
       var listItem = $('<li><div>' +
                          '<h2>No releases for the selected project have been published yet.</h3>' +
                       '</div></li>');
-      releaseList.append(listItem);
-      releaseList.appendTo('.wrapper nav');
-      Main.lockRight = true;
+      self.navigationList.append(listItem);
+      self.navigationList.appendTo('.wrapper nav');
+      self.lockRight = true;
     } else {
       for (var i = 0; i < releasePage.Releases.length; i++) {
   			var release = releasePage.Releases[i];
@@ -66,24 +73,24 @@ function Releases() {
           var envString = environments.substring(1);
           listItem.append('<span class="message-badge">' + envString + '</span>');
         }
-  			releaseList.append(listItem);
+  			self.navigationList.append(listItem);
   		}
 
-      releaseList.find('li:first-child').addClass('current');
-      releaseList.appendTo('.wrapper nav');
+      self.navigationList.find('li:first-child').addClass('current');
+      self.navigationList.appendTo('.wrapper nav');
 
-      Main.lockRight = false;
+      self.lockRight = false;
     }
 
-    releaseList.removeClass('hidden');
+    self.navigationList.removeClass('hidden');
     $('header').removeClass('hidden');
 
-    Main.pageLock = false;
-    Main.stopSpinner();
+    self.pageLock = false;
+    self.stopSpinner();
   }
 
-  return {
-    list: releaseList,
-		right: right
-  }
+  this.init();
 }
+
+Releases.prototype = Main;
+var Releases = new Releases();
