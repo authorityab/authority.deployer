@@ -34,22 +34,6 @@ function Dashboard() {
       }, 300);
   };
 
-  this.left = function() {
-    if (this.hasBuildErrors) {
-      clearInterval(this.clockInterval);
-      this.ngScope().$apply(function() {
-  			self.ngScope().routeLeft();
-  		});
-    }
-	};
-
-	this.right = function() {
-    clearInterval(this.clockInterval);
-		this.ngScope().$apply(function() {
-			self.ngScope().routeRight();
-		});
-	};
-
   this.setLatestBuild = function() {
     if (this.buildParams.latestBuild != null) {
       var finishDate = new Date(this.buildParams.latestBuild.FinishDate);
@@ -132,6 +116,24 @@ function Dashboard() {
       $('main').removeClass('failed');
       this.hasBuildErrors = false;
     }
+  };
+
+  this.left = function() {
+    var page = this;
+    if (page.hasBuildErrors) {
+      clearInterval(page.clockInterval);
+      page.ngScope().$apply(function() {
+        page.ngScope().routeLeft();
+      });
+    }
+  };
+
+  this.right = function() {
+    var page = this;
+    clearInterval(page.clockInterval);
+    page.ngScope().$apply(function() {
+      page.ngScope().routeRight();
+    });
   };
 
   function setCurrentDate() {

@@ -16,20 +16,13 @@ function Releases() {
     }, 500);
   };
 
-  this.left = function() {
-   if (!this.pageLock) {
-     this.ngScope().$apply(function() {
-       self.ngScope().routeLeft();
-     });
-   }
- };
-
   this.right = function() {
-    if (!this.pageLock && !this.lockRight) {
-      var releaseId = this.navigationList.find('li.current').data('release-id');
+    var page = this;
+    if (!page.pageLock && !page.lockRight) {
+      var releaseId = page.navigationList.find('li.current').data('release-id');
 
-      this.ngScope().$apply(function() {
-        self.ngScope().routeRight(projectId, releaseId);
+      page.ngScope().$apply(function() {
+        page.ngScope().routeRight(projectId, releaseId);
       });
     }
   };

@@ -7,22 +7,6 @@ function BuildStatus() {
     this.navigationList = $('nav .project-list');
   };
 
-  this.left = function() {
-    if (!this.pageLock) {
-      this.ngScope().$apply(function() {
-        self.ngScope().routeLeft();
-      });
-    }
-  };
-
-  this.right = function() {
-    if (!this.pageLock) {
-      this.ngScope().$apply(function() {
-        self.ngScope().routeRight();
-      });
-    }
-  };
-
   this.setFailedBuilds = function() {
     var currentIndex = this.navigationList.find('li.current').index();
     this.navigationList.empty();

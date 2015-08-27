@@ -118,6 +118,24 @@ var Main = function() {
   this.init();
 }
 
+Main.prototype.left = function() {
+  var page = this;
+  if (!page.pageLock) {
+    page.ngScope().$apply(function() {
+      page.ngScope().routeLeft();
+    });
+  }
+}
+
+Main.prototype.right = function() {
+  var page = this;
+  if (!page.pageLock) {
+    page.ngScope().$apply(function() {
+      page.ngScope().routeRight();
+    });
+  }
+}
+
 Main.prototype.ngScope = function() {
   var scope = angular.element($(".wrapper")).scope();
   return scope;

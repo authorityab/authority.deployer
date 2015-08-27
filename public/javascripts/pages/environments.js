@@ -12,7 +12,6 @@ function Environments() {
     this.startSpinner();
     this.pageLock = true;
     this.buttonIsArmed = true;
-
     this.navigationList = $('ul#environments');
 
     // TODO: Remove after test
@@ -60,25 +59,27 @@ function Environments() {
   };
 
   this.left = function() {
-    this.buttonIsArmed = false;
-    if (!this.pageLock && !this.lockRight) {
-      this.socket.emit('disarm_deploy_button');
-      this.ngScope().$apply(function() {
-  			self.ngScope().routeLeft();
-  		});
+    var page = this;
+    page.buttonIsArmed = false;
+    if (!page.pageLock && !page.lockRight) {
+      page.socket.emit('disarm_deploy_button');
+      page.ngScope().$apply(function() {
+        page.ngScope().routeLeft();
+      });
     }
-	};
+  };
 
-	this.right = function() {
+  this.right = function() {
     // TODO: what to do here?
-    this.buttonIsArmed = false;
-    this.socket.emit('disarm_deploy_button');
-    if (!this.pageLock && !this.lockRight) {
-      this.ngScope().$apply(function() {
-  			self.ngScope().routeRight();
-  		});
+    var page = this;
+    page.buttonIsArmed = false;
+    page.socket.emit('disarm_deploy_button');
+    if (!page.pageLock && !page.lockRight) {
+      page.ngScope().$apply(function() {
+        page.ngScope().routeRight();
+      });
     }
-	};
+  };
 
   function setEnvironments(data) {
     var environmentPage =  JSON.parse(JSON.parse(data));
@@ -149,7 +150,6 @@ function Environments() {
 
   function setDeployStatus(data) {
     var status =  JSON.parse(JSON.parse(data));
-
 		if (status.IsCompleted) {
 			clearInterval(self.deployInProgress);
 			env = self.navigationList.find('li.current');

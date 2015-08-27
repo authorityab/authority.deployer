@@ -12,23 +12,6 @@ function Projects() {
     });
   };
 
-  this.left = function() {
-   if (!this.pageLock) {
-     this.ngScope().$apply(function() {
-       self.ngScope().routeLeft();
-     });
-   }
- };
-
-	this.right = function() {
-		if (!this.pageLock && !this.lockRight) {
-			var projectId = this.navigationList.find('li.current').data('project-id');
-			this.ngScope().$apply(function() {
-				self.ngScope().routeRight(projectId);
-			});
-		}
-	};
-
 	this.setProjects = function(data) {
 		var projects =  JSON.parse(JSON.parse(data));
 
@@ -62,8 +45,19 @@ function Projects() {
 		this.stopSpinner();
 	};
 
+  this.right = function() {
+    var page = this;
+    if (!page.pageLock && !page.lockRight) {
+      var projectId = page.navigationList.find('li.current').data('project-id');
+      page.ngScope().$apply(function() {
+        page.ngScope().routeRight(projectId);
+      });
+    }
+  };
+
   this.init();
 }
+
 
 Projects.prototype = Main;
 var Projects = new Projects();
