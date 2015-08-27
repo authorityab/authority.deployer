@@ -15,6 +15,7 @@ GPIO.setup(13, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 GPIO.setup(21, GPIO.IN, pull_up_down=GPIO.PUD_UP)
 
 GPIO.setup(12, GPIO.OUT)
+buttonled = False 
 
 while True:
 	input_up = GPIO.input(6)
@@ -41,4 +42,6 @@ while True:
 
 	if button_pushed == False:
 		print('button_pushed')
+		GPIO.output(12, not buttonled)
+		buttonled = not buttonled
 		time.sleep(0.2)
