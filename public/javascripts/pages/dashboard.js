@@ -13,10 +13,10 @@ function Dashboard() {
 
       //TODO: Remove after test
       $(document).on('click', '#success', function(){
-  			self.socket.emit('deploy_succeeded');
+  			self.socket.emit('arm_deploy_button');
   		});
   		$(document).on('click', '#error', function(){
-  			self.socket.emit('deploy_failed');
+  			self.socket.emit('disarm_deploy_button');
   		});
   		// $(document).on('click', '#loading', function(){
   		// 	Main.socket.emit('trigger_deploy');
