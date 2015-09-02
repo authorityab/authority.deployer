@@ -19,10 +19,10 @@ angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProv
     .when('/environments/:projectId/:releaseId', {
       templateUrl: 'partials/environments.jade',
       controller: 'EnvironmentsController'
-    })
-    .otherwise({
-      redirectTo: '/'
     });
+    // .otherwise({
+    //   redirectTo: '/'
+    // });
 
     $locationProvider.html5Mode(true);
 }]);

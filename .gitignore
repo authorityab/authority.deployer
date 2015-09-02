@@ -6,5 +6,5 @@ public/.sass-cache/
 node_modules/
 typings/
 
-
 *.DS_Store
+*.swp

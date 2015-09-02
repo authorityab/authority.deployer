@@ -66,54 +66,153 @@ var Main = function() {
       self.ngScope().currentPage.right();
     });
 
-    this.buildParams.statusInterval = setInterval(function() {
-      self.socket.emit('get_build_status', function (status) {
-        setBuildStatus(status);
-      });
-    }, 10000);
+    this.socket.removeListener('inputs_right');
+    this.socket.on('inputs_right', function() {
+      self.ngScope().currentPage.right();
+    });
+
+    this.socket.removeListener('set_builds');
+    this.socket.on('set_builds', function(builds, hollaback) {
+      setBuilds(builds, hollaback);
+    });
+
+    this.socket.removeListener('set_latest_build');
+    this.socket.on('set_latest_build', function(build, hollaback) {
+      setLatestBuild(build, hollaback);
+    });
+
+    this.socket.removeListener('set_latest_failed_build');
+    this.socket.on('set_latest_failed_build', function(build, hollaback) {
+      setLatestFailedBuild(build, hollaback)
+    });
+
+
+    self.socket.emit('get_builds', function(builds) {
+      var builds = JSON.parse(JSON.parse(builds));
+      setBuilds(builds);
+      setLatestBuild(builds[0]);
+    });
+
+    // self.socket.emit('get_latest_build', function(build) {
+    //   var build = JSON.parse(JSON.parse(build));
+    //   setLatestBuild(build);
+    // });
+
+    self.socket.emit('get_latest_failed_build', function(build) {
+      var build = JSON.parse(JSON.parse(build));
+      setLatestFailedBuild(build);
+    });
+
+    // this.buildParams.statusInterval = setInterval(function() {
+    //   self.socket.emit('get_build_status', function (status) {
+    //     setBuildStatus(status);
+    //   });
+    // }, 10000);
   };
 
-  function setBuildStatus(data) {
-    var builds = JSON.parse(JSON.parse(data));
+  function setBuilds(builds, hollaback) {
+    var isSuccess;
+    try {
+      // var builds = JSON.parse(JSON.parse(data));
 
-    self.buildParams.totalCount = builds.length;
-    self.buildParams.failedBuilds = [];
-    self.buildParams.succeededBuilds = [];
+      self.buildParams.totalCount = builds.length;
+      self.buildParams.failedBuilds = [];
+      self.buildParams.succeededBuilds = [];
 
-    if (builds.length > 0) {
-      self.buildParams.latestBuild = builds[0];
+      if (builds.length > 0) {
+        // self.buildParams.latestBuild = builds[0];
 
-      for (var i = 0; i < builds.length; i++) {
-        var build = builds[i];
+        for (var i = 0; i < builds.length; i++) {
+          var build = builds[i];
 
-        if (build.Status === 'FAILURE') {
-          self.buildParams.failedBuilds.push(build);
-        } else if (build.Status === 'SUCCESS') {
-          self.buildParams.succeededBuilds.push(build);
+          if (build.Status === 'FAILURE') {
+            self.buildParams.failedBuilds.push(build);
+          } else if (build.Status === 'SUCCESS') {
+            self.buildParams.succeededBuilds.push(build);
+          }
         }
       }
+
+      // if (self.buildParams.failedBuilds.length > 0) {
+      //   // self.socket.emit('get_latest_failed_build', function(build) {
+      //   //   self.buildParams.latestFailed = JSON.parse(JSON.parse(build));
+      //   // });
+      //
+      //   if (typeof BuildStatus !== 'undefined') {
+      //     BuildStatus.setFailedBuilds();
+      //   }
+      //
+      //   if (typeof Dashboard !== 'undefined') {
+      //     Dashboard.checkForBuildErrors();
+      //   }
+      // }
+
+      if (typeof Dashboard !== 'undefined') {
+        // Dashboard.setLatestBuild();
+        Dashboard.setBuildCount();
+        // Dashboard.setLastFailedCounter();
+      }
+      console.log('set_builds');
+
+
+
+      isSuccess = true;
+    }
+    catch(e) {
+      isSuccess = false;
     }
 
-    if (self.buildParams.failedBuilds.length > 0) {
-      self.socket.emit('get_latest_failed_build', function(build) {
-        self.buildParams.latestFailed = JSON.parse(JSON.parse(build));
-      });
+    if (typeof(hollaback) == "function") {
+      hollaback(isSuccess);
+    }
 
+  }
+
+  function setLatestBuild(build, hollaback) {
+    var isSuccess;
+    try {
+      self.buildParams.latestBuild = build;
+      if (typeof Dashboard !== 'undefined') {
+        Dashboard.setLatestBuild();
+        Dashboard.checkForBuildErrors();
+      }
       if (typeof BuildStatus !== 'undefined') {
         BuildStatus.setFailedBuilds();
       }
 
-      if (typeof Dashboard !== 'undefined') {
-        Dashboard.checkForBuildErrors();
-      }
+      isSuccess = true;
+    }
+    catch(e) {
+
+      isSuccess = false;
     }
 
-    if (typeof Dashboard !== 'undefined') {
-      Dashboard.setLatestBuild();
-      Dashboard.setBuildCount();
-      Dashboard.setLastFailedCounter();
+    if (typeof(hollaback) == "function") {
+      hollaback(isSuccess);
     }
   }
+
+  function setLatestFailedBuild(build, hollaback) {
+    var isSuccess;
+    try {
+      self.buildParams.latestFailed = build;
+      if (typeof Dashboard !== 'undefined') {
+        Dashboard.setLastFailedCounter();
+        console.log('set_latest_failed_build');
+      }
+
+      isSuccess = true;
+    }
+    catch(e) {
+
+      isSuccess = false;
+    }
+
+    if (typeof(hollaback) == "function") {
+      hollaback(isSuccess);
+    }
+  }
+
 
   this.init();
 }

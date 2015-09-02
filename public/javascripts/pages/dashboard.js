@@ -29,9 +29,13 @@ function Dashboard() {
         setCurrentDate();
         self.setLatestBuild();
         self.setBuildCount();
-        self.setLastFailedCounter();
         self.checkForBuildErrors();
+        self.setLastFailedCounter();
       }, 300);
+
+      setInterval(function() {
+        self.setLastFailedCounter();
+      }, 60000)
   };
 
   this.setLatestBuild = function() {
@@ -80,7 +84,7 @@ function Dashboard() {
   this.setLastFailedCounter = function() {
     if (this.buildParams.latestFailed != null) {
       var currentDate = new Date();
-      var failedDate = this.buildParams.latestFailed.Build.FinishDate;
+      var failedDate = this.buildParams.latestFailed.FinishDate;
       var diffMilli = Math.floor(currentDate - new Date(failedDate));
 
       var seconds = (diffMilli / 1000) | 0;
@@ -104,7 +108,7 @@ function Dashboard() {
       countHolder.find('#f_hours').text(hours);
       countHolder.find('#f_minutes').text(minutes);
 
-      countHolder.find('.failer .name').text(this.buildParams.latestFailed.BuildDestroyer);
+      countHolder.find('.failer .name').text(this.buildParams.latestFailed.LastModifiedBy);
     }
   };
 
