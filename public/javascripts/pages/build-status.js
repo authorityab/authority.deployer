@@ -5,6 +5,7 @@ function BuildStatus() {
   this.init = function() {
     this.startSpinner();
     this.navigationList = $('nav .project-list');
+    self.setFailedBuilds();
   };
 
   this.setFailedBuilds = function() {
@@ -33,7 +34,7 @@ function BuildStatus() {
     this.stopSpinner();
   };
 
-  this.ngScope().currentPage = this;
+
   this.init();
 }
 

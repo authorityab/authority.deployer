@@ -170,7 +170,6 @@ function Environments() {
 		}
   }
 
-  this.ngScope().currentPage = this;
   this.init();
 }
 
