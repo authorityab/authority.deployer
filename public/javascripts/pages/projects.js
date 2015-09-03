@@ -55,6 +55,7 @@ function Projects() {
     }
   };
 
+  this.ngScope().currentPage = this;
   this.init();
 }
 

@@ -33,6 +33,7 @@ function BuildStatus() {
     this.stopSpinner();
   };
 
+  this.ngScope().currentPage = this;
   this.init();
 }
 

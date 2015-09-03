@@ -165,6 +165,7 @@ function Dashboard() {
     }, 1000)
   }
 
+  this.ngScope().currentPage = this;
   this.init();
 }
 

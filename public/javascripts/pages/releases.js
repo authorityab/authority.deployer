@@ -82,6 +82,7 @@ function Releases() {
     self.stopSpinner();
   }
 
+  this.ngScope().currentPage = this;
   this.init();
 }
 
