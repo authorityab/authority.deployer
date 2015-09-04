@@ -1,1 +1,1 @@
-angular.module('srDeployer', ['ngRoute', 'ngAnimate', 'srDeployer.routes', 'srDeployer.controllers']);
+angular.module('authorityDeployer', ['ngRoute', 'ngAnimate', 'authorityDeployer.routes', 'authorityDeployer.controllers']);

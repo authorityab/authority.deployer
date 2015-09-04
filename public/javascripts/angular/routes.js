@@ -1,4 +1,4 @@
-angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('authorityDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/dashboard.jade',

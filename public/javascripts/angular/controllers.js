@@ -1,4 +1,4 @@
-var controllers = angular.module('srDeployer.controllers', []);
+var controllers = angular.module('authorityDeployer.controllers', []);
 
 controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.pageId = 'fails_view';
