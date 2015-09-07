@@ -1,6 +1,6 @@
 function Releases() {
-
   var self = this;
+
   this.projectId;
 
   this.init = function() {
@@ -84,6 +84,3 @@ function Releases() {
 
   this.init();
 }
-
-Releases.prototype = Main;
-var Releases = new Releases();

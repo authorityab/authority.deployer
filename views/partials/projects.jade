@@ -3,5 +3,10 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
   nav
     ul(id='projects' class='project-list')
     
-
-script(src='javascripts/pages/projects.js')
+script.
+  if (typeof Projects !== 'object') {
+    Projects.prototype = Main;
+    var Projects = new Projects();
+  } else {
+    Projects.init();
+  }

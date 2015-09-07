@@ -100,5 +100,11 @@ main(id='{{ pageId }}' class='{{ pageClass }}')
     button#loading loading
     button#stop stop
     
+script.
+  if (typeof Dashboard !== 'object') {
+    Dashboard.prototype = Main;
+    var Dashboard = new Dashboard();
+  } else {
+    Dashboard.init();
+  }
     
-script(src='javascripts/pages/dashboard.js')

@@ -1,5 +1,4 @@
 function Environments() {
-
   var self = this;
 
   this.projectId;
@@ -172,6 +171,3 @@ function Environments() {
 
   this.init();
 }
-
-Environments.prototype = Main;
-var Environments = new Environments();

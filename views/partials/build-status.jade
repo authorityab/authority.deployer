@@ -3,4 +3,10 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
   nav
     ul(class="project-list")
 
-script(src='javascripts/pages/build-status.js')
+script.
+  if (typeof BuildStatus !== 'object') {
+    BuildStatus.prototype = Main;
+    var BuildStatus = new BuildStatus();
+  } else {
+    BuildStatus.init();
+  }

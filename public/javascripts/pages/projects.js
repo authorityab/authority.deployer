@@ -1,5 +1,4 @@
 function Projects() {
-
   var self = this;
 
   this.init = function() {
@@ -57,7 +56,3 @@ function Projects() {
 
   this.init();
 }
-
-
-Projects.prototype = Main;
-var Projects = new Projects();

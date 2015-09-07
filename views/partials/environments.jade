@@ -16,4 +16,10 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
   nav
     ul(id='environments' class='hidden project-list')
     
-script(src='javascripts/pages/environments.js')
+script.
+  if (typeof Environments !== 'object') {
+    Environments.prototype = Main;
+    var Environments = new Environments();
+  } else {
+    Environments.init();
+  }

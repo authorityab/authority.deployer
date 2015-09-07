@@ -12,4 +12,10 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
   nav
     ul(id='releases' class='hidden project-list')
     
-script(src='javascripts/pages/releases.js')
+script.
+  if (typeof Releases !== 'object') {
+    Releases.prototype = Main;
+    var Releases = new Releases();
+  } else {
+    Releases.init();
+  }

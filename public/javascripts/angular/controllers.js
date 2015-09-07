@@ -1,9 +1,10 @@
-var controllers = angular.module('authorityDeployer.controllers', []);
 
-controllers.controller('BuildStatusController', function($scope, $location) {
+
+function BuildStatusController($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
   $scope.currentPage = BuildStatus;
+
 
   $scope.routeLeft = function() {
   }
@@ -11,12 +12,15 @@ controllers.controller('BuildStatusController', function($scope, $location) {
   $scope.routeRight = function() {
       $location.url('/');
   }
-});
+}
 
-controllers.controller('DashboardController', function($scope, $location) {
+function DashboardController($scope, $location) {
   $scope.pageId = 'main_view';
   $scope.pageClass = 'view dash';
   $scope.currentPage = Dashboard;
+
+  // console.log(Dashboard);
+
 
   $scope.routeLeft = function() {
     $location.url('/build-status');
@@ -25,9 +29,9 @@ controllers.controller('DashboardController', function($scope, $location) {
   $scope.routeRight = function() {
     $location.url('/projects');
   }
-});
+}
 
-controllers.controller('ProjectsController', function($scope, $location) {
+function ProjectsController($scope, $location) {
   $scope.pageId = 'projects_view';
   $scope.pageClass = 'view projects';
   $scope.currentPage = Projects;
@@ -39,9 +43,9 @@ controllers.controller('ProjectsController', function($scope, $location) {
   $scope.routeRight = function(projectId) {
     $location.url('/releases/' + projectId);
   }
-});
+}
 
-controllers.controller('ReleasesController', function($scope, $location, $routeParams) {
+function ReleasesController($scope, $location, $routeParams) {
   $scope.pageId = 'project_view';
   $scope.pageClass = 'view project';
   $scope.projectId = $routeParams.projectId;
@@ -54,9 +58,9 @@ controllers.controller('ReleasesController', function($scope, $location, $routeP
   $scope.routeRight = function(projectId, releaseId) {
     $location.url('/environments/' + projectId + '/' + releaseId);
   }
-});
+}
 
-controllers.controller('EnvironmentsController', function($scope, $location, $routeParams) {
+function EnvironmentsController($scope, $location, $routeParams) {
   $scope.pageId = 'project_view';
   $scope.pageClass = 'view project';
   $scope.projectId = $routeParams.projectId;
@@ -70,4 +74,17 @@ controllers.controller('EnvironmentsController', function($scope, $location, $ro
   $scope.routeRight = function() {
     $location.url('/');
   }
-});
+}
+
+BuildStatusController.$inject = ['$scope', '$location'];
+DashboardController.$inject = ['$scope', '$location'];
+ProjectsController.$inject = ['$scope', '$location'];
+ReleasesController.$inject = ['$scope', '$location', '$routeParams'];
+BuildStatusController.$inject = ['$scope', '$location', '$routeParams'];
+
+angular.module('authorityDeployer.controllers', [])
+  .controller('BuildStatusController', BuildStatusController)
+  .controller('DashboardController', DashboardController)
+  .controller('ProjectsController', ProjectsController)
+  .controller('ReleasesController', ReleasesController)
+  .controller('EnvironmentsController', EnvironmentsController);

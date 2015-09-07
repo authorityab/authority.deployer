@@ -1,5 +1,4 @@
 function BuildStatus() {
-
   var self = this;
 
   this.init = function() {
@@ -37,6 +36,3 @@ function BuildStatus() {
 
   this.init();
 }
-
-BuildStatus.prototype = Main;
-var BuildStatus = new BuildStatus();

@@ -1,35 +1,29 @@
 #!/usr/bin/env node
 
-var app = require('../app');
+var deployer = require('../deployer');
 var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
 var com = require('../lib/communication');
 
 /**
- * Get port from environment and store in Express.
- */
+* Get port from environment and store in Express.
+*/
 
 var port = normalizePort(process.env.PORT || '3000');
-app.set('port', port);
-
+deployer.app.set('port', port);
 
 /**
- * Create and set controllers
- */
+* Create and set controllers
+*/
 
- var indexController = require('../controllers/index');
- var apiController = require('../controllers/api')(com);
+deployer.initControllers(com);
 
- app.use('/api', apiController);
- app.use('/', indexController);
-
-
- /**
-  * Setup error handlers.
-  */
+/**
+* Setup error handlers.
+*/
 
  // catch 404 and forward to error handler
- app.use(function(req, res, next) {
+ deployer.app.use(function(req, res, next) {
    var err = new Error('Not Found');
    err.status = 404;
    next(err);
@@ -37,8 +31,8 @@ app.set('port', port);
 
  // development
  // will print stacktrace
- if (app.get('env') === 'development') {
-   app.use(function(err, req, res, next) {
+ if (deployer.app.get('env') === 'development') {
+   deployer.app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error', {
        message: err.message,
@@ -49,8 +43,8 @@ app.set('port', port);
  }
 
  // production
- if (app.get('env') === 'production') {
-   app.use(function(err, req, res, next) {
+ if (deployer.app.get('env') === 'production') {
+   deployer.app.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error', {
        message: err.message,
@@ -65,10 +59,10 @@ app.set('port', port);
   * Create HTTP server.
   */
 
-var server = http.createServer(app);
+var server = http.createServer(deployer.app);
 
 server.listen(port, function() {
-  console.log('listening on *:' + port + ' in ' + app.get('env') + ' mode');
+  console.log('listening on *:' + port + ' in ' + deployer.app.get('env') + ' mode');
 });
 
 server.on('error', onError);
@@ -84,7 +78,7 @@ com.init(server);
  * Initialize IO modules.
  */
 
-if (app.get('env') === 'production') {
+if (deployer.app.get('env') === 'production') {
   var inputs = new (require('../lib/inputs'));
   var outputs = new (require('../lib/outputs'));
 

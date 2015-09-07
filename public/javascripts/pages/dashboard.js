@@ -1,5 +1,4 @@
 function Dashboard() {
-
   var self = this;
 
   this.clockInterval;
@@ -167,6 +166,3 @@ function Dashboard() {
 
   this.init();
 }
-
-Dashboard.prototype = Main;
-var Dashboard = new Dashboard();
