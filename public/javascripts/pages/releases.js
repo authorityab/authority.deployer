@@ -28,7 +28,7 @@ function Releases() {
   };
 
   function setReleases(data) {
-    var releasePage = JSON.parse(JSON.parse(data));
+    var releasePage = JSON.parse(data);
 
     $('.head-line h1').text(releasePage.ProjectName);
     $('.head-description h3').text(releasePage.ProjectDescription);

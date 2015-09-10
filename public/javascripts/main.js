@@ -88,13 +88,13 @@ var Main = function() {
     });
 
     self.socket.emit('get_builds', function(builds) {
-      var builds = JSON.parse(JSON.parse(builds));
+      var builds = JSON.parse(builds);
       setBuilds(builds);
       setLatestBuild(builds[0]);
     });
 
     self.socket.emit('get_latest_failed_build', function(build) {
-      var build = JSON.parse(JSON.parse(build));
+      var build = JSON.parse(build);
       setLatestFailedBuild(build);
     });
   };

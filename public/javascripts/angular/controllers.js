@@ -80,7 +80,7 @@ BuildStatusController.$inject = ['$scope', '$location'];
 DashboardController.$inject = ['$scope', '$location'];
 ProjectsController.$inject = ['$scope', '$location'];
 ReleasesController.$inject = ['$scope', '$location', '$routeParams'];
-BuildStatusController.$inject = ['$scope', '$location', '$routeParams'];
+EnvironmentsController.$inject = ['$scope', '$location', '$routeParams'];
 
 angular.module('authorityDeployer.controllers', [])
   .controller('BuildStatusController', BuildStatusController)

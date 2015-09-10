@@ -12,7 +12,7 @@ function Projects() {
   };
 
 	this.setProjects = function(data) {
-		var projects =  JSON.parse(JSON.parse(data));
+		var projects =  JSON.parse(data);
 
 		if (projects.length === 0) {
 			var listItem = $('<li><div>' +

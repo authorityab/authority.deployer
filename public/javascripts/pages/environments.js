@@ -81,7 +81,7 @@ function Environments() {
   };
 
   function setEnvironments(data) {
-    var environmentPage =  JSON.parse(JSON.parse(data));
+    var environmentPage =  JSON.parse(data);
 
     if (environmentPage.Environments.length === 0) {
 			var listItem = $('<li><div>' +
@@ -148,7 +148,7 @@ function Environments() {
 	}
 
   function setDeployStatus(data) {
-    var status =  JSON.parse(JSON.parse(data));
+    var status =  JSON.parse(data);
 		if (status.IsCompleted) {
 			clearInterval(self.deployInProgress);
 			env = self.navigationList.find('li.current');
