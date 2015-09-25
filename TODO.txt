@@ -1,3 +1,5 @@
+* Speed up GUI
+
 * Figure out what to do after a deploy has succeeded/failed.
 
 * New design
@@ -6,4 +8,4 @@
 
 * Maybe split up dashboard and project deployment
 
-* Do the TC build polling on windows server side instead
+* Do the TC build polling on windows server side instead - DONE
