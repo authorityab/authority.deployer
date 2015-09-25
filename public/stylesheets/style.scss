@@ -17,6 +17,11 @@
   width: 40%;
   min-width: 200px;
   margin: 4rem auto 2rem;
+  >img{
+     path {
+      fill: #ff0000;
+    }
+  }
   h2{
     color: $font-color-inverted;
     padding-bottom: 1rem;

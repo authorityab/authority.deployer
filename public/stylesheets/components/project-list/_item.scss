@@ -1,13 +1,13 @@
 ul.project-list{
   width: 90%;
   margin: 0 auto;
-  padding-bottom: 4vh;
-  padding-top: 4vh;
+  padding-bottom: 2vh;
+  padding-top: 2vh;
   >li{
     width: 100%;
-    height: 24vw;
+    height: 12vw;
     margin-bottom: 0.5vh;
-    background-color: $list-bg-color;
+    background-color: $project-list-bg-color;
     position: relative;
     >div{
       @extend %vertical-align;
@@ -17,7 +17,7 @@ ul.project-list{
         @extend %display-4;
       }
       h3, h4{
-        color: $list-small-text-color;
+        color: $project-list-small-text-color;
         @extend %display-1;
         text-transform: uppercase;
         letter-spacing: 0.08em;
@@ -34,9 +34,9 @@ ul.project-list{
       z-index: 100;
       transform: scale(1.05);
       @extend %dropshadow_4;
-      background: $selected-list-bg-color;
+      background: $project-selected-list-bg-color;
       h3, h4{
-        color: $selected-list-text-color;
+        color: $list-small-text-color;
       }
     }
 
@@ -85,7 +85,7 @@ ul.project-list{
       &.current{
         background: $project-selected-list-bg-color;
         h3, h4{
-          color: $project-selected-list-text-color;
+          color: $list-small-text-color;
         }
       }
     }

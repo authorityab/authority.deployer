@@ -5,11 +5,11 @@
   @extend %clearafter;
 
   &.fails{
-    background-color: $fail-page-bg-color;
+    //background-color: $fail-page-bg-color;
   }
 
   &.project{
-    background-color: $project-background-color;
+    //background-color: $project-background-color;
   }
 
   nav{
