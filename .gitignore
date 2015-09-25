@@ -8,5 +8,7 @@ typings/
 
 public/javascripts/script.min.*
 
+.idea/
+
 *.DS_Store
 *.swp

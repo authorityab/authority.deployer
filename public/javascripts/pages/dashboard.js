@@ -28,7 +28,7 @@ function Dashboard() {
         setCurrentDate();
         self.setLatestBuild();
         self.setBuildCount();
-        self.checkForBuildErrors();
+        // self.checkForBuildErrors();
         self.setLastFailedCounter();
       }, 300);
 
@@ -111,15 +111,7 @@ function Dashboard() {
     }
   };
 
-  this.checkForBuildErrors = function() {
-    if (this.buildParams.failedBuilds.length > 0) {
-      $('main').addClass('failed');
-      this.hasBuildErrors = true;
-    } else {
-      $('main').removeClass('failed');
-      this.hasBuildErrors = false;
-    }
-  };
+
 
   this.left = function() {
     var page = this;

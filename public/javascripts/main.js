@@ -22,7 +22,6 @@ var Main = function() {
     $(document).keydown(function(e) {
       switch(e.which) {
           case 37: // left
-          console.log(self.ngScope().currentPage);
           self.ngScope().currentPage.left();
           console.log('l');
           break;
@@ -64,7 +63,6 @@ var Main = function() {
 
     this.socket.removeListener('inputs_right');
     this.socket.on('inputs_right', function() {
-      console.log('Main right');
       self.ngScope().currentPage.right();
     });
 
@@ -136,9 +134,9 @@ var Main = function() {
     var isSuccess;
     try {
       self.buildParams.latestBuild = build;
+      Dashboard.checkForBuildErrors();
       if (typeof Dashboard === 'object') {
         Dashboard.setLatestBuild();
-        Dashboard.checkForBuildErrors();
       }
       if (typeof BuildStatus === 'object') {
         BuildStatus.setFailedBuilds();
@@ -173,6 +171,16 @@ var Main = function() {
   }
 
   this.init();
+}
+
+function checkForBuildErrors() {
+  if (this.buildParams.failedBuilds.length > 0) {
+    $('main').addClass('failed');
+    this.hasBuildErrors = true;
+  } else {
+    $('main').removeClass('failed');
+    this.hasBuildErrors = false;
+  }
 }
 
 Main.prototype.left = function() {
