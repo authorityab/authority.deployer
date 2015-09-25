@@ -6,16 +6,16 @@ $.fn.navigation = function (options) {
         zStart : 1000,
         var2 : 2,
         currentView : "",
-        nextPage : "",
-        prevPage : ""
+        pages : "",
+        init : 2
     }, options);
 
-
-    //TODO:populate this in some way
+    $("#content_area").load("dash.html");
 
     var $currentView = settings.currentView;
     var $currentListIndex = 0 ;
-
+    var $currentPageIndex = settings.init;
+    var $pages = settings.pages;
 
 
 
@@ -38,12 +38,12 @@ $.fn.navigation = function (options) {
         if(e.keyCode==100){
             // d, right
             console.log("right");
-            pageNav(settings.nextPage);
+            pageNav(1);
         }
         if(e.keyCode==97){
             // a, left
             console.log("left");
-            pageNav(settings.prevPage);
+            pageNav(-1);
         }
         if(e.keyCode==32){
             // space, action
@@ -65,9 +65,15 @@ $.fn.navigation = function (options) {
     });
 
 
-    function pageNav(page){
+    function pageNav(dir){
+
+        $currentPageIndex = $currentPageIndex + dir;
+
+        var page = $pages[$currentPageIndex];
+
         if(page != ""){
-            window.location = page;
+            $("#content_area").load(page);
+            //window.location = page;
         }
     }
 
@@ -83,11 +89,8 @@ $.fn.navigation = function (options) {
                 $(this).removeClass("current");
 
             });
-
-            $(_item+":eq("+$currentListIndex+")").addClass('current');
-
-
-
+            var _newThis = $(_item+":eq("+$currentListIndex+")");
+            _newThis.addClass('current');
         }
 
 
