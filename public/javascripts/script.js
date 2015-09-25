@@ -29326,7 +29326,6 @@ function BuildStatusController($scope, $location) {
   $scope.pageClass = 'view fails';
   $scope.currentPage = BuildStatus;
 
-
   $scope.routeLeft = function() {
   }
 
@@ -29339,9 +29338,6 @@ function DashboardController($scope, $location) {
   $scope.pageId = 'main_view';
   $scope.pageClass = 'view dash';
   $scope.currentPage = Dashboard;
-
-  // console.log(Dashboard);
-
 
   $scope.routeLeft = function() {
     $location.url('/build-status');
@@ -29436,7 +29432,6 @@ var Main = function() {
     $(document).keydown(function(e) {
       switch(e.which) {
           case 37: // left
-          console.log(self.ngScope().currentPage);
           self.ngScope().currentPage.left();
           console.log('l');
           break;
@@ -29549,9 +29544,9 @@ var Main = function() {
     var isSuccess;
     try {
       self.buildParams.latestBuild = build;
+      Dashboard.checkForBuildErrors();
       if (typeof Dashboard === 'object') {
         Dashboard.setLatestBuild();
-        Dashboard.checkForBuildErrors();
       }
       if (typeof BuildStatus === 'object') {
         BuildStatus.setFailedBuilds();
@@ -29586,6 +29581,16 @@ var Main = function() {
   }
 
   this.init();
+}
+
+function checkForBuildErrors() {
+  if (this.buildParams.failedBuilds.length > 0) {
+    $('main').addClass('failed');
+    this.hasBuildErrors = true;
+  } else {
+    $('main').removeClass('failed');
+    this.hasBuildErrors = false;
+  }
 }
 
 Main.prototype.left = function() {
@@ -29700,7 +29705,7 @@ function Dashboard() {
         setCurrentDate();
         self.setLatestBuild();
         self.setBuildCount();
-        self.checkForBuildErrors();
+        // self.checkForBuildErrors();
         self.setLastFailedCounter();
       }, 300);
 
@@ -29783,15 +29788,7 @@ function Dashboard() {
     }
   };
 
-  this.checkForBuildErrors = function() {
-    if (this.buildParams.failedBuilds.length > 0) {
-      $('main').addClass('failed');
-      this.hasBuildErrors = true;
-    } else {
-      $('main').removeClass('failed');
-      this.hasBuildErrors = false;
-    }
-  };
+
 
   this.left = function() {
     var page = this;
