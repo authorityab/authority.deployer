@@ -64,6 +64,7 @@ var Main = function() {
 
     this.socket.removeListener('inputs_right');
     this.socket.on('inputs_right', function() {
+      console.log('Main right');
       self.ngScope().currentPage.right();
     });
 
