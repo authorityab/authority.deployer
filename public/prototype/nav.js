@@ -19,7 +19,7 @@ $.fn.navigation = function (options) {
 
 
 
- //   alert(settings.var2);
+    alert(44);
 
 
     $('body').bind('keypress', function(e) {
@@ -65,15 +65,33 @@ $.fn.navigation = function (options) {
     });
 
 
-    function pageNav(dir){
+    function pageNav(dir) {
 
-        $currentPageIndex = $currentPageIndex + dir;
+        console.log("PL:" , $pages.length);
 
-        var page = $pages[$currentPageIndex];
+        console.log("CP:" , $currentPageIndex );
 
-        if(page != ""){
-            $("#content_area").load(page);
-            //window.location = page;
+        var nextPageIndex = $currentPageIndex + dir;
+
+        if (nextPageIndex > 0 && nextPageIndex < $pages.length){
+
+
+        var page = $pages[nextPageIndex];
+
+            $currentPageIndex = nextPageIndex;
+
+        if (page !== "") {
+
+
+
+          $( "#content_area>section" ).fadeOut( "slow", function() {
+                $("#content_area").load(page , function(){
+                    $( "#content_area" ).fadeIn( 200);
+                });
+              });
+        }
+
+
         }
     }
 
@@ -82,18 +100,13 @@ $.fn.navigation = function (options) {
         if($currentListIndex>=0){
             $currentListIndex = $currentListIndex + dir;
             if($currentListIndex<0){$currentListIndex=0;}
-
-
             var _item = $currentView + " nav > ul >li";
             $(_item).each(function(){
                 $(this).removeClass("current");
-
             });
             var _newThis = $(_item+":eq("+$currentListIndex+")");
             _newThis.addClass('current');
         }
-
-
     }
 
 

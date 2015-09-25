@@ -8,7 +8,7 @@
   <link rel="stylesheet" href="../stylesheets/style.css">
 </head>
 <body>
-<div class="wrapper view failed">
+<div id="main" class="wrapper view failed">
   <aside class="sec-1">
     <div class="date-time">
       <div class="clock">
@@ -53,9 +53,12 @@
 <script src="jQuery/jquery-2.1.3.min.js"></script>
 <script src="nav.js"></script>
 <script language="JavaScript" type="text/javascript">
-  $(".wrapper").navigation({  zStart: 2000,
+
+  alert(3);
+
+  $("#main").navigation({  zStart: 2000,
     currentView : "",
-    pages : ["","fail-list.html","dash.html", "list.html", "project.html", "project-build.html",""],
+    pages : ["","fail-list.html","dash.html", "list.html", "project.html", "project-build.html"],
     initIndex : 2
   }) ;
 </script>
