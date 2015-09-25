@@ -1,73 +1,38 @@
-var BuildStatus = (function() {
+function BuildStatus() {
+  var self = this;
 
+  this.init = function() {
+    this.startSpinner();
+    this.navigationList = $('nav .project-list');
+    self.setFailedBuilds();
+  };
 
+  this.setFailedBuilds = function() {
+    var currentIndex = this.navigationList.find('li.current').index();
+    this.navigationList.empty();
 
-  $(function() {
+    for (var i = 0; i < this.buildParams.failedBuilds.length; i++) {
+      var build = this.buildParams.failedBuilds[i];
 
-    //TODO: Remove after test
-    $(document).unbind();
-    $(document).keydown(function(e) {
-      switch (e.which) {
-        case 37: // left
-          left();
-          console.log('l');
-          break;
+      var listItem = $('<li><div>' +
+											 	'<h2>' + build.ProjectName + '</h2>' +
+										 		'<h3>' + build.StepName + '</h3>' +
+												'<h4>' + build.LastBuild + '</h4>' +
+										  '</div></li>');
 
-        case 39: // right
-          right();
-          console.log('r');
-          break;
-
-        default:
-          return;
-      }
-      e.preventDefault();
-    });
-
-    setFailedBuilds();
-
-  });
-
-
-
-
-
-
-	function left() {
-		Main.ngScope().$apply(function() {
-			Main.ngScope().routeLeft();
-		});
-	}
-
-	function right() {
-		Main.ngScope().$apply(function() {
-			Main.ngScope().routeRight();
-		});
-	}
-
-
-  function setFailedBuilds() {
-    var list = $('ul#failed-builds');
-    list.empty();
-
-    for (var i = 0; i < Main.buildParams.failedBuilds.length; i++) {
-      var build = Main.buildParams.failedBuilds[i];
-
-      var changedBy = 'Anoymous';
-      if (build.Changes != null && build.Changes.Change.length !== 0) {
-        changedBy = build.Changes.Change[0].Username;
-      }
-
-
-      var listItem = $('<li>' + build.BuildConfig.ProjectName + ' ¶ ' + build.BuildConfig.Name + ' ¶ ' + changedBy + '</li>');
-      listItem.attr('class', 'error'); // build.Status === 'SUCCESS' ? "success" : "error"
-      list.append(listItem);
+      listItem.attr('class', 'error');
+      this.navigationList.append(listItem);
     }
-  }
 
-  return {
-    setFailedBuilds: setFailedBuilds
-  }
+    if (currentIndex > -1) {
+      $(this.navigationList.find('li')[currentIndex]).addClass('current');
+    } else {
+      this.navigationList.find('li:first-child').addClass('current');
+    }
+
+    this.stopSpinner();
+  };
 
 
-})();
+  this.init();
+}

@@ -1,10 +1,110 @@
-h1 DASHBOARD
-
-h2#build-destroyer
+main(id='{{ pageId }}' class='{{ pageClass }}')
+  section(class="dash-projects")
   
-button#success success
-button#error error
-button#loading loading
-button#stop stop
+    div(class="date-time")
+      div( class="clock")
+        svg(id="clock" viewBox="0 0 100 100")
+          g( id="face")
+            rect(x="49" width="2" height="13")
+            rect(x="49" y="87" width="2" height="13")
+            rect(x="87" y="49"  width="13" height="2")
+            rect(y="49"  width="13" height="2")
+            rect(x="86.6" y="72.1" transform="matrix(0.8669 0.4985 -0.4985 0.8669 48.1478 -35.2172)"  width="6.9" height="0.9")
+            rect(x="72.5" y="5.6" transform="matrix(0.8642 0.5031 -0.5031 0.8642 14.4828 -35.5001)"  width="0.9" height="6.9")
+            rect(x="26.1" y="86.1" transform="matrix(0.8677 0.497 -0.497 0.8677 48.0272 -1.3508)"  width="0.9" height="6.8")
+            rect(x="6.1" y="25.6" transform="matrix(0.8651 0.5016 -0.5016 0.8651 14.3745 -1.268)"  width="6.8" height="0.9")
+            rect(x="9.4" y="69.1" transform="matrix(0.4991 0.8666 -0.8666 0.4991 67.8225 27.7821)"  width="0.9" height="6.9")
+            rect(x="89.9" y="22.7" transform="matrix(0.5011 0.8654 -0.8654 0.5011 67.6606 -65.1795)"  width="0.9" height="6.8")
+            rect(x="23.5" y="8.6" transform="matrix(0.5027 0.8644 -0.8644 0.5027 21.2224 -18.7264)"  width="6.9" height="0.9")
+            rect(x="69.9" y="89.1" transform="matrix(0.4972 0.8676 -0.8676 0.4972 114.5828 -18.6133)"  width="6.8" height="0.9")
+          g(id="hands")
+            rect(id="hour" x="48" y="20" width="4" height="30" rx="2" ry="2")
+            rect(id="min" x="48" y="2" width="4" height="48" rx="2" ry="2")
+            line(id="sec" x1="50" y1="50" x2="50" y2="16")
+          circle(id="joint" cx="50" cy="50" r="3")
+      div(class="date")
+        span(class="day")
+        span(class="month")
+        span(class="year")
+        
+    div(class="head-line")
+      div(class="line")
+      h1 Builds
+      div(class="line")
+    
+    div(class="dash-proj dash-segment")
+      div(class="p-success dash-stat")
+        h1 0
+        h3 success
+      div(class="p-fail dash-stat")
+        h1 0
+        h3 fail
+        
+    div(class="head-line")
+      div(class="line")
+      h1 Latest build
+      div(class="line")
+    
+    div(class="dash-latest dash-segment")
+      div(class="l-date dash-stat")
+        h1
+        h3
+        h4
+      div(class="l-description")
 
-script(src='javascripts/pages/dashboard.js')
+    div(class="head-line")
+      div(class="line")
+      h1 Time since last failed build
+      div(class="line")
+    
+    div(class="count-up dash-segment")
+      div(class="count")
+        div(class="dash-stat")
+          h1(id="f_weeks") 0
+          h3 weeks
+          
+        div(class="dash-stat")
+          h1(id="f_days") 0
+          h3 days
+          
+        div(class="dash-stat")
+          h1(id="f_hours") 0
+          h3 hours
+          
+        div(class="dash-stat")
+          h1(id="f_minutes") 0
+          h3 minutes
+      
+      div(class="failer")
+        span(class="flag-l")
+          svg(viewBox="0 0 50 32")
+            polygon(points="0,0 50,0 50,32 0,32 12,16 ")
+        
+        span(class="name") 
+          
+        span(class="flag-r")
+          svg(viewBox="0 0 50 32")
+            polygon(points="0,0 50,0 38,16 50,32 0,32  ")
+    
+    div(class="head-line")
+      div(class="line")
+   
+    footer
+      div(class="logo")
+        
+       
+      
+    
+    button#success success
+    button#error error
+    button#loading loading
+    button#stop stop
+    
+script.
+  if (typeof Dashboard !== 'object') {
+    Dashboard.prototype = Main;
+    var Dashboard = new Dashboard();
+  } else {
+    Dashboard.init();
+  }
+    

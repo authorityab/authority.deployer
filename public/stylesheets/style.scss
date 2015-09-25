@@ -61,7 +61,16 @@ li {
   text-transform: uppercase;
 }
 
+.message-badge {
+  @extend %message-badge;
+  background-color: cyan;
+}
 
+.dev:after {
+  @extend %message-badge;
+  content: "fail";
+  background-color: $fail-color;
+}
 
 .fail:after {
   @extend %message-badge;
@@ -75,66 +84,8 @@ li {
   background-color: $success-color;
 }
 
-.active {
-  box-shadow: 2px 2px 2px #888888;
-  margin-bottom: 10px;
-  margin-top: 2px;
-  margin-left: -8px;
+.in-progress:after {
+  @extend %message-badge;
+  content : "in progress";
+  background-color: $in-progress-color;
 }
-
-.selected {
-  background-color: cyan;
-}
-
-/* ANIMATIONS
-============================================================================= */
-
-/* leaving animations ----------------------------------------- */
-/* rotate and fall */
-@keyframes rotateFall {
-    0%      { transform: rotateZ(0deg); }
-    20%     { transform: rotateZ(10deg); animation-timing-function: ease-out; }
-    40%     { transform: rotateZ(17deg); }
-    60%     { transform: rotateZ(16deg); }
-    100%    { transform: translateY(100%) rotateZ(17deg); }
-}
-
-/* slide in from the bottom */
-@keyframes slideOutLeft {
-    to      { transform: translateX(-100%); }
-}
-
-/* rotate out newspaper */
-@keyframes rotateOutNewspaper {
-    to      { transform: translateZ(-3000px) rotateZ(360deg); opacity: 0; }
-}
-
-/* entering animations --------------------------------------- */
-/* scale up */
-@keyframes scaleUp {
-    from    { opacity: 0.3; -webkit-transform: scale(0.8); }
-}
-
-/* slide in from the right */
-@keyframes slideInRight {
-    from    { transform:translateX(100%); }
-    to      { transform: translateX(0); }
-}
-
-/* slide in from the bottom */
-@keyframes slideInUp {
-    from    { transform:translateY(100%); }
-    to      { transform: translateY(0); }
-}
-
-
-.ng-enter       { z-index: 8888; }
-.ng-leave       { z-index: 9999; }
-
-// /* projects ------------------------ */
-// .projects-page.ng-enter        { animation:slideInRight 0.5s both ease-in; }
-// .projects-page.ng-leave        { animation:slideOutLeft 0.5s both ease-in; }
-//
-// /* status ------------------------ */
-// .status-page.ng-enter        { animation:slideInLeft 0.5s both ease-in; }
-// .status-page.ng-leave        { animation:slideOutRight 0.5s both ease-in; }

@@ -1,0 +1,21 @@
+section(id='{{ pageId }}' class='{{ pageClass }}')
+
+  header(class='hidden')
+    div(class='head-line')
+      div(class='line')
+      h1
+      div(class='line')
+        
+    div(class='head-description')
+      h3
+        
+  nav
+    ul(id='releases' class='hidden project-list')
+    
+script.
+  if (typeof Releases !== 'object') {
+    Releases.prototype = Main;
+    var Releases = new Releases();
+  } else {
+    Releases.init();
+  }

@@ -1,4 +1,25 @@
-h1 ENVIRONMENTS
+section(id='{{ pageId }}' class='{{ pageClass }}')
 
-
-script(src='javascripts/pages/environments.js')
+  header(class='hidden')
+    div(class='head-line')
+      div(class='line')
+      h1
+      div(class='line')
+        
+    div(class='head-description')
+      h3
+        
+  div(class="hidden btn-container")
+    img(src="../images/press-the-button.svg")
+    h2 DEPLOY
+        
+  nav
+    ul(id='environments' class='hidden project-list')
+    
+script.
+  if (typeof Environments !== 'object') {
+    Environments.prototype = Main;
+    var Environments = new Environments();
+  } else {
+    Environments.init();
+  }

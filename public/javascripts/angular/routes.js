@@ -1,6 +1,4 @@
-// var routes = angular.module('srDeployer.routes', []);
-
-angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
+angular.module('authorityDeployer.routes', []).config(['$routeProvider', '$locationProvider', function($routeProvider, $locationProvider) {
   $routeProvider
     .when('/', {
       templateUrl: 'partials/dashboard.jade',
@@ -14,13 +12,17 @@ angular.module('srDeployer.routes', []).config(['$routeProvider', '$locationProv
       templateUrl: 'partials/projects.jade',
       controller: 'ProjectsController'
     })
-    .when('/environments', {
+    .when('/releases/:projectId', {
+      templateUrl: 'partials/releases.jade',
+      controller: 'ReleasesController'
+    })
+    .when('/environments/:projectId/:releaseId', {
       templateUrl: 'partials/environments.jade',
       controller: 'EnvironmentsController'
-    })
-    .otherwise({
-      redirectTo: '/'
     });
+    // .otherwise({
+    //   redirectTo: '/'
+    // });
 
     $locationProvider.html5Mode(true);
 }]);

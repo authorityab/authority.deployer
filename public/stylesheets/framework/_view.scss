@@ -15,4 +15,8 @@
   nav{
     @extend %clearafter;
   }
+
+  .hidden {
+    display: none !important;
+  }
 }

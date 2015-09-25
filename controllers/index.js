@@ -1,10 +1,5 @@
-//var sockets = require('../lib/websockets');
 var express = require('express');
 var router = express.Router();
-
-
-// router.use('/status', require('./status'));
-
 
 router.get('/partials/:name', function(req, res, next) {
   var name = req.params.name;
@@ -19,9 +14,5 @@ router.get('/', function(req, res, next) {
 router.get('*', function(req, res, next) {
   res.render('index');
 });
-
-
-
-
 
 module.exports = router;

@@ -4,5 +4,9 @@ npm-debug.log
 .settings/
 public/.sass-cache/
 node_modules/
+typings/
+
+public/javascripts/script.min.*
 
 *.DS_Store
+*.swp
