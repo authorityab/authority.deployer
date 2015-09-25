@@ -1,33 +1,37 @@
-.dash{
-  background-color: $background-color;
-  color: $dark;
+.view{
 
   &.failed:after{
     width: 0;
-    	height: 0;
-    	border-top: 14vw solid $fail-color;
-    	border-right: 14vw solid transparent;
+    height: 0;
+    border-top: 14vw solid $fail-color;
+    border-right: 14vw solid transparent;
     position: absolute;
     top: 0;
     left: 0;
     z-index: 10;
   }
-
+  .dash-projects{
+    float: left;
+    width: 100%;
+    height: 100vh;
+  }
   .dash-segment{
     position: relative;
     width: 90%;
     margin: auto;
-    padding: 6vw 0;
+    padding: 2vw 0;
+    height: 25%;
+    font-size: 1rem;
   }
   .dash-stat{
     display: inline-block;
     flex:1;
     text-align: center;
     h1{
-      font-size: 8vw;
+      font-size: 4em;
     }
     h3{
-      font-size: 2vw;
+      font-size: 1em;
       text-transform: uppercase;
       font-weight: bold;
     }
@@ -128,13 +132,13 @@
 
 }
 
-  footer{
-    height: 40vw;
+  .logo-segment{
+    height: 20%;
     >.logo{
       margin: auto;
       background: center center no-repeat url("../images/logo.svg");
       width: 60%;
-      height: 40vw;
+      height: 100%;
     }
   }
 
