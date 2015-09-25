@@ -17,7 +17,7 @@ var staticDevPath = path.join(__dirname, 'public');
 var staticProPath = path.join(__dirname, 'public_dist');
 
 //TODO: Uglify in production, Copy images and styles to public_dist
-if (app.get('env') !== 'production') {
+if (app.get('env') === 'production') {
   buildify()
    .concat([ '/public/libs/jquery/dist/jquery.min.js',
              '/public/libs/angular/angular.js',
