@@ -14,10 +14,12 @@ function BuildStatusController($scope, $location) {
 }
 
 function DashboardController($scope, $location) {
-  $scope.pageId = 'main_view';
-  $scope.pageClass = 'view dash';
+  $scope.pageId = 'dash_view';
+  $scope.pageClass = 'dash-projects';
   $scope.currentPage = Dashboard;
 
+  console.log('dashg: ' + Dashboard);
+  
   $scope.routeLeft = function() {
     $location.url('/build-status');
   }

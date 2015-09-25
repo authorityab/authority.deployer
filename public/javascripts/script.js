@@ -29335,10 +29335,12 @@ function BuildStatusController($scope, $location) {
 }
 
 function DashboardController($scope, $location) {
-  $scope.pageId = 'main_view';
-  $scope.pageClass = 'view dash';
+  $scope.pageId = 'dash_view';
+  $scope.pageClass = 'dash-projects';
   $scope.currentPage = Dashboard;
 
+  console.log('dashg: ' + Dashboard);
+  
   $scope.routeLeft = function() {
     $location.url('/build-status');
   }
@@ -29506,6 +29508,10 @@ var Main = function() {
       var build = JSON.parse(build);
       setLatestFailedBuild(build);
     });
+
+    // setInterval(function() {
+    //   setLatestBuild();
+    // }, 300);
   };
 
   function setBuilds(builds, hollaback) {
@@ -29544,7 +29550,7 @@ var Main = function() {
     var isSuccess;
     try {
       self.buildParams.latestBuild = build;
-      Dashboard.checkForBuildErrors();
+      checkForBuildErrors();
       if (typeof Dashboard === 'object') {
         Dashboard.setLatestBuild();
       }
@@ -29580,18 +29586,20 @@ var Main = function() {
     }
   }
 
+  function checkForBuildErrors() {
+    if (self.buildParams.failedBuilds.length > 0) {
+      $('main').addClass('failed');
+      self.hasBuildErrors = true;
+    } else {
+      $('main').removeClass('failed');
+      self.hasBuildErrors = false;
+    }
+  }
+
   this.init();
 }
 
-function checkForBuildErrors() {
-  if (this.buildParams.failedBuilds.length > 0) {
-    $('main').addClass('failed');
-    this.hasBuildErrors = true;
-  } else {
-    $('main').removeClass('failed');
-    this.hasBuildErrors = false;
-  }
-}
+
 
 Main.prototype.left = function() {
   var page = this;

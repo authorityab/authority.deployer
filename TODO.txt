@@ -1,14 +1,17 @@
-* Speed up GUI
 
-* Figure out what to do after a deploy has succeeded/failed.
+-= ERRORS =-
+* CurrentPage in scope does not get set in controller. left/right etc...
 
-* New design
+
+-= TODO =-
+* Speed up GUI - IN PROGRESS
+
+* Figure out what to do after a deploy has succeeded/failed. - IN PROGRESS
+
+* New design - IN PROGRESS
 
 * If triggerDeploy return taskId === null, figure out what to do
 
 * Maybe split up dashboard and project deployment
 
 * Do the TC build polling on windows server side instead - DONE
-
-
-sudo
