@@ -176,10 +176,10 @@ var Main = function() {
 
   function checkForBuildErrors() {
     if (self.buildParams.failedBuilds.length > 0) {
-      $('main').addClass('failed');
+      $('div.wrapper').addClass('failed');
       self.hasBuildErrors = true;
     } else {
-      $('main').removeClass('failed');
+      $('div.wrapper').removeClass('failed');
       self.hasBuildErrors = false;
     }
   }
@@ -208,7 +208,7 @@ Main.prototype.right = function() {
 }
 
 Main.prototype.ngScope = function() {
-  var scope = angular.element($(".wrapper")).scope();
+  var scope = angular.element($(".page-holder")).scope();
   return scope;
 }
 

@@ -1,5 +1,3 @@
-
-
 function BuildStatusController($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
@@ -18,8 +16,6 @@ function DashboardController($scope, $location) {
   $scope.pageClass = 'dash-projects';
   $scope.currentPage = Dashboard;
 
-  console.log('dashg: ' + Dashboard);
-  
   $scope.routeLeft = function() {
     $location.url('/build-status');
   }

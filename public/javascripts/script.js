@@ -29319,8 +29319,6 @@ angular.module('authorityDeployer.routes', []).config(['$routeProvider', '$locat
     $locationProvider.html5Mode(true);
 }]);
 
-
-
 function BuildStatusController($scope, $location) {
   $scope.pageId = 'fails_view';
   $scope.pageClass = 'view fails';
@@ -29339,8 +29337,6 @@ function DashboardController($scope, $location) {
   $scope.pageClass = 'dash-projects';
   $scope.currentPage = Dashboard;
 
-  console.log('dashg: ' + Dashboard);
-  
   $scope.routeLeft = function() {
     $location.url('/build-status');
   }
@@ -29408,7 +29404,7 @@ angular.module('authorityDeployer.controllers', [])
   .controller('ReleasesController', ReleasesController)
   .controller('EnvironmentsController', EnvironmentsController);
 
-angular.module('authorityDeployer', ['ngRoute', 'authorityDeployer.routes', 'authorityDeployer.controllers']);
+angular.module('authorityDeployer', ['ngRoute', 'authorityDeployer.controllers', 'authorityDeployer.routes']);
 
 var Main = function() {
   var self = this;
@@ -29588,10 +29584,10 @@ var Main = function() {
 
   function checkForBuildErrors() {
     if (self.buildParams.failedBuilds.length > 0) {
-      $('main').addClass('failed');
+      $('div.wrapper').addClass('failed');
       self.hasBuildErrors = true;
     } else {
-      $('main').removeClass('failed');
+      $('div.wrapper').removeClass('failed');
       self.hasBuildErrors = false;
     }
   }
@@ -29620,7 +29616,7 @@ Main.prototype.right = function() {
 }
 
 Main.prototype.ngScope = function() {
-  var scope = angular.element($(".wrapper")).scope();
+  var scope = angular.element($(".page-holder")).scope();
   return scope;
 }
 

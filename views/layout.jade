@@ -7,7 +7,7 @@ html(ng-app='authorityDeployer')
     title= title
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
-    div(class="wrapper view failed")
+    div(class="wrapper view")
       aside(class="sec-1")
         div(class="date-time")
           div( class="clock")
@@ -34,18 +34,17 @@ html(ng-app='authorityDeployer')
             span(class="day")
             span(class="month")
             span(class="year")
-      div(class="logo-segment")
-        div(class="logo")
+        div(class="logo-segment")
+          div(class="logo")
       
       block body  
 
     script(src='socket.io/socket.io.js')
-
     script(src='javascripts/script.js')
       
-  script.
-    var Main = new Main();
-      
+    script.
+      var Main = new Main();
+        
     
       
 
