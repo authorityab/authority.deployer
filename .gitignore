@@ -6,7 +6,7 @@ public/.sass-cache/
 node_modules/
 typings/
 
-public/javascripts/script.min.*
+public/javascripts/script.js
 
 .idea/
 
