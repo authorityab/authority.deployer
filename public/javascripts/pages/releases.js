@@ -33,7 +33,7 @@ function Releases() {
     $('.head-line h1').text(releasePage.ProjectName);
     $('.head-description h3').text(releasePage.ProjectDescription);
 
-    if (releasePage.Releases.length === 0) {
+    if (releasePage.Items.length === 0) {
       var listItem = $('<li><div>' +
                          '<h2>No releases for the selected project have been published yet.</h3>' +
                       '</div></li>');
@@ -41,8 +41,8 @@ function Releases() {
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
     } else {
-      for (var i = 0; i < releasePage.Releases.length; i++) {
-  			var release = releasePage.Releases[i];
+      for (var i = 0; i < releasePage.Items.length; i++) {
+  			var release = releasePage.Items[i];
 
         var notes = '';
         if (release.ReleaseNotes != null) {

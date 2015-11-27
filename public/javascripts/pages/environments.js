@@ -83,7 +83,7 @@ function Environments() {
   function setEnvironments(data) {
     var environmentPage =  JSON.parse(data);
 
-    if (environmentPage.Environments.length === 0) {
+    if (environmentPage.Items.length === 0) {
 			var listItem = $('<li><div>' +
 												'<h2>No environments for the selected project were found.</h3>' +
 											'</div></li>');
@@ -96,8 +96,8 @@ function Environments() {
       $('.head-line h1').text(environmentPage.ProjectName);
       $('.head-description h3').text("Version " + releaseVersion);
 
-      for (var i = 0; i < environmentPage.Environments.length; i++) {
-        var env = environmentPage.Environments[i];
+      for (var i = 0; i < environmentPage.Items.length; i++) {
+        var env = environmentPage.Items[i];
 
         var listItem = $('<li><div>' +
                            '<h2>' + env.Name + '</h2>' +
