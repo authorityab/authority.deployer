@@ -1,8 +1,5 @@
-main(id='{{ pageId }}' class='{{ pageClass }}')
-  section(class="dash-projects")
+section(class="{{ pageClass }}'" id="{{ pageId }}")
   
-    
-        
     div(class="head-line")
       div(class="line")
       h1 Builds
@@ -75,7 +72,7 @@ main(id='{{ pageId }}' class='{{ pageClass }}')
     button#error error
     button#loading loading
     button#stop stop
-    
+        
 script.
   if (typeof Dashboard !== 'object') {
     Dashboard.prototype = Main;
@@ -83,4 +80,3 @@ script.
   } else {
     Dashboard.init();
   }
-    

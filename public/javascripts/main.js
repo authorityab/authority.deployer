@@ -96,6 +96,10 @@ var Main = function() {
       var build = JSON.parse(build);
       setLatestFailedBuild(build);
     });
+
+    // setInterval(function() {
+    //   setLatestBuild();
+    // }, 300);
   };
 
   function setBuilds(builds, hollaback) {
@@ -134,7 +138,7 @@ var Main = function() {
     var isSuccess;
     try {
       self.buildParams.latestBuild = build;
-      Dashboard.checkForBuildErrors();
+      checkForBuildErrors();
       if (typeof Dashboard === 'object') {
         Dashboard.setLatestBuild();
       }
@@ -170,18 +174,20 @@ var Main = function() {
     }
   }
 
+  function checkForBuildErrors() {
+    if (self.buildParams.failedBuilds.length > 0) {
+      $('div.wrapper').addClass('failed');
+      self.hasBuildErrors = true;
+    } else {
+      $('div.wrapper').removeClass('failed');
+      self.hasBuildErrors = false;
+    }
+  }
+
   this.init();
 }
 
-function checkForBuildErrors() {
-  if (this.buildParams.failedBuilds.length > 0) {
-    $('main').addClass('failed');
-    this.hasBuildErrors = true;
-  } else {
-    $('main').removeClass('failed');
-    this.hasBuildErrors = false;
-  }
-}
+
 
 Main.prototype.left = function() {
   var page = this;
@@ -202,7 +208,7 @@ Main.prototype.right = function() {
 }
 
 Main.prototype.ngScope = function() {
-  var scope = angular.element($(".wrapper")).scope();
+  var scope = angular.element($(".page-holder")).scope();
   return scope;
 }
 
