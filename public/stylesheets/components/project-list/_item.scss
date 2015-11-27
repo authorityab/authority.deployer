@@ -32,8 +32,8 @@ ul.project-list{
     }
     &.current{
       z-index: 100;
-      transform: scale(1.05);
-      @extend %dropshadow_4;
+      //stransform: scale(1.05);
+      //@extend %dropshadow_4;
       background: $project-selected-list-bg-color;
       h3, h4{
         color: $list-small-text-color;
