@@ -3,12 +3,12 @@
 <!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
 <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
 	 viewBox="0 0 447 356" enable-background="new 0 0 447 356" xml:space="preserve">
-<polygon fill="#698D99" points="247,91.2 247,31 200,31 200,91.2 167.2,91.2 223.1,147 279,91.2 ">
+<polygon fill="#ffffff" points="247,91.2 247,31 200,31 200,91.2 167.2,91.2 223.1,147 279,91.2 ">
 <animateMotion path="M 0 0 V 20 Z" dur="1s" repeatCount="indefinite" />
 </polygon>
-<path fill="#698D99" d="M431.5,346H14.7c-3.7,0-6.6-3-6.6-6.6V210.6c0-3.7,3-6.6,6.6-6.6h416.8c3.7,0,6.6,3,6.6,6.6v128.8
+<path fill="#ffffff" d="M431.5,346H14.7c-3.7,0-6.6-3-6.6-6.6V210.6c0-3.7,3-6.6,6.6-6.6h416.8c3.7,0,6.6,3,6.6,6.6v128.8
 	C438.1,343,435.1,346,431.5,346z"/>
 <g>
-	<path fill="#698D99" d="M412.1,193c-8.9-16.9-26.6-28.4-47.1-28.4H81.2c-20.4,0-38.1,11.5-47.1,28.4H412.1z"/>
+	<path fill="#ffffff" d="M412.1,193c-8.9-16.9-26.6-28.4-47.1-28.4H81.2c-20.4,0-38.1,11.5-47.1,28.4H412.1z"/>
 </g>
 </svg>

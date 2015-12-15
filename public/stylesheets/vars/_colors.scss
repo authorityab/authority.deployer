@@ -1,48 +1,54 @@
-$background-color:#6c8c99;
+
 
 $fail-color:#f72350;
 $success-color: #67cb67;
 $in-progress-color: #33CCFF;
 $fail-badge-text-color:#ffffff;
 $success-badge-text-color:#ffffff;
+$fail-color2: #c8213e;
 
-$dark:#475a60;
-$theme:#6c8c99;
+$dark:#333333;
+$theme:#574f55;
+$theme2:#ed677a;
+$kontrast :#ffffff;
+
+$background-color:$theme;
 
 $light: rgba(255,255,255,0.8);
 
-$font-color:#475a60;
-$font-color-inverted: #6c8c99;
+$font-color:$dark;
+$font-color-inverted: $theme;
 
-$list-bg-color:#475a60;
-$list-text-color:#ffffff;
-$list-small-text-color:#6c8c99;
+$list-bg-color:$dark;
+$list-text-color:$kontrast;
+$list-small-text-color:$theme;
 
-$selected-list-bg-color:#6c8c99;
-$selected-list-text-color:#ffffff;
-
-
-
-$fail-page-bg-color:#f72350;
-$fail-list-bg-color:#cd264b;
+$selected-list-bg-color:$theme;
+$selected-list-text-color:$kontrast;
 
 
 
-$fail-list-bg-color:#cd264b;
-$fail-list-text-color:#ffffff;
-$fail-list-small-text-color:#f72350;
-
-$fail-selected-list-bg-color:#f72350;
-$fail-selected-list-text-color:#ffffff;
+$fail-page-bg-color:$fail-color;
 
 
 
 
+$fail-list-bg-color:$theme;
+$fail-list-text-color:$fail-color;
+$fail-list-small-text-color:$kontrast;
 
-$project-background-color:#475a60;
-$project-list-bg-color:#6c8c99;
-$project-list-text-color:#ffffff;
-$project-list-small-text-color:#475a60;
+$fail-selected-list-bg-color:$fail-color;
+$fail-selected-list-text-color:$kontrast;;
 
-$project-selected-list-bg-color:#475a60;
-$project-selected-list-text-color:#ffffff;
+
+$clock-color:$kontrast;
+$clock-sec-color:$theme2;
+
+
+$project-background-color:$dark;
+$project-list-bg-color:$theme;
+$project-list-text-color:$kontrast;;
+$project-list-small-text-color:$dark;
+
+$project-selected-list-bg-color:$dark;
+$project-selected-list-text-color:$kontrast;;

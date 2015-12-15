@@ -1,7 +1,7 @@
 .head-line{
   display: block;
   margin: 0 2em;
-  font-size: 1em;
+
   height: 8.3%;
 
   >h1{
@@ -16,11 +16,11 @@
     font-weight: lighter;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    font-size: 2vw;
     position: relative;
     >span{
       background-color: $background-color;
       padding: 0 1em;
+      font-size: 0.8em;
     }
   }
 }
@@ -33,6 +33,7 @@
   padding: 1em;
   text-align: center;
   margin: 0 2rem 0 2rem;
+
 }
 
 

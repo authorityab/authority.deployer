@@ -1,7 +1,7 @@
-#joint { stroke-width: 2px; stroke: $dark; fill:$theme;}
-#face { fill:$dark;}
-#hour, #min, #sec { stroke-width: 0px; fill: $dark; }
-#sec { stroke: $dark; stroke-width: 1px;}
+#joint { stroke-width: 2px; stroke: $clock-color; fill:$theme;}
+#face { fill:$clock-color;}
+#hour, #min{ stroke-width: 0px; fill: $clock-color; }
+#sec { stroke: $clock-sec-color; stroke-width: 1px;}
 
 .date-time{
   width: 80%;
@@ -32,7 +32,7 @@
 .date{
   height: 30%;
   float: left;
-  color: $dark;
+  color: $clock-color;
   width: 100%;
   font-size: 2vh;
   text-align: center;
@@ -49,6 +49,9 @@
     margin: 0 1vw;
     display: inline-block;
     vertical-align: middle;
+    background-color: $dark;
+    padding: 0.1em;
+    color: $theme;
 
   }
 
@@ -68,7 +71,7 @@
     margin: 0 1vw;
     font-weight: lighter;
     background-color: $dark;
-    color: $background-color;
+    color: $theme;
     vertical-align: middle;
     padding:0 0.2em;
   }

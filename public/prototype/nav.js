@@ -19,9 +19,6 @@ $.fn.navigation = function (options) {
 
 
 
-    alert(44);
-
-
     $('body').bind('keypress', function(e) {
         //console.log(e.keyCode);
         if(e.keyCode==119){
