@@ -81,9 +81,9 @@ function Environments() {
   };
 
   function setEnvironments(data) {
-    var environmentPage =  JSON.parse(data);
+    var environments =  JSON.parse(data);
 
-    if (environmentPage.Environments.length === 0) {
+    if (environments.Items.length === 0) {
 			var listItem = $('<li><div>' +
 												'<h2>No environments for the selected project were found.</h3>' +
 											'</div></li>');
@@ -91,13 +91,13 @@ function Environments() {
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
 		} else {
-      releaseVersion = environmentPage.ReleaseVersion;
+      releaseVersion = environments.ReleaseVersion;
 
-      $('.head-line h1').text(environmentPage.ProjectName);
+      $('.head-line h1').text(environments.ProjectName);
       $('.head-description h3').text("Version " + releaseVersion);
 
-      for (var i = 0; i < environmentPage.Environments.length; i++) {
-        var env = environmentPage.Environments[i];
+      for (var i = 0; i < environments.Items.length; i++) {
+        var env = environments.Items[i];
 
         var listItem = $('<li><div>' +
                            '<h2>' + env.Name + '</h2>' +
