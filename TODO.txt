@@ -1,7 +1,5 @@
 
 -= ERRORS =-
-* CurrentPage in scope does not get set in controller. left/right etc...
-
 
 -= TODO =-
 * Speed up GUI - IN PROGRESS

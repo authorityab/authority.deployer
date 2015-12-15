@@ -19,9 +19,9 @@ var staticProPath = path.join(__dirname, 'public_dist');
 app.use(express.static(staticDevPath));
 app.use(favicon(staticDevPath + '/images/favicon.ico'));
 
-var scripts = [staticDevPath + '/libs/jquery/dist/jquery.min.js',
-               staticDevPath + '/libs/angular/angular.js',
-               staticDevPath + '/libs/angular-route/angular-route.js',
+var scripts = [staticDevPath + '/vendor/jquery/dist/jquery.min.js',
+               staticDevPath + '/vendor/angular/angular.js',
+               staticDevPath + '/vendor/angular-route/angular-route.js',
                staticDevPath + '/javascripts/angular/routes.js',
                staticDevPath + '/javascripts/angular/controllers.js',
                staticDevPath + '/javascripts/angular/app.js',

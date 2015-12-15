@@ -3,7 +3,7 @@
 var deployer = require('../deployer');
 var debug = require('debug')('SoftResource.Deployer:server');
 var http = require('http');
-var com = require('../lib/communication');
+var com = require('../source/communication');
 
 /**
 * Get port from environment and store in Express.
@@ -79,8 +79,8 @@ com.init(server);
  */
 
 if (deployer.app.get('env') === 'production') {
-  var inputs = new (require('../lib/inputs'));
-  var outputs = new (require('../lib/outputs'));
+  var inputs = new (require('../source/inputs'));
+  var outputs = new (require('../source/outputs'));
 
   inputs.init(com);
   outputs.init();
@@ -120,7 +120,7 @@ function onError(error) {
 
   var bind = typeof port === 'string'
     ? 'Pipe ' + port
-    
+
     : 'Port ' + port;
 
   // handle specific listen errors with friendly messages

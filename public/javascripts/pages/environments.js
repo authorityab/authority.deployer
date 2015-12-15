@@ -46,6 +46,7 @@ function Environments() {
 
     this.socket.removeListener('deploy_started');
     this.socket.on('deploy_started', function(taskId) {
+      // TODO: What to do if taskId is null?
       self.deployInProgress = setInterval(function () {
         self.socket.emit('get_deploy_status', taskId);
       }, 8000);
