@@ -29652,8 +29652,6 @@ Main.prototype.stopSpinner = function() {
 }
 
 Main.prototype.setCurrentDate = function() {
-  // clearInterval(this.clockInterval);
-
   if (this.clockInterval != null)
     return;
 
@@ -29681,10 +29679,6 @@ Main.prototype.setCurrentDate = function() {
     r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
   }, 1000)
 }
-
-// Main.prototype.hasBuildErrors = function() {
-//   return this.hasBuildErrors;
-// }
 
 Main.prototype.up = function() {
   var list = this.ngScope().currentPage.navigationList;
@@ -29719,10 +29713,6 @@ Main.prototype.down = function() {
 
 function Dashboard() {
   var self = this;
-
-
-
-
 
   this.init = function() {
 
@@ -29827,27 +29817,14 @@ function Dashboard() {
     }
   };
 
-
-
   this.left = function() {
     var page = this;
     if (page.hasBuildErrors) {
-      // clearInterval(page.clockInterval);
       page.ngScope().$apply(function() {
         page.ngScope().routeLeft();
       });
     }
   };
-
-  // this.right = function() {
-  //   var page = this;
-  //   // clearInterval(page.clockInterval);
-  //   page.ngScope().$apply(function() {
-  //     page.ngScope().routeRight();
-  //   });
-  // };
-
-
 
   this.init();
 }
@@ -29895,7 +29872,6 @@ function Projects() {
   var self = this;
 
   this.init = function() {
-    // this.setCurrentDate();
     this.startSpinner();
     this.pageLock = true;
 		this.navigationList = $('ul#projects');
@@ -30112,9 +30088,9 @@ function Environments() {
   this.right = function() {
     // TODO: what to do here?
     var page = this;
-    page.buttonIsArmed = false;
-    page.socket.emit('disarm_deploy_button');
     if (!page.pageLock && !page.lockRight) {
+      page.buttonIsArmed = false;
+      page.socket.emit('disarm_deploy_button');
       page.ngScope().$apply(function() {
         page.ngScope().routeRight();
       });

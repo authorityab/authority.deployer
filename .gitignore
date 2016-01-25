@@ -7,6 +7,7 @@ node_modules/
 typings/
 
 public/javascripts/script.js
+public/javascripts/script.min.js
 
 .idea/
 
