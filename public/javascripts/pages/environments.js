@@ -61,7 +61,7 @@ function Environments() {
   this.left = function() {
     var page = this;
     page.buttonIsArmed = false;
-    if (!page.pageLock && !page.lockRight) {
+    if (!page.pageLock && !page.lockLeft) {
       page.socket.emit('disarm_deploy_button');
       page.ngScope().$apply(function() {
         page.ngScope().routeLeft();
@@ -72,9 +72,9 @@ function Environments() {
   this.right = function() {
     // TODO: what to do here?
     var page = this;
-    page.buttonIsArmed = false;
-    page.socket.emit('disarm_deploy_button');
     if (!page.pageLock && !page.lockRight) {
+      page.buttonIsArmed = false;
+      page.socket.emit('disarm_deploy_button');
       page.ngScope().$apply(function() {
         page.ngScope().routeRight();
       });

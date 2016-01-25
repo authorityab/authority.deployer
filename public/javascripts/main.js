@@ -2,11 +2,15 @@ var Main = function() {
   var self = this;
 
   this.socket = io();
+  this.clockInterval;
   this.navigationList;
+  this.projects = [];
+  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   this.pageLock = false;
   this.lockRight = false;
   this.lockLeft = false;
-  this.projects = [];
+  this.hasBuildErrors = false;
   this.buildParams = {
     statusInterval: null,
     latestFailed: null,
@@ -17,6 +21,8 @@ var Main = function() {
   };
 
   this.init = function() {
+    this.setCurrentDate();
+
     //TODO: Remove after test
     $(document).unbind();
     $(document).keydown(function(e) {
@@ -96,10 +102,6 @@ var Main = function() {
       var build = JSON.parse(build);
       setLatestFailedBuild(build);
     });
-
-    // setInterval(function() {
-    //   setLatestBuild();
-    // }, 300);
   };
 
   function setBuilds(builds, hollaback) {
@@ -184,9 +186,10 @@ var Main = function() {
     }
   }
 
+
+
   this.init();
 }
-
 
 
 Main.prototype.left = function() {
@@ -238,6 +241,35 @@ Main.prototype.startSpinner = function() {
 
 Main.prototype.stopSpinner = function() {
   $('.spinner').remove();
+}
+
+Main.prototype.setCurrentDate = function() {
+  if (this.clockInterval != null)
+    return;
+
+  var currentDate = new Date();
+  var monthNr = currentDate.getMonth();
+  var year = currentDate.getFullYear();
+  var day = currentDate.getDate();
+
+  var month = this.monthNamesShort[monthNr];
+  var dateHolder = $('.date-time .date');
+
+  dateHolder.find('.day').text(day);
+  dateHolder.find('.month').text(month);
+  dateHolder.find('.year').text(year);
+
+  this.clockInterval = setInterval(function() {
+
+    function r(el, deg) {
+      el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
+    }
+    var d = new Date()
+    console.log(d.getSeconds())
+    r($('#sec').get(0), 6*d.getSeconds())
+    r($('#min').get(0), 6*d.getMinutes())
+    r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
+  }, 1000)
 }
 
 Main.prototype.up = function() {

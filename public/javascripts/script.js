@@ -29410,11 +29410,15 @@ var Main = function() {
   var self = this;
 
   this.socket = io();
+  this.clockInterval;
   this.navigationList;
+  this.projects = [];
+  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+  this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
   this.pageLock = false;
   this.lockRight = false;
   this.lockLeft = false;
-  this.projects = [];
+  this.hasBuildErrors = false;
   this.buildParams = {
     statusInterval: null,
     latestFailed: null,
@@ -29425,6 +29429,8 @@ var Main = function() {
   };
 
   this.init = function() {
+    this.setCurrentDate();
+
     //TODO: Remove after test
     $(document).unbind();
     $(document).keydown(function(e) {
@@ -29504,10 +29510,6 @@ var Main = function() {
       var build = JSON.parse(build);
       setLatestFailedBuild(build);
     });
-
-    // setInterval(function() {
-    //   setLatestBuild();
-    // }, 300);
   };
 
   function setBuilds(builds, hollaback) {
@@ -29592,9 +29594,10 @@ var Main = function() {
     }
   }
 
+
+
   this.init();
 }
-
 
 
 Main.prototype.left = function() {
@@ -29648,6 +29651,41 @@ Main.prototype.stopSpinner = function() {
   $('.spinner').remove();
 }
 
+Main.prototype.setCurrentDate = function() {
+  // clearInterval(this.clockInterval);
+
+  if (this.clockInterval != null)
+    return;
+
+  var currentDate = new Date();
+  var monthNr = currentDate.getMonth();
+  var year = currentDate.getFullYear();
+  var day = currentDate.getDate();
+
+  var month = this.monthNamesShort[monthNr];
+  var dateHolder = $('.date-time .date');
+
+  dateHolder.find('.day').text(day);
+  dateHolder.find('.month').text(month);
+  dateHolder.find('.year').text(year);
+
+  this.clockInterval = setInterval(function() {
+
+    function r(el, deg) {
+      el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
+    }
+    var d = new Date()
+    console.log(d.getSeconds())
+    r($('#sec').get(0), 6*d.getSeconds())
+    r($('#min').get(0), 6*d.getMinutes())
+    r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
+  }, 1000)
+}
+
+// Main.prototype.hasBuildErrors = function() {
+//   return this.hasBuildErrors;
+// }
+
 Main.prototype.up = function() {
   var list = this.ngScope().currentPage.navigationList;
   if (list !== undefined) {
@@ -29682,10 +29720,9 @@ Main.prototype.down = function() {
 function Dashboard() {
   var self = this;
 
-  this.clockInterval;
-  this.hasBuildErrors = false;
-  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+
+
+
 
   this.init = function() {
 
@@ -29706,10 +29743,8 @@ function Dashboard() {
   		});
 
       setTimeout(function() {
-        setCurrentDate();
         self.setLatestBuild();
         self.setBuildCount();
-        // self.checkForBuildErrors();
         self.setLastFailedCounter();
       }, 300);
 
@@ -29797,45 +29832,22 @@ function Dashboard() {
   this.left = function() {
     var page = this;
     if (page.hasBuildErrors) {
-      clearInterval(page.clockInterval);
+      // clearInterval(page.clockInterval);
       page.ngScope().$apply(function() {
         page.ngScope().routeLeft();
       });
     }
   };
 
-  this.right = function() {
-    var page = this;
-    clearInterval(page.clockInterval);
-    page.ngScope().$apply(function() {
-      page.ngScope().routeRight();
-    });
-  };
+  // this.right = function() {
+  //   var page = this;
+  //   // clearInterval(page.clockInterval);
+  //   page.ngScope().$apply(function() {
+  //     page.ngScope().routeRight();
+  //   });
+  // };
 
-  function setCurrentDate() {
-    var currentDate = new Date();
-    var monthNr = currentDate.getMonth();
-    var year = currentDate.getFullYear();
-    var day = currentDate.getDate();
 
-    var month = self.monthNamesShort[monthNr];
-
-    var dateHolder = $('.date-time .date');
-    dateHolder.find('.day').text(day);
-    dateHolder.find('.month').text(month);
-    dateHolder.find('.year').text(year);
-
-    self.clockInterval = setInterval(function() {
-      function r(el, deg) {
-        el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
-      }
-      var d = new Date()
-
-      r($('#sec').get(0), 6*d.getSeconds())
-      r($('#min').get(0), 6*d.getMinutes())
-      r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
-    }, 1000)
-  }
 
   this.init();
 }
@@ -29883,6 +29895,7 @@ function Projects() {
   var self = this;
 
   this.init = function() {
+    // this.setCurrentDate();
     this.startSpinner();
     this.pageLock = true;
 		this.navigationList = $('ul#projects');
@@ -29968,12 +29981,12 @@ function Releases() {
   };
 
   function setReleases(data) {
-    var releasePage = JSON.parse(data);
+    var releases = JSON.parse(data);
 
-    $('.head-line h1').text(releasePage.ProjectName);
-    $('.head-description h3').text(releasePage.ProjectDescription);
+    $('.head-line h1').text(releases.ProjectName);
+    $('.head-description h3').text(releases.ProjectDescription);
 
-    if (releasePage.Releases.length === 0) {
+    if (releases.Items.length === 0) {
       var listItem = $('<li><div>' +
                          '<h2>No releases for the selected project have been published yet.</h3>' +
                       '</div></li>');
@@ -29981,8 +29994,8 @@ function Releases() {
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
     } else {
-      for (var i = 0; i < releasePage.Releases.length; i++) {
-  			var release = releasePage.Releases[i];
+      for (var i = 0; i < releases.Items.length; i++) {
+  			var release = releases.Items[i];
 
         var notes = '';
         if (release.ReleaseNotes != null) {
@@ -30073,6 +30086,7 @@ function Environments() {
 
     this.socket.removeListener('deploy_started');
     this.socket.on('deploy_started', function(taskId) {
+      // TODO: What to do if taskId is null?
       self.deployInProgress = setInterval(function () {
         self.socket.emit('get_deploy_status', taskId);
       }, 8000);
@@ -30087,7 +30101,7 @@ function Environments() {
   this.left = function() {
     var page = this;
     page.buttonIsArmed = false;
-    if (!page.pageLock && !page.lockRight) {
+    if (!page.pageLock && !page.lockLeft) {
       page.socket.emit('disarm_deploy_button');
       page.ngScope().$apply(function() {
         page.ngScope().routeLeft();
@@ -30108,9 +30122,9 @@ function Environments() {
   };
 
   function setEnvironments(data) {
-    var environmentPage =  JSON.parse(data);
+    var environments =  JSON.parse(data);
 
-    if (environmentPage.Environments.length === 0) {
+    if (environments.Items.length === 0) {
 			var listItem = $('<li><div>' +
 												'<h2>No environments for the selected project were found.</h3>' +
 											'</div></li>');
@@ -30118,13 +30132,13 @@ function Environments() {
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
 		} else {
-      releaseVersion = environmentPage.ReleaseVersion;
+      releaseVersion = environments.ReleaseVersion;
 
-      $('.head-line h1').text(environmentPage.ProjectName);
+      $('.head-line h1').text(environments.ProjectName);
       $('.head-description h3').text("Version " + releaseVersion);
 
-      for (var i = 0; i < environmentPage.Environments.length; i++) {
-        var env = environmentPage.Environments[i];
+      for (var i = 0; i < environments.Items.length; i++) {
+        var env = environments.Items[i];
 
         var listItem = $('<li><div>' +
                            '<h2>' + env.Name + '</h2>' +

@@ -1,11 +1,6 @@
 function Dashboard() {
   var self = this;
 
-  this.clockInterval;
-  this.hasBuildErrors = false;
-  this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-  this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
-
   this.init = function() {
 
       this.stopSpinner();
@@ -25,10 +20,8 @@ function Dashboard() {
   		});
 
       setTimeout(function() {
-        setCurrentDate();
         self.setLatestBuild();
         self.setBuildCount();
-        // self.checkForBuildErrors();
         self.setLastFailedCounter();
       }, 300);
 
@@ -111,50 +104,14 @@ function Dashboard() {
     }
   };
 
-
-
   this.left = function() {
     var page = this;
     if (page.hasBuildErrors) {
-      clearInterval(page.clockInterval);
       page.ngScope().$apply(function() {
         page.ngScope().routeLeft();
       });
     }
   };
-
-  this.right = function() {
-    var page = this;
-    clearInterval(page.clockInterval);
-    page.ngScope().$apply(function() {
-      page.ngScope().routeRight();
-    });
-  };
-
-  function setCurrentDate() {
-    var currentDate = new Date();
-    var monthNr = currentDate.getMonth();
-    var year = currentDate.getFullYear();
-    var day = currentDate.getDate();
-
-    var month = self.monthNamesShort[monthNr];
-
-    var dateHolder = $('.date-time .date');
-    dateHolder.find('.day').text(day);
-    dateHolder.find('.month').text(month);
-    dateHolder.find('.year').text(year);
-
-    self.clockInterval = setInterval(function() {
-      function r(el, deg) {
-        el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
-      }
-      var d = new Date()
-
-      r($('#sec').get(0), 6*d.getSeconds())
-      r($('#min').get(0), 6*d.getMinutes())
-      r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
-    }, 1000)
-  }
 
   this.init();
 }
