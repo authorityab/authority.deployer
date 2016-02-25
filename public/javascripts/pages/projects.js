@@ -14,7 +14,7 @@ function Projects() {
 	this.setProjects = function(data) {
 		var projects =  JSON.parse(data);
 
-		if (projects.length === 0) {
+		if (projects === null || projects.length === 0) {
 			var listItem = $('<li><div>' +
 												'<h2>No projects were found.</h3>' +
 											'</div></li>');

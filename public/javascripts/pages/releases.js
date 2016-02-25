@@ -33,7 +33,7 @@ function Releases() {
     $('.head-line h1').text(releases.ProjectName);
     $('.head-description h3').text(releases.ProjectDescription);
 
-    if (releases.Items.length === 0) {
+    if (releases === null || releases.Items.length === 0) {
       var listItem = $('<li><div>' +
                          '<h2>No releases for the selected project have been published yet.</h3>' +
                       '</div></li>');

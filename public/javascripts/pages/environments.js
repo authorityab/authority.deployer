@@ -14,8 +14,11 @@ function Environments() {
     this.navigationList = $('ul#environments');
 
     // TODO: Remove after test
-    $(document).unbind("hitenter", hitEnter);
-    $(document).keydown("hitenter", hitEnter);
+    // $(document).unbind("hitenter", hitEnter);
+    // $(document).keydown("hitenter", hitEnter);
+
+    $(document).off('keydown', hitEnter);
+    $(document).on('keydown', hitEnter);
 
     function hitEnter(e) {
       switch (e.which) {
@@ -84,7 +87,7 @@ function Environments() {
   function setEnvironments(data) {
     var environments =  JSON.parse(data);
 
-    if (environments.Items.length === 0) {
+    if (environments == null || environments.Items.length === 0) {
 			var listItem = $('<li><div>' +
 												'<h2>No environments for the selected project were found.</h3>' +
 											'</div></li>');
@@ -92,10 +95,10 @@ function Environments() {
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
 		} else {
-      releaseVersion = environments.ReleaseVersion;
+      self.releaseVersion = environments.ReleaseVersion;
 
       $('.head-line h1').text(environments.ProjectName);
-      $('.head-description h3').text("Version " + releaseVersion);
+      $('.head-description h3').text("Version " + self.releaseVersion);
 
       for (var i = 0; i < environments.Items.length; i++) {
         var env = environments.Items[i];
@@ -108,6 +111,7 @@ function Environments() {
 
         listItem.attr('data-environment-id', env.Id);
 
+        listItem.removeClass('success fail');
         if (env.Status == 0) {
           listItem.addClass('success');
         } else  if (env.Status == 1) {
@@ -143,31 +147,45 @@ function Environments() {
         var environmentId = activeItem.data('environment-id');
 
     		self.socket.emit('trigger_deploy', { projectId: self.projectId, releaseId: self.releaseId, environmentId: environmentId });
+        activeItem.removeClass('success fail');
     		activeItem.addClass('in-progress');
       }
     }
+    self.socket.removeListener('inputs_button');
 	}
 
   function setDeployStatus(data) {
     var status =  JSON.parse(data);
-		if (status.IsCompleted) {
-			clearInterval(self.deployInProgress);
-			env = self.navigationList.find('li.current');
-			env.removeClass('in-progress');
-      env.find('h3').text(self.releaseVersion);
-      env.find('h4').text(status.CompletedTime);
+    var env = self.navigationList.find('li.current');
+    env.removeClass('success fail');
 
-			if (status.FinishedSuccessfully) {
-				env.addClass('success');
-        self.socket.emit('deploy_succeeded');
-			}
-			else if (status.HasWarningOrErrors) {
-				env.addClass('error');
-        self.socket.emit('deploy_failed');
-			}
-
+    if (status === null) {
+      env.removeClass('in-progress');
+      env.addClass('fail');
+      self.socket.emit('deploy_failed');
       self.pageLock = false;
-		}
+    } else {
+      if (status.IsCompleted) {
+        clearInterval(self.deployInProgress);
+
+        env.removeClass('in-progress');
+        env.find('h3').text(self.releaseVersion);
+        env.find('h4').text(status.CompletedTime);
+
+        if (status.FinishedSuccessfully) {
+          env.addClass('success');
+          self.socket.emit('deploy_succeeded');
+        }
+        else if (status.HasWarningOrErrors) {
+          env.addClass('fail');
+          self.socket.emit('deploy_failed');
+        }
+
+        self.pageLock = false;
+      }
+    }
+
+    self.socket.removeListener('set_deploy_status');
   }
 
   this.init();

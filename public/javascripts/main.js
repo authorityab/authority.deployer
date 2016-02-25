@@ -265,7 +265,6 @@ Main.prototype.setCurrentDate = function() {
       el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
     }
     var d = new Date()
-    console.log(d.getSeconds())
     r($('#sec').get(0), 6*d.getSeconds())
     r($('#min').get(0), 6*d.getMinutes())
     r($('#hour').get(0), 30*(d.getHours()%12) + d.getMinutes()/2)
