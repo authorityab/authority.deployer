@@ -117,7 +117,7 @@ module.exports = function() {
 
 	this.lockJoystick = function(input) {
 		for(var i = 0; i < self.joystickLocks.length; i++) {
-			var lock = joystickLocks[i];
+			var lock = self.joystickLocks[i];
 			if (lock.name === input) {
 				lock.isLocked = true;
 			} else {
@@ -127,8 +127,8 @@ module.exports = function() {
 	};
 
 	this.unlockJoystick = function() {
-		for(var i = 0; i < joystickLocks.length; i++) {
-			var lock = joystickLocks[i];
+		for(var i = 0; i < self.joystickLocks.length; i++) {
+			var lock = self.joystickLocks[i];
 			lock.isLocked = false;
 		}
 	};
