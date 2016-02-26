@@ -107,18 +107,23 @@ module.exports = function() {
 	this.inputs = {
 		up: function() {
 			self.socket.volatile.emit('inputs_up');
+			console.log('websockets up');
 		},
 		down: function() {
 			self.socket.volatile.emit('inputs_down');
+			console.log('websockets down');
 		},
 		left: function() {
 			self.socket.volatile.emit('inputs_left');
+			console.log('websockets left');
 		},
 		right: function() {
 			self.socket.volatile.emit('inputs_right');
+			console.log('websockets right');
 		},
 		button: function() {
 			self.socket.volatile.emit('inputs_button');
+			console.log('websockets button');
 		}
 	};
 };

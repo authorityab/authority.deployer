@@ -42,6 +42,7 @@ module.exports = function() {
 
 			if (value === 1 && !self.lock_up) {
 				self.lockJoystick('up');
+				console.log('inputs up');
 
 				setTimeout(function() {
 					self.unlockJoystick();
@@ -58,9 +59,10 @@ module.exports = function() {
 
 			if (value === 1 && !self.lock_down) {
 				self.lockJoystick('down');
+				console.log('inputs down');
 
 				setTimeout(function() {
-					self.funlockJoystick();
+					self.unlockJoystick();
 				}, self.lock_time);
 
 				self.com.sockets.inputs.down();
@@ -74,6 +76,7 @@ module.exports = function() {
 
 			if (value === 1 && !self.lock_left) {
 				self.lockJoystick('left');
+				console.log('inputs left');
 
 				setTimeout(function() {
 					self.unlockJoystick();
@@ -90,6 +93,7 @@ module.exports = function() {
 
 			if (value === 1 && !self.lock_right) {
 				self.lockJoystick('right');
+				console.log('inputs right');
 
 				setTimeout(function() {
 					self.unlockJoystick();
@@ -105,6 +109,7 @@ module.exports = function() {
 			}
 
 			if(value == 0 && !self.lock_button){
+				console.log('inputs button');
 				self.com.sockets.inputs.button();
 				self.lock_button = true;
 
