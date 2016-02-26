@@ -4,6 +4,7 @@ var Main = function() {
   this.socket = io();
   this.clockInterval;
   this.navigationList;
+  // this.navigationPushHeight = 0;
   this.projects = [];
   this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -277,11 +278,15 @@ Main.prototype.up = function() {
     var activeItem = list.find('li.current');
     var activeIndex = list.find('li').index(activeItem);
 
-    activeItem.removeClass('current');
+
     if (activeIndex === 0) {
-      list.find('li:last-child').addClass('current');
+      // list.find('li:last-child').addClass('current');
     } else {
+      activeItem.removeClass('current');
       activeItem.prev('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight();
+      list.css('margin-top', pushHeight + 'px');
     }
   }
 }
@@ -293,11 +298,17 @@ Main.prototype.down = function() {
     var activeItem = list.find('li.current');
     var activeIndex = list.find('li').index(activeItem);
 
-    activeItem.removeClass('current');
+
     if (activeIndex === totalCount - 1) {
-      list.find('li:first-child').addClass('current');
+      // list.find('li:first-child').addClass('current');
+
     } else {
+      activeItem.removeClass('current');
       activeItem.next('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight() * -1;
+      list.css('margin-top', pushHeight + 'px');
+      // list.css('margin-top', this.navigationPushHeight + 'px');
     }
   }
 }

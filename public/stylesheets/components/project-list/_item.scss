@@ -52,7 +52,7 @@ ul.project-list{
       background-color: $fail-list-bg-color;
       >div{
         h2{
-          color: $fail-list-text-color;
+          color: $fail-list-small-text-color;
         }
         h3, h4{
           color: $fail-list-small-text-color;
@@ -89,5 +89,26 @@ ul.project-list{
         }
       }
     }
+  }
+}
+
+#project_view {
+  header {
+    position: absolute;
+    top: 1vw;
+    width: 50%;
+    z-index: 1000;
+    background-color: $project-list-bg-color;
+
+    .head-description {
+      min-height: 6vw;
+    }
+  }
+}
+
+#releases {
+  position: relative;
+  ul {
+    margin-top: 7vw;
   }
 }

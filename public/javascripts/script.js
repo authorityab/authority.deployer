@@ -29412,6 +29412,7 @@ var Main = function() {
   this.socket = io();
   this.clockInterval;
   this.navigationList;
+  // this.navigationPushHeight = 0;
   this.projects = [];
   this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -29685,11 +29686,15 @@ Main.prototype.up = function() {
     var activeItem = list.find('li.current');
     var activeIndex = list.find('li').index(activeItem);
 
-    activeItem.removeClass('current');
+
     if (activeIndex === 0) {
-      list.find('li:last-child').addClass('current');
+      // list.find('li:last-child').addClass('current');
     } else {
+      activeItem.removeClass('current');
       activeItem.prev('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight();
+      list.css('margin-top', pushHeight + 'px');
     }
   }
 }
@@ -29701,11 +29706,17 @@ Main.prototype.down = function() {
     var activeItem = list.find('li.current');
     var activeIndex = list.find('li').index(activeItem);
 
-    activeItem.removeClass('current');
+
     if (activeIndex === totalCount - 1) {
-      list.find('li:first-child').addClass('current');
+      // list.find('li:first-child').addClass('current');
+
     } else {
+      activeItem.removeClass('current');
       activeItem.next('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight() * -1;
+      list.css('margin-top', pushHeight + 'px');
+      // list.css('margin-top', this.navigationPushHeight + 'px');
     }
   }
 }
@@ -29715,7 +29726,7 @@ function Dashboard() {
 
   this.init = function() {
 
-      this.stopSpinner();
+      // this.stopSpinner();
 
       //TODO: Remove after test
       $(document).on('click', '#success', function(){
@@ -29832,7 +29843,7 @@ function BuildStatus() {
   var self = this;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.navigationList = $('nav .project-list');
     self.setFailedBuilds();
   };
@@ -29860,7 +29871,7 @@ function BuildStatus() {
       this.navigationList.find('li:first-child').addClass('current');
     }
 
-    this.stopSpinner();
+    // this.stopSpinner();
   };
 
 
@@ -29871,9 +29882,9 @@ function Projects() {
   var self = this;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
-		this.navigationList = $('ul#projects');
+		this.navigationList = $('#projects ul');
 
 		this.socket.emit('get_projects', function(projects) {
       self.setProjects(projects);
@@ -29897,7 +29908,7 @@ function Projects() {
 												 	'<h2>' + project.Name + '</h2>' +
 											 		'<h3>' + project.GroupName + '</h3>' +
 													'<h4>' + project.Description + '</h4>' +
-                          '<img src="' + project.Logo + '" alt="Project Logo"/>' +
+                          // '<img src="' + project.Logo + '" alt="Project Logo"/>' +
 
 											  '</div></li>');
 
@@ -29910,7 +29921,7 @@ function Projects() {
 		}
 
 		this.pageLock = false;
-		this.stopSpinner();
+		// this.stopSpinner();
 	};
 
   this.right = function() {
@@ -29932,9 +29943,9 @@ function Releases() {
   this.projectId;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
-    this.navigationList = $('ul#releases');
+    this.navigationList = $('#releases ul');
 
     setTimeout(function() {
       projectId = self.ngScope().projectId;
@@ -30007,7 +30018,7 @@ function Releases() {
     $('header').removeClass('hidden');
 
     self.pageLock = false;
-    self.stopSpinner();
+    // self.stopSpinner();
   }
 
   this.init();
@@ -30023,10 +30034,10 @@ function Environments() {
   this.buttonIsArmed = false;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
     this.buttonIsArmed = true;
-    this.navigationList = $('ul#environments');
+    this.navigationList = $('#environments ul');
 
     // TODO: Remove after test
     // $(document).unbind("hitenter", hitEnter);
@@ -30150,7 +30161,7 @@ function Environments() {
     self.navigationList.removeClass('hidden');
 
     self.pageLock = false;
-    self.stopSpinner();
+    // self.stopSpinner();
   }
 
   function triggerDeploy() {

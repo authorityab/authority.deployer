@@ -11,7 +11,7 @@ function Environments() {
     // this.startSpinner();
     this.pageLock = true;
     this.buttonIsArmed = true;
-    this.navigationList = $('ul#environments');
+    this.navigationList = $('#environments ul');
 
     // TODO: Remove after test
     // $(document).unbind("hitenter", hitEnter);

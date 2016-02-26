@@ -9,8 +9,8 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
     div(class='head-description')
       h3
         
-  nav
-    ul(id='releases' class='hidden project-list')
+  nav(id='releases')
+    ul(class='hidden project-list')
     
 script.
   if (typeof Releases !== 'object') {

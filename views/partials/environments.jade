@@ -13,8 +13,8 @@ section(id='{{ pageId }}' class='{{ pageClass }}')
     img(src="../images/press-the-button.svg")
     h2 DEPLOY
         
-  nav
-    ul(id='environments' class='hidden project-list')
+  nav(id='environments')
+    ul(class='hidden project-list')
     
 script.
   if (typeof Environments !== 'object') {

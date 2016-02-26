@@ -4,7 +4,7 @@ function Projects() {
   this.init = function() {
     // this.startSpinner();
     this.pageLock = true;
-		this.navigationList = $('ul#projects');
+		this.navigationList = $('#projects ul');
 
 		this.socket.emit('get_projects', function(projects) {
       self.setProjects(projects);
@@ -28,7 +28,7 @@ function Projects() {
 												 	'<h2>' + project.Name + '</h2>' +
 											 		'<h3>' + project.GroupName + '</h3>' +
 													'<h4>' + project.Description + '</h4>' +
-                          '<img src="' + project.Logo + '" alt="Project Logo"/>' +
+                          // '<img src="' + project.Logo + '" alt="Project Logo"/>' +
 
 											  '</div></li>');
 

@@ -6,7 +6,7 @@ function Releases() {
   this.init = function() {
     // this.startSpinner();
     this.pageLock = true;
-    this.navigationList = $('ul#releases');
+    this.navigationList = $('#releases ul');
 
     setTimeout(function() {
       projectId = self.ngScope().projectId;
