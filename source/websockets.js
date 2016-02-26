@@ -69,6 +69,9 @@ module.exports = function() {
 
 			socket.on('deploy_succeeded', function() {
 				self.execOutputFunc('ledstrip', 'success');
+				setTimeout(function() {
+					self.execOutputFunc('ledstrip', 'stop');
+				}, 10000);
 			});
 
 			socket.on('arm_deploy_button', function() {

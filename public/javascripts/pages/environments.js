@@ -175,6 +175,9 @@ function Environments() {
         if (status.FinishedSuccessfully) {
           env.addClass('success');
           self.socket.emit('deploy_succeeded');
+          setTimeout(function() {
+            self.right();
+          }, 10000);
         }
         else if (status.HasWarningOrErrors) {
           env.addClass('fail');
