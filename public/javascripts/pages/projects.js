@@ -2,7 +2,7 @@ function Projects() {
   var self = this;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
 		this.navigationList = $('ul#projects');
 
@@ -41,7 +41,7 @@ function Projects() {
 		}
 
 		this.pageLock = false;
-		this.stopSpinner();
+		// this.stopSpinner();
 	};
 
   this.right = function() {

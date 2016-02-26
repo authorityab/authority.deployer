@@ -2,7 +2,7 @@ function BuildStatus() {
   var self = this;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.navigationList = $('nav .project-list');
     self.setFailedBuilds();
   };
@@ -30,7 +30,7 @@ function BuildStatus() {
       this.navigationList.find('li:first-child').addClass('current');
     }
 
-    this.stopSpinner();
+    // this.stopSpinner();
   };
 
 

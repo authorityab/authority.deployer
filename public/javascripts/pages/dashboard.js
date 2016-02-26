@@ -3,7 +3,7 @@ function Dashboard() {
 
   this.init = function() {
 
-      this.stopSpinner();
+      // this.stopSpinner();
 
       //TODO: Remove after test
       $(document).on('click', '#success', function(){

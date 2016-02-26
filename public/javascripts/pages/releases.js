@@ -4,7 +4,7 @@ function Releases() {
   this.projectId;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
     this.navigationList = $('ul#releases');
 
@@ -79,7 +79,7 @@ function Releases() {
     $('header').removeClass('hidden');
 
     self.pageLock = false;
-    self.stopSpinner();
+    // self.stopSpinner();
   }
 
   this.init();

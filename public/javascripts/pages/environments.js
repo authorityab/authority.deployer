@@ -8,7 +8,7 @@ function Environments() {
   this.buttonIsArmed = false;
 
   this.init = function() {
-    this.startSpinner();
+    // this.startSpinner();
     this.pageLock = true;
     this.buttonIsArmed = true;
     this.navigationList = $('ul#environments');
@@ -135,7 +135,7 @@ function Environments() {
     self.navigationList.removeClass('hidden');
 
     self.pageLock = false;
-    self.stopSpinner();
+    // self.stopSpinner();
   }
 
   function triggerDeploy() {

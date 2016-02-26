@@ -29737,9 +29737,9 @@ function Dashboard() {
         self.setLastFailedCounter();
       }, 300);
 
-      // setInterval(function() {
-      //   self.setLastFailedCounter();
-      // }, 60000)
+      setInterval(function() {
+        self.setLastFailedCounter();
+      }, 60000)
   };
 
   this.setLatestBuild = function() {
@@ -30190,6 +30190,9 @@ function Environments() {
         if (status.FinishedSuccessfully) {
           env.addClass('success');
           self.socket.emit('deploy_succeeded');
+          setTimeout(function() {
+            self.right();
+          }, 10000);
         }
         else if (status.HasWarningOrErrors) {
           env.addClass('fail');
@@ -30200,7 +30203,7 @@ function Environments() {
       }
     }
 
-    self.socket.removeListener('set_deploy_status');
+    // self.socket.removeListener('set_deploy_status');
   }
 
   this.init();
