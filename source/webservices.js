@@ -5,7 +5,7 @@ module.exports = function() {
 	this.sockets = null;
 
 	// TODO: Change this url in production!
-	this.apiBaseUrl = 'http://authority-deployer.api.local:49530/api';
+	this.apiBaseUrl = 'http://authority-deployer.api/api';
 
 	this.init = function (websockets) {
 		self = this;
