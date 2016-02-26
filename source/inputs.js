@@ -34,7 +34,7 @@ module.exports = function() {
 	};
 
 	this.attachListeners = function() {
-		
+
 		this.joystick_up.watch(function(err, value) {
 			if (err) {
 				throw err;
@@ -116,7 +116,7 @@ module.exports = function() {
 	};
 
 	this.lockJoystick = function(input) {
-		for(var i = 0; i < joystickLocks.length; i++) {
+		for(var i = 0; i < self.joystickLocks.length; i++) {
 			var lock = joystickLocks[i];
 			if (lock.name === input) {
 				lock.isLocked = true;

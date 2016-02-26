@@ -29737,9 +29737,9 @@ function Dashboard() {
         self.setLastFailedCounter();
       }, 300);
 
-      setInterval(function() {
-        self.setLastFailedCounter();
-      }, 60000)
+      // setInterval(function() {
+      //   self.setLastFailedCounter();
+      // }, 60000)
   };
 
   this.setLatestBuild = function() {
