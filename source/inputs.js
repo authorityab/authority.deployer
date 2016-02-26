@@ -44,7 +44,7 @@ module.exports = function() {
 				self.lockJoystick('up');
 
 				setTimeout(function() {
-					unlockJoystick();
+					self.unlockJoystick();
 				}, self.lock_time);
 
 				self.com.sockets.inputs.up();
@@ -60,7 +60,7 @@ module.exports = function() {
 				self.lockJoystick('down');
 
 				setTimeout(function() {
-					unlockJoystick();
+					self.funlockJoystick();
 				}, self.lock_time);
 
 				self.com.sockets.inputs.down();
@@ -76,7 +76,7 @@ module.exports = function() {
 				self.lockJoystick('left');
 
 				setTimeout(function() {
-					unlockJoystick();
+					self.unlockJoystick();
 				}, self.lock_time);
 
 				self.com.sockets.inputs.left();
@@ -92,7 +92,7 @@ module.exports = function() {
 				self.lockJoystick('right');
 
 				setTimeout(function() {
-					unlockJoystick();
+					self.unlockJoystick();
 				}, self.lock_time);
 
 				self.com.sockets.inputs.right();
