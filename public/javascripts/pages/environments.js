@@ -185,7 +185,7 @@ function Environments() {
       }
     }
 
-    self.socket.removeListener('set_deploy_status');
+    // self.socket.removeListener('set_deploy_status');
   }
 
   this.init();
