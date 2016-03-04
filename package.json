@@ -4,8 +4,8 @@
   "private": true,
   "scripts": {
     "start": "node ./bin/startup",
-    "start-forever": "forever start --minUptime 1000 --spinSleepTime 1000 node ./bin/startup",
-    "stop-forever":  "forever stop app.js"
+    "start-forever": "forever start --minUptime 1000 --spinSleepTime 1000 ./bin/startup",
+    "stop-forever":  "forever stop ./bin/startup"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
