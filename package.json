@@ -3,7 +3,9 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/startup"
+    start: "node ./bin/startup",
+    "start-forever": "forever start --minUptime 1000 --spinSleepTime 1000 node ./bin/startup",
+    "stop-forever":  "forever stop app.js"
   },
   "dependencies": {
     "body-parser": "~1.12.0",
