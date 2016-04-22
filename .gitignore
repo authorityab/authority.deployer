@@ -18,3 +18,4 @@ script.min.js
 *.swp
 *.codekit
 *.rb
+*.tmp
