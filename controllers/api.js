@@ -1,7 +1,9 @@
+var com = require('../source/communication');
+
 var express = require('express');
 var router = express.Router();
 
-module.exports = function(com) {
+module.exports = function() {
   router.get('/', function(req, res, next) {
     res.send('api');
   });

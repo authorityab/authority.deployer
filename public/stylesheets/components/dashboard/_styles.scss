@@ -1,5 +1,9 @@
 .view{
 
+  #dash_view {
+    margin-top: 6vw;
+  }
+
   &.failed:after{
     width: 0;
     height: 0;

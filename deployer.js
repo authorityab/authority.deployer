@@ -8,8 +8,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-var compass = require('node-compass');
+var sass = require('node-sass');
 var compressor = require('node-minify');
+
+var indexController = require('./controllers/index');
+var apiController = require('./controllers/api');
 
 var app = express();
 
@@ -32,17 +35,17 @@ var scripts = [staticDevPath + '/javascripts/vendor/jquery/dist/jquery.min.js',
                staticDevPath + '/javascripts/pages/releases.js',
                staticDevPath + '/javascripts/pages/environments.js'];
 
-// if (app.get('env') === 'production') {
-//   new compressor.minify({
-//       type: 'uglifyjs',
-//       fileIn: scripts,
-//       fileOut: staticDevPath + '/javascripts/script.js',
-//       callback: function(err, min){
-//           // console.log(err);
-//       }
-//   });
-// }
-// else {
+if (app.get('env') === 'production') {
+  new compressor.minify({
+      type: 'uglifyjs',
+      fileIn: scripts,
+      fileOut: staticDevPath + '/javascripts/script.js',
+      callback: function(err, min){
+          // console.log(err);
+      }
+  });
+}
+else {
   new compressor.minify({
       type: 'no-compress',
       fileIn: scripts,
@@ -51,7 +54,7 @@ var scripts = [staticDevPath + '/javascripts/vendor/jquery/dist/jquery.min.js',
           // console.log(err);
       }
   });
-// }
+}
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
@@ -60,15 +63,20 @@ app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(compass({ mode: 'compress' }));
+
+sass.render({
+  file: staticDevPath + '/stylesheets/style.scss',
+  outFile: staticDevPath + '/stylesheets/style.css',
+}, function(err, result) {
+    if(!err){
+        fs.writeFile(staticDevPath + '/stylesheets/style.css', result.css, function(err) {
+          if(!err) {}
+        });
+      }
+ });
 
 
-function initControllers(com) {
-  var indexController = require('./controllers/index');
-  var apiController = require('./controllers/api')(com);
+app.use('/api', apiController);
+app.use('/', indexController);
 
-  app.use('/api', apiController);
-  app.use('/', indexController);
-}
-
-module.exports = { app: app, initControllers: initControllers };
+module.exports = app;

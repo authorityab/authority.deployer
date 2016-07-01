@@ -29411,6 +29411,7 @@ var Main = function() {
 
   this.socket = io();
   this.clockInterval;
+  this.dateInterval;
   this.navigationList;
   // this.navigationPushHeight = 0;
   this.projects = [];
@@ -29656,19 +29657,20 @@ Main.prototype.setCurrentDate = function() {
   if (this.clockInterval != null)
     return;
 
-  var currentDate = new Date();
-  var monthNr = currentDate.getMonth();
-  var year = currentDate.getFullYear();
-  var day = currentDate.getDate();
-
-  var month = this.monthNamesShort[monthNr];
-  var dateHolder = $('.date-time .date');
-
-  dateHolder.find('.day').text(day);
-  dateHolder.find('.month').text(month);
-  dateHolder.find('.year').text(year);
-
   this.clockInterval = setInterval(function() {
+    var currentDate = new Date();
+    var monthNr = currentDate.getMonth();
+    var year = currentDate.getFullYear();
+    var day = currentDate.getDate();
+
+    var month = Main.monthNamesShort[monthNr];
+    var dateHolder = $('.date-time .date');
+
+    dateHolder.find('.day').text(day);
+    dateHolder.find('.month').text(month);
+    dateHolder.find('.year').text(year);
+  // }, 60 * 1000);
+
 
     function r(el, deg) {
       el.setAttribute('transform', 'rotate('+ deg +' 50 50)')

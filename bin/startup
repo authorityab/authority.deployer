@@ -1,7 +1,7 @@
 #!/usr/bin/env node
 
 var deployer = require('../deployer');
-var debug = require('debug')('SoftResource.Deployer:server');
+var debug = require('debug')('Authority.Deployer:server');
 var http = require('http');
 var com = require('../source/communication');
 
@@ -10,20 +10,14 @@ var com = require('../source/communication');
 */
 
 var port = normalizePort(process.env.PORT || '3000');
-deployer.app.set('port', port);
-
-/**
-* Create and set controllers
-*/
-
-deployer.initControllers(com);
+deployer.set('port', port);
 
 /**
 * Setup error handlers.
 */
 
  // catch 404 and forward to error handler
- deployer.app.use(function(req, res, next) {
+ deployer.use(function(req, res, next) {
    var err = new Error('Not Found');
    err.status = 404;
    next(err);
@@ -31,8 +25,8 @@ deployer.initControllers(com);
 
  // development
  // will print stacktrace
- if (deployer.app.get('env') === 'development') {
-   deployer.app.use(function(err, req, res, next) {
+ if (deployer.get('env') === 'development') {
+   deployer.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error', {
        message: err.message,
@@ -43,8 +37,8 @@ deployer.initControllers(com);
  }
 
  // production
- if (deployer.app.get('env') === 'production') {
-   deployer.app.use(function(err, req, res, next) {
+ if (deployer.get('env') === 'production') {
+   deployer.use(function(err, req, res, next) {
      res.status(err.status || 500);
      res.render('error', {
        message: err.message,
@@ -59,10 +53,10 @@ deployer.initControllers(com);
   * Create HTTP server.
   */
 
-var server = http.createServer(deployer.app);
+var server = http.createServer(deployer);
 
 server.listen(port, function() {
-  console.log('listening on *:' + port + ' in ' + deployer.app.get('env') + ' mode');
+  console.log('listening on *:' + port + ' in ' + deployer.get('env') + ' mode');
 });
 
 server.on('error', onError);
@@ -78,7 +72,7 @@ com.init(server);
  * Initialize IO modules.
  */
 
-if (deployer.app.get('env') === 'production') {
+if (deployer.get('env') === 'production') {
   var inputs = new (require('../source/inputs'));
   var outputs = new (require('../source/outputs'));
 

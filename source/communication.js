@@ -1,10 +1,11 @@
 var Webservices = require('./webservices');
 var Websockets = require('./websockets');
 
+var self;
+var sockets;
+var services;
+
 module.exports = {
-	self: null,
-	sockets: null,
-	services: null,
 
 	init: function(server) {
 		self = this;
@@ -20,6 +21,7 @@ module.exports = {
 	},
 
 	attachOutputs: function(outputs) {
-		self.sockets.setOutputs(outputs);
+		self.sockets.attachOutputs(outputs);
 	}
+	
 };

@@ -1,4 +1,5 @@
 module.exports = function() {
+
 	var self = null;
 	this.led = null;
 	this.Gpio = null;
@@ -55,4 +56,5 @@ module.exports = function() {
 		self.buttonPin.unexport();
 		process.exit();
 	}
+	
 };

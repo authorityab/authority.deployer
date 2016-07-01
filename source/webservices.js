@@ -1,10 +1,10 @@
 var request = require('request');
 
 module.exports = function() {
+
 	var self = null;
 	this.sockets = null;
 
-	// TODO: Change this url in production!
 	this.apiBaseUrl = 'http://authority-deployer.api/api';
 
 	this.init = function (websockets) {
@@ -89,4 +89,5 @@ module.exports = function() {
 			}
 		});
 	};
+	
 };

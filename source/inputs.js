@@ -1,4 +1,5 @@
 module.exports = function() {
+
 	var self = null;
 	this.Gpio = null;
 	this.joystick_up = null;
@@ -148,4 +149,5 @@ module.exports = function() {
 
 		process.exit();
 	};
+	
 };
