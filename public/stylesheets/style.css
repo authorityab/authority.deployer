@@ -118,7 +118,6 @@ body {
   width: 50%;
   display: block;
   height: 100%;
-  margin-top: 4vh;
   padding: 0 0 6vh 0;
   overflow: hidden; }
 
@@ -153,7 +152,7 @@ body {
   font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif; }
 
 .view #dash_view {
-  margin-top: 6vw; }
+  margin-top: 8vw; }
 
 .view.failed:after {
   width: 0;

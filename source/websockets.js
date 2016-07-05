@@ -18,8 +18,17 @@ module.exports = function() {
 	};
 
 	this.attachOutputs = function(outputs) {
-		self.outputs = outputs
+		self.outputs = outputs;
 	};
+
+	// Semi hack, to run in debug without att attached outputs...
+	this.execOutputFunc = function(namespace, func) {
+		if (this.outputs === null) {
+			return false;
+		}
+
+		this.outputs[namespace][func]();
+	}
 
 	this.attachEvents = function () {
 		this.io.on('connection', function(socket) {
@@ -47,7 +56,7 @@ module.exports = function() {
 			});
 
 			socket.on('trigger_deploy', function(data) {
-				self.outputs.ledstrip.loading();
+				self.execOutputFunc('ledstrip', 'loading');
 		  	self.services.triggerDeploy(data.projectId, data.releaseId, data.environmentId);
 			});
 
@@ -56,25 +65,26 @@ module.exports = function() {
 			});
 
 			socket.on('deploy_failed', function() {
-				self.outputs.ledstrip.error();
+				self.execOutputFunc('ledstrip', 'error');
 			});
 
 			socket.on('deploy_succeeded', function() {
-				self.outputs.ledstrip.success();
+				self.execOutputFunc('ledstrip', 'success');
 				setTimeout(function() {
-					self.outputs.ledstrip.stop();
+					self.execOutputFunc('ledstrip', 'stop');
 				}, 10000);
 			});
 
 			socket.on('arm_deploy_button', function() {
-				self.outputs.button.arm();
-				self.outputs.ledstrip.arm();
+				self.execOutputFunc('button', 'arm');
+				self.execOutputFunc('ledstrip', 'arm');
 			});
 
 			socket.on('disarm_deploy_button', function() {
-				self.outputs.button.disarm();
-				self.outputs.ledstrip.stop();
+				self.execOutputFunc('button', 'disarm');
+				self.execOutputFunc('ledstrip', 'stop');
 			});
+
 		});
 	};
 
