@@ -132,4 +132,10 @@ module.exports = function() {
 		}
 	};
 
+	this.test = {
+		debug: function(hollaback) {
+			hollaback('socket debug');
+		}
+	}
+
 };
