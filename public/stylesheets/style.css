@@ -176,7 +176,7 @@ body {
   padding: 2vw 0;
   height: 25%;
   font-size: 1rem;
-  color: #333333; }
+  color: rgba(255, 255, 255, 0.8); }
 
 .view .dash-stat {
   display: inline-block;
