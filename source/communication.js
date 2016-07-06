@@ -10,11 +10,8 @@ module.exports = {
 	init: function(server) {
 		self = this;
 
-		var sockets = new Websockets();
-		var services = new Webservices();
-
-		self.services = services;
-    self.sockets = sockets;
+		self.services = new Webservices();
+    self.sockets = new Websockets();
 
 		self.services.init(self.sockets);
 		self.sockets.init(server, self.services);
@@ -23,5 +20,5 @@ module.exports = {
 	attachOutputs: function(outputs) {
 		self.sockets.attachOutputs(outputs);
 	}
-	
+
 };
