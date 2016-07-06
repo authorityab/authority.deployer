@@ -5,6 +5,7 @@ var router = express.Router();
 
 module.exports = function() {
   router.get('/', function(req, res, next) {
+    console.log('api');
     res.send('api');
   });
 
