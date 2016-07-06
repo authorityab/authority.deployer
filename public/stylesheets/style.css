@@ -524,7 +524,7 @@ ul.project-list {
     vertical-align: middle;
     background-color: #333333;
     padding: 0.1em;
-    color: #574f55; }
+    color: rgba(255, 255, 255, 0.8); }
   .date .month {
     text-transform: uppercase;
     font-weight: lighter;
@@ -539,7 +539,7 @@ ul.project-list {
     margin: 0 1vw;
     font-weight: lighter;
     background-color: #333333;
-    color: #574f55;
+    color: rgba(255, 255, 255, 0.8);
     vertical-align: middle;
     padding: 0 0.2em; }
 
