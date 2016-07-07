@@ -152,7 +152,7 @@ body {
   font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif; }
 
 .view #dash_view {
-  margin-top: 8vw; }
+  margin-top: 7vw; }
 
 .view.failed:after {
   width: 0;
@@ -320,14 +320,17 @@ ul.project-list {
 .head-line {
   display: block;
   margin: 0 2em;
-  height: 8.3%; }
+  height: 8.3%;
+  text-align: center; }
   .head-line > h1 {
     color: rgba(255, 255, 255, 0.8);
+    background: #333333;
+    padding: 5px;
+    display: inline-block;
     text-align: center;
     font-weight: lighter;
     text-transform: uppercase;
-    letter-spacing: 0.1em;
-    position: relative; }
+    letter-spacing: 0.1em; }
     .head-line > h1.line {
       background: center center repeat-x;
       background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAIAAAACCAMAAABFaP0WAAAAA1BMVEX///+nxBvIAAAACklEQVR4AWMAAwAABgABeV6XjwAAAABJRU5ErkJggg==); }

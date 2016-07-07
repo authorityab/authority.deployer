@@ -1,8 +1,8 @@
 .head-line{
   display: block;
   margin: 0 2em;
-
   height: 8.3%;
+  text-align: center;
 
   >h1{
 
@@ -12,11 +12,13 @@
       }
 
     color: $light;
+    background: $dark;
+    padding: 5px;
+    display: inline-block;
     text-align: center;
     font-weight: lighter;
     text-transform: uppercase;
     letter-spacing: 0.1em;
-    position: relative;
     >span{
       background-color: $background-color;
       padding: 0 1em;
