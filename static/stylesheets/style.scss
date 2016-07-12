@@ -58,7 +58,7 @@ li {
   right: 0.7em;
   content: "";
   font-size: $font-bread-head-size;
-  color: $fail-badge-text-color;
+  color: $theme;
   min-width: 12%;
   text-align: center;
   padding: 0.2em;
@@ -92,4 +92,16 @@ li {
   @extend %message-badge;
   content : "in progress";
   background-color: $in-progress-color;
+}
+
+.build-fail:after {
+  @extend %message-badge;
+  content: attr(data-builder);
+  background-color: $fail-color;
+}
+
+.build-success:after {
+  @extend %message-badge;
+  content: attr(data-builder);
+  background-color: $success-color;
 }

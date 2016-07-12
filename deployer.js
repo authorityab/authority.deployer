@@ -35,7 +35,7 @@ var scripts = [staticDevPath + '/javascripts/vendor/jquery/dist/jquery.min.js',
                staticDevPath + '/javascripts/pages/releases.js',
                staticDevPath + '/javascripts/pages/environments.js'];
 
-if (app.get('env') === 'production') {
+// if (app.get('env') === 'production') {
   new compressor.minify({
       type: 'uglifyjs',
       fileIn: scripts,
@@ -44,17 +44,17 @@ if (app.get('env') === 'production') {
           // console.log(err);
       }
   });
-}
-else {
-  new compressor.minify({
-      type: 'no-compress',
-      fileIn: scripts,
-      fileOut: staticDevPath + '/javascripts/script.js',
-      callback: function(err, min){
-          // console.log(err);
-      }
-  });
-}
+// }
+// else {
+//   new compressor.minify({
+//       type: 'no-compress',
+//       fileIn: scripts,
+//       fileOut: staticDevPath + '/javascripts/script.js',
+//       callback: function(err, min){
+//           // console.log(err);
+//       }
+//   });
+// }
 
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

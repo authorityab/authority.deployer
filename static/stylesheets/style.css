@@ -152,7 +152,7 @@ body {
   font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif; }
 
 .view #dash_view {
-  margin-top: 4vw; }
+  margin-top: 3.5vw; }
 
 .view.failed:after {
   width: 0;
@@ -242,7 +242,7 @@ body {
   .view .failer .name {
     background-color: #ed677a;
     padding: 1vw;
-    color: #ffffff;
+    color: #574f55;
     font-size: 1.5vw;
     text-transform: uppercase;
     border: 0.3vw solid #574f55;
@@ -584,14 +584,14 @@ li {
   margin-bottom: 1px;
   padding: 8px; }
 
-.message-badge, .dev:after, .fail:after, .success:after, .in-progress:after {
+.message-badge, .dev:after, .fail:after, .success:after, .in-progress:after, .build-fail:after, .build-success:after {
   display: block;
   position: absolute;
   top: 0.7em;
   right: 0.7em;
   content: "";
   font-size: 2vh;
-  color: #ffffff;
+  color: #574f55;
   min-width: 12%;
   text-align: center;
   padding: 0.2em;
@@ -615,3 +615,11 @@ li {
 .in-progress:after {
   content: "in progress";
   background-color: #33CCFF; }
+
+.build-fail:after {
+  content: attr(data-builder);
+  background-color: #f72350; }
+
+.build-success:after {
+  content: attr(data-builder);
+  background-color: #67cb67; }

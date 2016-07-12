@@ -53,13 +53,14 @@ function Dashboard() {
       buildHolder.find('h4').text(hours + ':' + minutes);
 
       buildHolder.find('.l-description').text(this.buildParams.latestBuild.ProjectName + ' - ' + this.buildParams.latestBuild.StepName);
+      buildHolder.attr('data-builder', this.buildParams.latestBuild.LastModifiedBy);
 
       if (this.buildParams.latestBuild.Status === 'SUCCESS') {
-        buildHolder.removeClass('fail');
-        buildHolder.addClass('success');
+        buildHolder.removeClass('build-fail');
+        buildHolder.addClass('build-success');
       } else {
-        buildHolder.removeClass('success');
-        buildHolder.addClass('fail');
+        buildHolder.removeClass('build-success');
+        buildHolder.addClass('build-fail');
       }
     }
   };
