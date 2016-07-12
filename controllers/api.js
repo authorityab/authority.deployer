@@ -18,14 +18,14 @@ router.post('/setBuilds', function(req, res, next) {
 });
 
 router.post('/setLatestBuild', function(req, res, next) {
-  console.log('setBuilds');
+  console.log('setLatestBuild');
   com.sockets.builds.setLatest(req.body, function(isSuccess) {
     res.send({ success: isSuccess });
   });
 });
 
 router.post('/setLatestFailedBuild', function(req, res, next) {
-  console.log('setBuilds');
+  console.log('setLatestFailedBuild');
   com.sockets.builds.setLatestFailed(req.body, function(isSuccess) {
     res.send({ success: isSuccess });
   });
