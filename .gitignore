@@ -2,12 +2,12 @@
 npm-debug.log
 
 .settings/
-public/.sass-cache/
+static/.sass-cache/
 node_modules/
 typings/
 
-public/javascripts/script.js
-public/javascripts/script.min.js
+static/javascripts/script.js
+static/javascripts/script.min.js
 
 .idea/
 

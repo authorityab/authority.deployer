@@ -152,7 +152,7 @@ body {
   font-family: Helvetica Neue, Helvetica, Arial, Sans-Serif; }
 
 .view #dash_view {
-  margin-top: 3vw; }
+  margin-top: 4vw; }
 
 .view.failed:after {
   width: 0;
@@ -185,9 +185,9 @@ body {
   .view .dash-stat h1 {
     font-size: 4em; }
   .view .dash-stat h3 {
-    font-size: 1em;
+    font-size: 1.5em;
     text-transform: uppercase;
-    font-weight: bold; }
+    font-weight: normal; }
 
 .view .l-date h1 {
   font-size: 6em; }

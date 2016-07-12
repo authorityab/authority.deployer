@@ -16,8 +16,8 @@ var apiController = require('./controllers/api');
 
 var app = express();
 
-var staticDevPath = path.join(__dirname, 'public');
-var staticProPath = path.join(__dirname, 'public_dist');
+var staticDevPath = path.join(__dirname, 'static');
+var staticProPath = path.join(__dirname, 'static_dist');
 
 app.use(express.static(staticDevPath));
 app.use(favicon(staticDevPath + '/images/favicon.ico'));
