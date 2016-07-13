@@ -74,11 +74,6 @@ var Main = function() {
       self.ngScope().currentPage.right();
     });
 
-    this.socket.removeListener('inputs_right');
-    this.socket.on('inputs_right', function() {
-      self.ngScope().currentPage.right();
-    });
-
     this.socket.removeListener('set_builds');
     this.socket.on('set_builds', function(builds, hollaback) {
       setBuilds(builds, hollaback);

@@ -14,9 +14,6 @@ function Environments() {
     this.navigationList = $('#environments ul');
 
     // TODO: Remove after test
-    // $(document).unbind("hitenter", hitEnter);
-    // $(document).keydown("hitenter", hitEnter);
-
     $(document).off('keydown', hitEnter);
     $(document).on('keydown', hitEnter);
 
@@ -187,8 +184,6 @@ function Environments() {
         self.pageLock = false;
       }
     }
-
-    // self.socket.removeListener('set_deploy_status');
   }
 
   this.init();
