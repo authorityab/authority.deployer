@@ -21,7 +21,6 @@ body{
 .wrapper{
   width: $wrapper-width;
   height: $screen-height;
-  overflow: scroll;
 
   >*{
     float: left;
