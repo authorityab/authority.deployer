@@ -337,6 +337,7 @@ ul.project-list {
   height: 8.3%;
   text-align: center; }
   .head-line > h1 {
+    font-size: 2em;
     color: rgba(255, 255, 255, 0.8);
     background: #333333;
     padding: 5px;
@@ -595,7 +596,7 @@ li {
   top: 0.7em;
   right: 0.7em;
   content: "";
-  font-size: 2vh;
+  font-size: 2.5vh;
   font-weight: bold;
   color: #333333;
   min-width: 12%;
