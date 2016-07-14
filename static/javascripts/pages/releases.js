@@ -35,7 +35,7 @@ function Releases() {
 
     if (releases === null || releases.Items.length === 0) {
       var listItem = $('<li><div>' +
-                         '<h2>No releases for the selected project have been published yet.</h3>' +
+                         '<h2>This project has not been published to Octopus yet.</h3>' +
                       '</div></li>');
       self.navigationList.append(listItem);
       self.navigationList.appendTo('.wrapper nav');

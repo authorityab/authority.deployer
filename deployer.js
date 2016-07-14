@@ -11,8 +11,9 @@ var bodyParser = require('body-parser');
 var sass = require('node-sass');
 var compressor = require('node-minify');
 
-var indexController = require('./controllers/index');
-var apiController = require('./controllers/api');
+var pagesApi = require('./api/pages');
+var buildsApi = require('./api/builds');
+var inputsApi = require('./api/inputs');
 
 var app = express();
 
@@ -76,7 +77,8 @@ sass.render({
  });
 
 
-app.use('/api', apiController);
-app.use('/', indexController);
+app.use('/api/builds', buildsApi);
+app.use('/api/inputs', inputsApi);
+app.use('/', pagesApi);
 
 module.exports = app;

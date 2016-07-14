@@ -16,7 +16,7 @@ module.exports = function() {
 	];
 
 	this.lock_button = false;
-	this.lock_time = 300;
+	this.lock_time = 500;
 
 	this.init = function(communication) {
 		self = this;
@@ -149,5 +149,5 @@ module.exports = function() {
 
 		process.exit();
 	};
-	
+
 };
