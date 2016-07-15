@@ -5,7 +5,7 @@ var router = express.Router();
 
 router.post('/up', function(req, res, next) {
   console.log('api up');
-  com.sockets.inputs.up();
+  com.sockets.inputs.down();
   res.send({ success: true });
 });
 
