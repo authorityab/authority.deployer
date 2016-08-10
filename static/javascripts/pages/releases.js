@@ -5,6 +5,8 @@ function Releases() {
 
   this.init = function() {
     // this.startSpinner();
+    self.socket.emit('loading_start');
+
     this.pageLock = true;
     this.navigationList = $('#releases ul');
 
@@ -79,7 +81,9 @@ function Releases() {
     $('header').removeClass('hidden');
 
     self.pageLock = false;
+
     // self.stopSpinner();
+    self.socket.emit('loading_stop');
   }
 
   this.init();

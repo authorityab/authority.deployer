@@ -3,6 +3,8 @@ function Projects() {
 
   this.init = function() {
     // this.startSpinner();
+    self.socket.emit('loading_start');
+
     this.pageLock = true;
 		this.navigationList = $('#projects ul');
 
@@ -41,7 +43,9 @@ function Projects() {
 		}
 
 		this.pageLock = false;
+
 		// this.stopSpinner();
+    self.socket.emit('loading_stop');
 	};
 
   this.right = function() {

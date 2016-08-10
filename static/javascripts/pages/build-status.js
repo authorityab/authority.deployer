@@ -3,6 +3,8 @@ function BuildStatus() {
 
   this.init = function() {
     // this.startSpinner();
+    self.socket.emit('loading_start');
+
     this.navigationList = $('nav .project-list');
     self.setFailedBuilds();
   };
@@ -31,6 +33,7 @@ function BuildStatus() {
     }
 
     // this.stopSpinner();
+    self.socket.emit('loading_stop');
   };
 
 
