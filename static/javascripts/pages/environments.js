@@ -127,7 +127,6 @@ function Environments() {
       self.navigationList.appendTo('.wrapper nav');
 
       self.lockRight = false;
-      self.socket.emit('loading_stop');
       self.socket.emit('arm_deploy_button');
     }
 
