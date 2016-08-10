@@ -9,7 +9,7 @@ function Environments() {
 
   this.init = function() {
     // this.startSpinner();
-    self.socket.emit('loading_start');
+    // self.socket.emit('loading_start');
 
     this.pageLock = true;
     this.buttonIsArmed = true;
