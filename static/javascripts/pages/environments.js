@@ -93,6 +93,7 @@ function Environments() {
 			self.navigationList.append(listItem);
       self.navigationList.appendTo('.wrapper nav');
       self.lockRight = true;
+      self.socket.emit('loading_stop');
 		} else {
       self.releaseVersion = environments.ReleaseVersion;
 
@@ -126,6 +127,7 @@ function Environments() {
       self.navigationList.appendTo('.wrapper nav');
 
       self.lockRight = false;
+      self.socket.emit('loading_stop');
       self.socket.emit('arm_deploy_button');
     }
 
@@ -134,9 +136,6 @@ function Environments() {
     self.navigationList.removeClass('hidden');
 
     self.pageLock = false;
-
-    // self.stopSpinner();
-    self.socket.emit('loading_stop');
   }
 
   function triggerDeploy() {
