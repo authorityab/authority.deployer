@@ -1,4 +1,4 @@
-var com = require('../source/communication');
+var com = require('../lib/communication');
 
 var express = require('express');
 var router = express.Router();

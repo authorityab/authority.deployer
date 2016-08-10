@@ -3,7 +3,7 @@
 var deployer = require('../deployer');
 var debug = require('debug')('Authority.Deployer:server');
 var http = require('http');
-var com = require('../source/communication');
+var com = require('../lib/communication');
 
 /**
 * Get port from environment and store in Express.
@@ -73,8 +73,8 @@ com.init(server);
  */
 
 if (deployer.get('env') === 'production') {
-  var inputs = new (require('../source/inputs'));
-  var outputs = new (require('../source/outputs'));
+  var inputs = new (require('../lib/inputs'));
+  var outputs = new (require('../lib/outputs'));
 
   inputs.init(com);
   outputs.init();
