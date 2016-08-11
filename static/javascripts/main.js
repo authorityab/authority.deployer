@@ -134,21 +134,24 @@ var Main = function() {
   }
 
   function setLatestBuild(build, hollaback) {
-    var isSuccess;
-    try {
-      self.buildParams.latestBuild = build;
-      checkForBuildErrors(build);
+    var isSuccess = true;
+    console.log('latest build id: ' + build.Id);
+    if (build.Id !== self.buildParams.latestBuild.Id) {
+      console.log('latest build id is not the same');
+      try {
+        self.buildParams.latestBuild = build;
+        checkForBuildErrors(build);
 
-      if (typeof Dashboard === 'object') {
-        Dashboard.setLatestBuild();
+        if (typeof Dashboard === 'object') {
+          Dashboard.setLatestBuild();
+        }
+        if (typeof BuildStatus === 'object') {
+          BuildStatus.setFailedBuilds();
+        }
       }
-      if (typeof BuildStatus === 'object') {
-        BuildStatus.setFailedBuilds();
+      catch(e) {
+        isSuccess = false;
       }
-      isSuccess = true;
-    }
-    catch(e) {
-      isSuccess = false;
     }
 
     if (typeof(hollaback) == "function") {
