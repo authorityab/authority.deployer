@@ -136,8 +136,10 @@ var Main = function() {
   function setLatestBuild(build, hollaback) {
     var isSuccess = true;
     console.log('latest build id: ' + build.Id);
-    if (self.buildParams.latestBuild == null || build.Id !== self.buildParams.latestBuild.Id) {
-      console.log('latest build id is not the same');
+    if (self.buildParams.latestBuild == null ||
+        build.Id !== self.buildParams.latestBuild.Id ||
+        build.Status !== self.buildParams.latestBuild.Status) {
+      console.log('latest build has changed');
       try {
         self.buildParams.latestBuild = build;
         checkForBuildErrors(build);
