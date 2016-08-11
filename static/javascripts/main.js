@@ -137,7 +137,8 @@ var Main = function() {
     var isSuccess;
     try {
       self.buildParams.latestBuild = build;
-      checkForBuildErrors();
+      checkForBuildErrors(build);
+
       if (typeof Dashboard === 'object') {
         Dashboard.setLatestBuild();
       }
@@ -173,7 +174,7 @@ var Main = function() {
     }
   }
 
-  function checkForBuildErrors() {
+  function checkForBuildErrors(build) {
     if (self.buildParams.failedBuilds.length > 0) {
       $('div.wrapper').addClass('failed');
       self.hasBuildErrors = true;
@@ -181,9 +182,13 @@ var Main = function() {
       $('div.wrapper').removeClass('failed');
       self.hasBuildErrors = false;
     }
+
+    if (build.Status === 'FAILURE') {
+      self.socket.emit('build_failed');
+    } else if (build.Status === 'SUCCESS') {
+      self.socket.emit('build_succeeded');
+    }
   }
-
-
 
   this.init();
 }
