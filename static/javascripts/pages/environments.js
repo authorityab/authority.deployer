@@ -8,14 +8,10 @@ function Environments() {
   this.buttonIsArmed = false;
 
   this.init = function() {
-    // this.startSpinner();
-    // self.socket.emit('loading_start');
-
     this.pageLock = true;
     this.buttonIsArmed = true;
     this.navigationList = $('#environments ul');
 
-    // TODO: Remove after test
     $(document).off('keydown', hitEnter);
     $(document).on('keydown', hitEnter);
 

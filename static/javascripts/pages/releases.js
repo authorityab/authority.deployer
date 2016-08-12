@@ -4,7 +4,6 @@ function Releases() {
   this.projectId;
 
   this.init = function() {
-    // this.startSpinner();
     self.socket.emit('loading_start');
 
     this.pageLock = true;
@@ -81,8 +80,6 @@ function Releases() {
     $('header').removeClass('hidden');
 
     self.pageLock = false;
-
-    // self.stopSpinner();
     self.socket.emit('loading_stop');
   }
 

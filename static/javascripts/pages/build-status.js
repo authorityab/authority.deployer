@@ -2,7 +2,6 @@ function BuildStatus() {
   var self = this;
 
   this.init = function() {
-    // this.startSpinner();
     self.socket.emit('loading_start');
 
     this.navigationList = $('nav .project-list');
@@ -32,10 +31,8 @@ function BuildStatus() {
       this.navigationList.find('li:first-child').addClass('current');
     }
 
-    // this.stopSpinner();
     self.socket.emit('loading_stop');
   };
-
 
   this.init();
 }

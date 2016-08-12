@@ -4,22 +4,7 @@ function Dashboard() {
   this.lastFailedCount = 0;
 
   this.init = function() {
-      // this.stopSpinner();
       self.socket.emit('loading_stop');
-
-      //TODO: Remove after test
-      // $(document).on('click', '#success', function(){
-  		// 	self.socket.emit('arm_deploy_button');
-  		// });
-  		// $(document).on('click', '#error', function(){
-  		// 	self.socket.emit('disarm_deploy_button');
-  		// });
-  		// $(document).on('click', '#loading', function(){
-  		// 	Main.socket.emit('trigger_deploy');
-  		// });
-  		// $(document).on('click', '#stop', function(){
-  		// 	self.socket.emit('ledstrip_stop');
-  		// });
 
       setTimeout(function() {
         self.setLatestBuild();

@@ -2,7 +2,6 @@ function Projects() {
   var self = this;
 
   this.init = function() {
-    // this.startSpinner();
     self.socket.emit('loading_start');
 
     this.pageLock = true;
@@ -30,8 +29,6 @@ function Projects() {
 												 	'<h2>' + project.Name + '</h2>' +
 											 		'<h3>' + project.GroupName + '</h3>' +
 													'<h4>' + project.Description + '</h4>' +
-                          // '<img src="' + project.Logo + '" alt="Project Logo"/>' +
-
 											  '</div></li>');
 
 				listItem.attr('data-project-id', project.Id);
@@ -43,8 +40,6 @@ function Projects() {
 		}
 
 		this.pageLock = false;
-
-		// this.stopSpinner();
     self.socket.emit('loading_stop');
 	};
 

@@ -5,7 +5,6 @@ var Main = function() {
   this.clockInterval;
   this.dateInterval;
   this.navigationList;
-  // this.navigationPushHeight = 0;
   this.projects = [];
   this.monthNames = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
   this.monthNamesShort = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
@@ -25,29 +24,21 @@ var Main = function() {
   this.init = function() {
     this.setCurrentDate();
 
-    //TODO: Remove after test
     $(document).unbind();
     $(document).keydown(function(e) {
       switch(e.which) {
           case 37: // left
-          self.ngScope().currentPage.left();
-          console.log('l');
-          break;
-
+            self.ngScope().currentPage.left();
+            break;
           case 38: // up
-          self.ngScope().currentPage.up();
-          console.log('u');
-          break;
-
+            self.ngScope().currentPage.up();
+            break;
           case 39: // right
-          self.ngScope().currentPage.right();
-          console.log('r');
-          break;
-
+            self.ngScope().currentPage.right();
+            break;
           case 40: // down
-          self.ngScope().currentPage.down();
-          console.log('d');
-          break;
+            self.ngScope().currentPage.down();
+            break;
 
           default: return;
       }
@@ -231,11 +222,6 @@ Main.prototype.removeListeners = function() {
 
 Main.prototype.startSpinner = function() {
   this.stopSpinner();
-  // var spinner = $('<div class="spinner">' +
-  //                   '<div class="double-bounce1"></div>' +
-  //                   '<div class="double-bounce2"></div>' +
-  //                 '</div>');
-
   var spinner = $('<div class="spinner sk-folding-cube">' +
                     '<div class="sk-cube1 sk-cube"></div>' +
                     '<div class="sk-cube2 sk-cube"></div>' +
@@ -266,8 +252,6 @@ Main.prototype.setCurrentDate = function() {
     dateHolder.find('.day').text(day);
     dateHolder.find('.month').text(month);
     dateHolder.find('.year').text(year);
-  // }, 60 * 1000);
-
 
     function r(el, deg) {
       el.setAttribute('transform', 'rotate('+ deg +' 50 50)')
@@ -287,8 +271,6 @@ Main.prototype.up = function() {
 
 
     if (activeIndex === 0) {
-      // list.find('li:last-child').addClass('current');
-    } else {
       activeItem.removeClass('current');
       activeItem.prev('li').addClass('current');
       var pushHeight = list.css('margin-top').split('px')[0];
@@ -306,16 +288,12 @@ Main.prototype.down = function() {
     var activeIndex = list.find('li').index(activeItem);
 
 
-    if (activeIndex === totalCount - 1) {
-      // list.find('li:first-child').addClass('current');
-
-    } else {
+    if (activeIndex !== totalCount - 1) {
       activeItem.removeClass('current');
       activeItem.next('li').addClass('current');
       var pushHeight = list.css('margin-top').split('px')[0];
       pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight() * -1;
       list.css('margin-top', pushHeight + 'px');
-      // list.css('margin-top', this.navigationPushHeight + 'px');
     }
   }
 }
