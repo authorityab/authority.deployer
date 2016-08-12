@@ -86,6 +86,7 @@ function Dashboard() {
     }
     if (this.lastFailedCount  !== failedCount) {
       failedHolder.text(failedCount);
+      failedHolder.addClass('pulse');
 
       setTimeout(function() {
         failedHolder.removeClass('pulse');
