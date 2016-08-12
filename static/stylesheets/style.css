@@ -655,3 +655,7 @@ li {
 .build-success:after {
   content: attr(data-builder);
   background-color: #67cb67; }
+
+.blink:after {
+  background-color: #574f55;
+  color: #574f55; }

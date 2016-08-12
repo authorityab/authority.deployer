@@ -2,6 +2,8 @@ function Dashboard() {
   var self = this;
   this.lastSuccessCount = 0;
   this.lastFailedCount = 0;
+  this.buildTimer = null;
+  this.timerLock = false;
 
   this.init = function() {
       self.socket.emit('loading_stop');
@@ -49,6 +51,15 @@ function Dashboard() {
         buildHolder.removeClass('build-success');
         buildHolder.addClass('build-fail');
       }
+
+      if (!this.timerLock) {
+        var buildTimer = this.blink(buildHolder);
+        this.timerLock = true;
+        setTimeout(function() {
+          self.timerLock = false;
+          self.stopBlink(buildHolder, buildTimer);
+        }, 5000);
+      }
     }
   };
 
@@ -65,7 +76,7 @@ function Dashboard() {
       var successTimer = this.blink(successHolder);
 
       setTimeout(function() {
-        clearInterval(successTimer);
+        self.stopBlink(successHolder, successTimer);
       }, 5000)
     }
     if (this.lastFailedCount  !== failedCount) {
@@ -73,20 +84,10 @@ function Dashboard() {
       var failTimer = this.blink(failedHolder);
 
       setTimeout(function() {
-        clearInterval(failTimer);
+        self.stopBlink(failedHolder, failTimer);
       }, 5000)
     }
   };
-
-  this.blink = function(item) {
-    for (var i = 0; i < 5; i++) {
-      var timer = setInterval(function() {
-        item.toggleClass('blink');
-      }, 500);
-    }
-    item.removeClass('blink');
-    return timer;
-  }
 
   this.setLastFailedCounter = function() {
     if (this.buildParams.latestFailed != null) {

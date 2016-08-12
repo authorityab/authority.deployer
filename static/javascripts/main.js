@@ -126,11 +126,9 @@ var Main = function() {
 
   function setLatestBuild(build, hollaback) {
     var isSuccess = true;
-    console.log('latest build id: ' + build.Id);
     if (self.buildParams.latestBuild == null ||
         build.Id !== self.buildParams.latestBuild.Id ||
         build.Status !== self.buildParams.latestBuild.Status) {
-      console.log('latest build has changed');
       try {
         self.buildParams.latestBuild = build;
         checkForBuildErrors(build);
@@ -263,37 +261,14 @@ Main.prototype.setCurrentDate = function() {
   }, 1000)
 }
 
-Main.prototype.up = function() {
-  var list = this.ngScope().currentPage.navigationList;
-  if (list !== undefined) {
-    var activeItem = list.find('li.current');
-    var activeIndex = list.find('li').index(activeItem);
-
-
-    if (activeIndex === 0) {
-      activeItem.removeClass('current');
-      activeItem.prev('li').addClass('current');
-      var pushHeight = list.css('margin-top').split('px')[0];
-      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight();
-      list.css('margin-top', pushHeight + 'px');
-    }
-  }
+Main.prototype.blink = function(item) {
+    var timer = setInterval(function() {
+      item.toggleClass('blink');
+    }, 500);
+  return timer;
 }
 
-Main.prototype.down = function() {
-  var list = this.ngScope().currentPage.navigationList;
-  if (list !== undefined) {
-    var totalCount = list.find('li').length;
-    var activeItem = list.find('li.current');
-    var activeIndex = list.find('li').index(activeItem);
-
-
-    if (activeIndex !== totalCount - 1) {
-      activeItem.removeClass('current');
-      activeItem.next('li').addClass('current');
-      var pushHeight = list.css('margin-top').split('px')[0];
-      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight() * -1;
-      list.css('margin-top', pushHeight + 'px');
-    }
-  }
+Main.prototype.stopBlink = function(item, timer) {
+  clearInterval(timer);
+  item.removeClass('blink');
 }

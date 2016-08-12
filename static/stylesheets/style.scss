@@ -89,20 +89,31 @@ li {
   background-color: $success-color;
 }
 
-.in-progress:after {
-  @extend %message-badge;
-  content : "in progress";
-  background-color: $in-progress-color;
+.in-progress {
+  &:after {
+    @extend %message-badge;
+    content : "in progress";
+    background-color: $in-progress-color;
+  }
 }
 
-.build-fail:after {
-  @extend %message-badge;
-  content: attr(data-builder);
-  background-color: $fail-color;
+.build-fail {
+  &:after {
+    @extend %message-badge;
+    content: attr(data-builder);
+    background-color: $fail-color;
+  }
 }
 
-.build-success:after {
-  @extend %message-badge;
-  content: attr(data-builder);
-  background-color: $success-color;
+.build-success {
+  &:after {
+    @extend %message-badge;
+    content: attr(data-builder);
+    background-color: $success-color;
+  }
+}
+
+.blink:after {
+  background-color: $theme;
+  color: $theme;
 }
