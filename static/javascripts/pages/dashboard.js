@@ -77,22 +77,31 @@ function Dashboard() {
 
     if (this.lastSuccessCount  !== successCount) {
       successHolder.text(successCount);
-      successHolder.addClass('pulse');
+      var successTimer = this.blink(successHolder);
 
       setTimeout(function() {
-        successHolder.removeClass('pulse');
-      }, 5000);
-
+        clearInterval(successTimer);
+      }, 5000)
     }
     if (this.lastFailedCount  !== failedCount) {
       failedHolder.text(failedCount);
-      failedHolder.addClass('pulse');
+      var failTimer = this.blink(failedHolder);
 
       setTimeout(function() {
-        failedHolder.removeClass('pulse');
-      }, 5000);
+        clearInterval(failTimer);
+      }, 5000)
     }
   };
+
+  this.blink = function(item) {
+    for (var i = 0; i < 5; i++) {
+      var timer = setInterval(function() {
+        item.toggleClass('blink');
+      }, 500);
+    }
+    item.removeClass('blink');
+    return timer;
+  }
 
   this.setLastFailedCounter = function() {
     if (this.buildParams.latestFailed != null) {
