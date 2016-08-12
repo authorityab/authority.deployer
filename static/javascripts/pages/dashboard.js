@@ -1,5 +1,7 @@
 function Dashboard() {
   var self = this;
+  this.lastSuccessCount = 0;
+  this.lastFailedCount = 0;
 
   this.init = function() {
       // this.stopSpinner();
@@ -70,8 +72,25 @@ function Dashboard() {
     var successCount = this.buildParams.succeededBuilds.length;
     var failedCount = this.buildParams.failedBuilds.length;
 
-    $('.p-success.dash-stat h1').text(successCount);
-    $('.p-fail.dash-stat h1').text(failedCount);
+    var successHolder = $('.p-success.dash-stat h1');
+    var failedHolder = $('.p-fail.dash-stat h1');
+
+    if (this.lastSuccessCount  !== successCount) {
+      successHolder.text(successCount);
+      successHolder.addClass('pulse');
+
+      setTimeout(function() {
+        successHolder.removeClass('pulse');
+      }, 5000);
+
+    }
+    if (this.lastFailedCount  !== failedCount) {
+      failedHolder.text(failedCount);
+
+      setTimeout(function() {
+        failedHolder.removeClass('pulse');
+      }, 5000);
+    }
   };
 
   this.setLastFailedCounter = function() {

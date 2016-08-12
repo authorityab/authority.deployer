@@ -39,6 +39,12 @@ body{
   @include spin;
 }
 
+.pulse {
+    -webkit-animation: pulsate 1s ease-out;
+    -webkit-animation-iteration-count: infinite;
+    opacity: 0.0
+}
+
 
 .sec-2{
   float: left;
