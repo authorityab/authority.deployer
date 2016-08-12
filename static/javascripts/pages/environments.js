@@ -6,6 +6,7 @@ function Environments() {
   this.releaseVersion;
   this.deployInProgress = false;
   this.buttonIsArmed = false;
+  this.inProgressTimer;
 
   this.init = function() {
     this.pageLock = true;
@@ -144,6 +145,9 @@ function Environments() {
     		self.socket.emit('trigger_deploy', { projectId: self.projectId, releaseId: self.releaseId, environmentId: environmentId });
         activeItem.removeClass('success fail');
     		activeItem.addClass('in-progress');
+
+        self.inProgressTimer = self.blink(activeItem);
+
       }
     }
     self.socket.removeListener('inputs_button');
@@ -163,6 +167,8 @@ function Environments() {
       if (status.IsCompleted) {
         clearInterval(self.deployInProgress);
 
+        self.stopBlink(self.navigationList.find('li.in-progress'), self.inProgressTimer);
+
         env.removeClass('in-progress');
         env.find('h3').text(self.releaseVersion);
         env.find('h4').text(status.CompletedTime);
@@ -178,6 +184,7 @@ function Environments() {
           env.addClass('fail');
           self.socket.emit('deploy_failed');
         }
+
 
         self.pageLock = false;
       }

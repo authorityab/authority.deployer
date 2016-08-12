@@ -31,6 +31,7 @@ var Main = function() {
             self.ngScope().currentPage.left();
             break;
           case 38: // up
+            console.log('up');
             self.ngScope().currentPage.up();
             break;
           case 39: // right
@@ -187,6 +188,39 @@ var Main = function() {
   this.init();
 }
 
+Main.prototype.up = function() {
+  console.log('up 2');
+  var list = this.ngScope().currentPage.navigationList;
+  if (list !== undefined) {
+    var activeItem = list.find('li.current');
+    var activeIndex = list.find('li').index(activeItem);
+
+    if (activeIndex !== 0) {
+      activeItem.removeClass('current');
+      activeItem.prev('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight();
+      list.css('margin-top', pushHeight + 'px');
+    }
+  }
+}
+
+Main.prototype.down = function() {
+  var list = this.ngScope().currentPage.navigationList;
+  if (list !== undefined) {
+    var totalCount = list.find('li').length;
+    var activeItem = list.find('li.current');
+    var activeIndex = list.find('li').index(activeItem);
+
+    if (activeIndex !== totalCount - 1) {
+      activeItem.removeClass('current');
+      activeItem.next('li').addClass('current');
+      var pushHeight = list.css('margin-top').split('px')[0];
+      pushHeight = parseFloat(pushHeight) + list.find('li').first().outerHeight() * -1;
+      list.css('margin-top', pushHeight + 'px');
+    }
+  }
+}
 
 Main.prototype.left = function() {
   var page = this;
