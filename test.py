@@ -42,5 +42,5 @@ while True:
 	if button_pushed == False:
 		print('button_pushed')
 		GPIO.output(12, not GPIO.input(12))
-		print('button_led_state ' + GPIO.input(12))
+		print('button_led_state ' + str(GPIO.input(12)))
 		time.sleep(0.2)
