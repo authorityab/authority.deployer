@@ -170,6 +170,7 @@ var Main = function() {
   }
 
   function checkForBuildErrors(build) {
+    console.log('checkForBuildErrors');
     if (self.buildParams.failedBuilds.length > 0) {
       $('div.wrapper').addClass('failed');
       self.hasBuildErrors = true;
