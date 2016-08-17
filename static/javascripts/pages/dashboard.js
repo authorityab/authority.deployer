@@ -73,19 +73,19 @@ function Dashboard() {
 
     if (this.lastSuccessCount  !== successCount) {
       successHolder.text(successCount);
-      var successTimer = this.blink(successHolder);
-
-      setTimeout(function() {
-        self.stopBlink(successHolder, successTimer);
-      }, 5000)
+      // var successTimer = this.blink(successHolder);
+      //
+      // setTimeout(function() {
+      //   self.stopBlink(successHolder, successTimer);
+      // }, 5000)
     }
     if (this.lastFailedCount  !== failedCount) {
       failedHolder.text(failedCount);
-      var failTimer = this.blink(failedHolder);
-
-      setTimeout(function() {
-        self.stopBlink(failedHolder, failTimer);
-      }, 5000)
+      // var failTimer = this.blink(failedHolder);
+      //
+      // setTimeout(function() {
+      //   self.stopBlink(failedHolder, failTimer);
+      // }, 5000)
     }
   };
 
