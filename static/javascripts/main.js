@@ -179,11 +179,11 @@ var Main = function() {
       self.hasBuildErrors = false;
     }
 
-    if (build.Status === 'FAILURE') {
-      self.socket.emit('build_failed');
-    } else if (build.Status === 'SUCCESS') {
-      self.socket.emit('build_succeeded');
-    }
+    // if (build.Status === 'FAILURE') {
+    //   self.socket.emit('build_failed');
+    // } else if (build.Status === 'SUCCESS') {
+    //   self.socket.emit('build_succeeded');
+    // }
   }
 
   this.init();

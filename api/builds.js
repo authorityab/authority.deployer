@@ -15,6 +15,13 @@ router.post('/latest', function(req, res, next) {
   com.sockets.builds.setLatest(req.body, function(isSuccess) {
     res.send({ success: isSuccess });
   });
+
+  var build = req.body;
+  if (build.Status === 'FAILURE') {
+    com.sockets.socket.emit('build_failed');
+  } else if (build.Status === 'SUCCESS') {
+    com.sockets.socket.emit('build_succeeded');
+  }
 });
 
 router.post('/latestFailed', function(req, res, next) {
